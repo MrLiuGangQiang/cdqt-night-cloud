@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.cdqt</groupId>
+    <artifactId>cdqt-night-cloud</artifactId>
+    <version>1.1.1.20200115.RELEASE</version>
+  </parent>
+  <artifactId>cdqt-night-redis</artifactId>
+  <name>cdqt-night-redis</name>
+  <packaging>jar</packaging>
+
+  <!-- 依赖包配置 -->
+  <dependencies>
+    <!-- 核心项目依赖 -->
+    <dependency>
+      <groupId>com.cdqt</groupId>
+      <artifactId>cdqt-night-core</artifactId>
+      <version>1.1.1.20200115.RELEASE</version>
+    </dependency>
+    <!-- redis依赖 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
+  </dependencies>
+
+  <!-- 构建信息配置 -->
+  <build>
+    <!-- 构建名称 -->
+    <finalName>cdqt-night-redis</finalName>
+  </build>
+</project>

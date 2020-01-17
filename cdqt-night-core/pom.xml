@@ -9,4 +9,38 @@
   </parent>
   <artifactId>cdqt-night-core</artifactId>
   <name>cdqt-night-core</name>
+  <packaging>jar</packaging>
+
+  <!-- 依赖包配置 -->
+  <dependencies>
+    <!-- 日志相关依赖包 -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+    </dependency>
+  </dependencies>
+
+  <!-- 构建配置 -->
+  <build>
+    <!-- 构建名称 -->
+    <finalName>cdqt-night-core</finalName>
+    <!-- 资源文件 -->
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.properties</include>
+        </includes>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+  </build>
 </project>

@@ -86,5 +86,15 @@
   <modules>
     <!-- 核心项目 -->
     <module>cdqt-night-core</module>
+    <!-- redis二次封装 -->
+    <module>cdqt-night-redis</module>
+    <!-- 全局工具项目 -->
+    <module>cdqt-night-tools</module>
+    <!-- 注册中心 -->
+    <module>cdqt-night-eureka</module>
+    <!-- 服务网关 -->
+    <module>cdqt-night-gateway</module>
+    <!-- 监控中心 -->
+    <module>cdqt-night-admin</module>
   </modules>
 </project>
