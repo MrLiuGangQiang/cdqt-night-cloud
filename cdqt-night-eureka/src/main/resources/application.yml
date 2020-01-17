@@ -1,0 +1,33 @@
+server:
+   port: 8761 #端口配置
+   undertow: #类似于Netty的配置
+      io-threads: 2 #IO线程数 默认一个CPU一个 不要设置过大
+      worker-threads: 16 #阻塞任务线程池 默认是IO线程数X8
+      buffer-size: 1024 #每块buffer的大小，越小利用越充分 建议保持1024
+spring:
+   application:
+      name: cdrx-comlib-eureka #服务名配置
+   security: #权限信息配置
+      user:
+         name: admin #用户名
+         password: 123456 #密码
+         roles: ROLEALL #角色
+   cloud:
+      loadbalancer:
+         ribbon:
+            enabled: false #禁用ribbon
+eureka:
+   instance:
+      hostname: localhost #主机域名配置
+      prefer-ip-address: true #是否使用IP地址
+      instance-id: ${spring.cloud.client.ip-address}:${server.port}:${spring.application.name} #服务ID格式
+   client:
+      healthcheck:
+         enabled: true #启用健康检查
+      register-with-eureka: false #是否注册自己
+      fetch-registry: false #是否获取eureka注册表的信息 这里不需要
+      service-url:
+         defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/ #默认注册地址
+   server:
+      enable-self-preservation: true # 自我保护机制，防止失效的服务也被一直访问 (Spring Cloud默认该配置是 true)
+      eviction-interval-timer-in-ms: 30000 # 该配置可以修改检查失效服务的时间(Spring Cloud默认该配置是 60s)
