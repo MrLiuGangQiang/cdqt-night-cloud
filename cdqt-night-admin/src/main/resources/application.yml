@@ -1,0 +1,41 @@
+server:
+   port: 8088 #端口配置
+   undertow: #类似于Netty的配置
+      io-threads: 2 #IO线程数 默认一个CPU一个 不要设置过大
+      worker-threads: 16 #阻塞任务线程池 默认是IO线程数X8
+      buffer-size: 1024 #每块buffer的大小，越小利用越充分 建议保持1024
+spring:
+   application:
+      name: cdqt-night-admin #服务名配置
+   security:
+      user: 
+         name: admin
+         password: 123456      
+management: #跨域设置
+   endpoints:
+      web:
+         exposure:
+            include: '*'
+         cors:
+            allowed-origins: '*'
+            allowed-methods: '*'
+   endpoint:
+    health:
+      show-details: ALWAYS  # 是否展示健康检查详情
+eureka: #注册中心设置
+   instance:
+      prefer-ip-address: true
+      instance-id: ${spring.cloud.client.ip-address}:${server.port}:${spring.application.name}
+      metadata-map:
+         user:
+            name: ${spring.security.user.name}
+            password: ${spring.security.user.password}
+   client:
+      healthcheck:
+         enabled: true
+      service-url:
+         defaultZone: http://admin:123456@localhost:8761/eureka/
+info:
+   version: '@project.version@'
+   groupId: '@project.groupId@'
+   artifactId: '@project.artifactId@'         

@@ -11,7 +11,6 @@ spring:
       user:
          name: admin #用户名
          password: 123456 #密码
-         roles: ROLEALL #角色
    cloud:
       loadbalancer:
          ribbon:
@@ -27,7 +26,7 @@ eureka:
       register-with-eureka: false #是否注册自己
       fetch-registry: false #是否获取eureka注册表的信息 这里不需要
       service-url:
-         defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/ #默认注册地址
+         defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/ #默认注册地址
    server:
       enable-self-preservation: true # 自我保护机制，防止失效的服务也被一直访问 (Spring Cloud默认该配置是 true)
       eviction-interval-timer-in-ms: 30000 # 该配置可以修改检查失效服务的时间(Spring Cloud默认该配置是 60s)
