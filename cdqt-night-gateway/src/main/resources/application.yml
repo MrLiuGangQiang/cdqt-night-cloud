@@ -1,0 +1,64 @@
+server:
+   port: 8080 #端口设置
+spring:
+   application:
+      name: cdqt-night-gateway #应用名设置
+   cloud:
+      gateway:
+         routes: #路由设置
+         -  id: smile-service
+            uri: lb://smile-service
+            predicates:
+            - Path=/api-service/**
+            filters:
+            - StripPrefix=1
+            -  name: Hystrix
+               args:
+                  name: fallbackcmd
+                  fallbackUri: forward:/fallback/smile-service
+smile-service: #单个服务负载均衡设置
+   ribbon:
+      NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
+management: #跨域设置
+   endpoints:
+      web:
+         exposure:
+            include: '*'
+         cors:
+            allowed-origins: '*'
+            allowed-methods: '*'
+hystrix:
+   command:
+      default:
+         execution:
+            isolation:
+               strategy: THREAD #SEMAPHORE信号量隔离适合高并发 默认THREAD线程隔离
+               semaphore:
+                  maxConcurrentRequests: 2000 #信号量隔离时设置最大并发量 默认10
+               thread:
+                  timeoutInMilliseconds: 30000 #执行超时时间 默认1000毫秒
+            timeout:
+               enabled: true #开启超时设置 默认为true
+         fallback:
+            enabled: true #是否开启fallback功能 默认true
+            isolation:
+               semaphore:
+                  maxConcurrentRequests: 2000 #请求并发量
+ribbon: #通讯设置
+   ReadTimeout: 10000
+   ConnectTimeout: 5000
+   MaxAutoRetries: 0
+   MaxAutoRetriesNextServer: 1
+eureka: #注册中心设置
+   instance:
+      prefer-ip-address: true
+      instance-id: ${spring.cloud.client.ip-address}:${server.port}:${spring.application.name}
+   client:
+      healthcheck:
+         enabled: true
+      service-url:
+         defaultZone: http://admin:123456@localhost:8761/eureka/
+info:
+   version: '@project.version@'
+   groupId: '@project.groupId@'
+   artifactId: '@project.artifactId@'
