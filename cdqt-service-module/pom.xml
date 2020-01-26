@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.cdqt</groupId>
+    <artifactId>cdqt-night-cloud</artifactId>
+    <version>1.1.1.20200115.RELEASE</version>
+  </parent>
+  <artifactId>cdqt-service-module</artifactId>
+  <version>1.1.1.20200121.RELEASE</version>
+  <packaging>pom</packaging>
+
+  <!-- 构建配置 -->
+  <build>
+    <finalName>cdqt-service-module</finalName>
+  </build>
+  <!-- 子项目配置 -->
+  <modules>
+    <!-- MongoDB项目 -->
+    <module>cdqt-module-mongo</module>
+  </modules>
+</project>

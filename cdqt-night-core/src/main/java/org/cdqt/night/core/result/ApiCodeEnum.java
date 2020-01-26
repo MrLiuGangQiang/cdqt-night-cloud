@@ -115,6 +115,6 @@ public enum ApiCodeEnum {
 	 */
 	ApiCodeEnum(int value, String message) {
 		this.value = value;
-		this.message = Prompt.bundle("i18n.comlib_core", message);
+		this.message = Prompt.bundle("i18n.night_core", message);
 	}
 }

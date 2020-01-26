@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.cdqt</groupId>
+    <artifactId>cdqt-service-module</artifactId>
+    <version>1.1.1.20200121.RELEASE</version>
+  </parent>
+  <artifactId>cdqt-module-mongo</artifactId>
+  <name>cdqt-module-mongo</name>
+
+  <dependencies>
+    <!-- 引入core项目 -->
+    <dependency>
+      <groupId>com.cdqt</groupId>
+      <artifactId>cdqt-night-core</artifactId>
+      <version>1.1.1.20200115.RELEASE</version>
+    </dependency>
+    <!-- 引入tools项目 -->
+    <dependency>
+      <groupId>com.cdqt</groupId>
+      <artifactId>cdqt-night-tools</artifactId>
+      <version>1.1.1.20200115.RELEASE</version>
+    </dependency>
+    <!-- web项目依赖 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-tomcat</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-aop</artifactId>
+    </dependency>
+    <!-- 引入eureka并 -->
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+    </dependency>
+    <!-- 引入undertow -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-undertow</artifactId>
+    </dependency>
+    <!-- 引入actuator用于系统健康监控 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <!-- mongodb依赖 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-mongodb</artifactId>
+    </dependency>
+  </dependencies>
+  <!-- 构建配置 -->
+  <build>
+    <finalName>cdqt-service-module</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>
