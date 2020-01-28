@@ -124,6 +124,13 @@ public class MD5Util {
 		return encrypt(text + salt).equals(new String(cs1));
 	}
 
+	/** 
+	 * encryptBytes 获取数组MD5编码
+	 *
+	 * @author LiuGangQiang Create in 2020/01/27
+	 * @param bytes 字节数组
+	 * @return {@link String}
+	 */
 	public String encryptBytes(byte[] bytes) {
 		StringBuffer md5 = new StringBuffer();
 		MessageDigest md;

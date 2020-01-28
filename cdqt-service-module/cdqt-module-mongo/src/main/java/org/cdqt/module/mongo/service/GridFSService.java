@@ -35,7 +35,7 @@ public class GridFSService {
 	 * @param ins      输入流
 	 * @return {@link ObjectId}
 	 */
-	@Deprecated 
+	@Deprecated
 	public ObjectId upload(String fileName, InputStream ins) {
 		return gridFsTemplate.store(ins, fileName);
 	}
@@ -63,9 +63,25 @@ public class GridFSService {
 	public GridFsResource download(String objectId) {
 		Query query = Query.query(Criteria.where("_id").is(objectId));
 		GridFSFile gridFSFile = gridFsTemplate.findOne(query);
+		if (gridFSFile == null) {
+			return null;
+		}
 		GridFSDownloadStream gridFSDownloadStream = gridFSBucket.openDownloadStream(gridFSFile.getObjectId());
 		GridFsResource gridFsResource = new GridFsResource(gridFSFile, gridFSDownloadStream);
 		return gridFsResource;
+	}
+
+	/**
+	 * downloadByMD5 下载文件
+	 *
+	 * @author LiuGangQiang Create in 2020/01/27
+	 * @param md5 文件MD5编码
+	 * @return {@link GridFSFile}
+	 */
+	public GridFSFile queryByMD5(String md5) {
+		Query query = Query.query(Criteria.where("md5").is(md5));
+		GridFSFile gridFSFile = gridFsTemplate.findOne(query);
+		return gridFSFile;
 	}
 
 	/**

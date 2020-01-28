@@ -28,6 +28,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mongodb.client.gridfs.model.GridFSFile;
+
 @RestController
 @RequestMapping("/gridfs")
 public class GridFSController {
@@ -44,20 +46,25 @@ public class GridFSController {
 	 * @throws NoSuchAlgorithmException
 	 */
 	@PostMapping("/upload")
-	public JsonApi<?> upload(@RequestParam("file") MultipartFile multipartFile) throws IOException, NoSuchAlgorithmException {
+	public JsonApi<?> upload(@RequestParam("file") MultipartFile multipartFile)
+			throws IOException, NoSuchAlgorithmException {
 		/* 获得提交的文件名 */
 		String fileName = multipartFile.getOriginalFilename();
 		/* 获得文件输入流 */
 		InputStream ins = multipartFile.getInputStream();
-		/*获取文件类型*/
+		/* 获取文件类型 */
 		String contentType = multipartFile.getContentType();
 		/* 获取文件MD5编码 */
-		String md5=MD5Util.getInstance().encryptBytes(multipartFile.getBytes());
-		System.out.println(md5);
+		String md5 = MD5Util.getInstance().encryptBytes(multipartFile.getBytes());
+		/* 根据MD5校验文件是否存在 */
+		GridFSFile gridFSFile = gridFSService.queryByMD5(md5);
+		if (gridFSFile != null) {
+			return new JsonApi<>(ApiCodeEnum.OK, gridFSFile.getObjectId().toHexString());
+		}
 		/* 将文件存储到mongodb中,mongodb 将会返回这个文件的具体信息 */
 		ObjectId objectId = gridFSService.upload(fileName, ins, contentType);
 		if (objectId != null) {
-			return new JsonApi<>(ApiCodeEnum.OK, objectId.toString());
+			return new JsonApi<>(ApiCodeEnum.OK, objectId.toHexString());
 		}
 		return new JsonApi<>(ApiCodeEnum.FAIL);
 	}
@@ -77,11 +84,13 @@ public class GridFSController {
 		if (gridFsResource != null) {
 			HttpHeaders headers = new HttpHeaders();
 			System.out.println(gridFsResource.getFilename().trim());
-			headers.setContentDispositionFormData("attachment", URLEncoder.encode(gridFsResource.getFilename().replaceAll(" ", ""), "UTF-8"));
+			headers.setContentDispositionFormData("attachment",
+					URLEncoder.encode(gridFsResource.getFilename().replaceAll(" ", ""), "UTF-8"));
 			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 			headers.setContentLength(gridFsResource.contentLength());
 			headers.setConnection("close");
-			return new ResponseEntity<byte[]>(IoUtil.toByteArray(gridFsResource.getInputStream()), headers, HttpStatus.OK);
+			return new ResponseEntity<byte[]>(IoUtil.toByteArray(gridFsResource.getInputStream()), headers,
+					HttpStatus.OK);
 		} else {
 			return new ResponseEntity<byte[]>(HttpStatus.NOT_FOUND);
 		}
@@ -104,7 +113,8 @@ public class GridFSController {
 			headers.setContentType(MediaType.parseMediaType(gridFsResource.getContentType()));
 			headers.setContentLength(gridFsResource.contentLength());
 			headers.setConnection("close");
-			return new ResponseEntity<byte[]>(IoUtil.toByteArray(gridFsResource.getInputStream()), headers, HttpStatus.OK);
+			return new ResponseEntity<byte[]>(IoUtil.toByteArray(gridFsResource.getInputStream()), headers,
+					HttpStatus.OK);
 		} else {
 			return new ResponseEntity<byte[]>(HttpStatus.NOT_FOUND);
 		}
