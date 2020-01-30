@@ -83,7 +83,6 @@ public class GridFSController {
 		GridFsResource gridFsResource = gridFSService.download(id);
 		if (gridFsResource != null) {
 			HttpHeaders headers = new HttpHeaders();
-			System.out.println(gridFsResource.getFilename().trim());
 			headers.setContentDispositionFormData("attachment",
 					URLEncoder.encode(gridFsResource.getFilename().replaceAll(" ", ""), "UTF-8"));
 			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
