@@ -14,13 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author LiuGangQiang Create in 2020/01/24
  */
 @ControllerAdvice
-@ResponseBody
 public class GlobalExceptionHandler {
 	private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-	@ExceptionHandler(Exception.class)
+	@ExceptionHandler(value = Exception.class)
+	@ResponseBody
 	public JsonApi<?> defaultErrorHandler(Exception e) {
-		e.printStackTrace();
 		if (logger.isErrorEnabled()) {
 			logger.error("system appear error msg:{}", e.getMessage());
 		}

@@ -1,19 +1,15 @@
 package org.cdqt.module.mongo.controller;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URLEncoder;
-import java.security.NoSuchAlgorithmException;
 
 import javax.annotation.Resource;
 
-import org.bson.types.ObjectId;
-import org.cdqt.module.mongo.service.GridFSService;
+import org.cdqt.module.mongo.entity.Bson;
+import org.cdqt.module.mongo.service.BsonService;
 import org.cdqt.night.core.result.ApiCodeEnum;
 import org.cdqt.night.core.result.JsonApi;
-import org.cdqt.night.tools.file.IoUtil;
 import org.cdqt.night.tools.md5.MD5Util;
-import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -28,115 +24,116 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.mongodb.client.gridfs.model.GridFSFile;
-
 /**
- * GridFSController
+ * BsonController
  *
- * @author LiuGangQiang Create in 2020/02/01
+ * @author LiuGangQiang Create in 2020/02/03
  */
 @RestController
-@RequestMapping("/gridfs")
-public class GridFSController {
+@RequestMapping("/bson")
+public class BsonController {
+	/**
+	 * bsonService
+	 *
+	 * @author LiuGangQiang Create in 2020/02/03
+	 */
 	@Resource
-	private GridFSService gridFSService;
+	private BsonService bsonService;
 
 	/**
-	 * uploadFile 上传单个文件
+	 * upload 上传
 	 *
-	 * @author LiuGangQiang Create in 2020/01/24
-	 * @param file 文件
+	 * @author LiuGangQiang Create in 2020/02/03
+	 * @param multipartFile
 	 * @return {@link JsonApi}
 	 * @throws IOException
-	 * @throws NoSuchAlgorithmException
 	 */
 	@PostMapping("/upload")
-	public JsonApi<?> upload(@RequestParam("file") MultipartFile multipartFile)
-			throws IOException, NoSuchAlgorithmException {
+	public JsonApi<?> upload(@RequestParam("file") MultipartFile multipartFile) throws IOException {
 		/* 获得提交的文件名 */
 		String fileName = multipartFile.getOriginalFilename();
-		/* 获得文件输入流 */
-		InputStream ins = multipartFile.getInputStream();
 		/* 获取文件类型 */
 		String contentType = multipartFile.getContentType();
+		/* 获取文件内容 */
+		byte[] content = multipartFile.getBytes();
 		/* 获取文件MD5编码 */
-		String md5 = MD5Util.getInstance().encryptBytes(multipartFile.getBytes());
+		String md5 = MD5Util.getInstance().encryptBytes(content);
 		/* 根据MD5校验文件是否存在 */
-		GridFSFile gridFSFile = gridFSService.queryByMD5(md5);
-		if (gridFSFile != null) {
-			return new JsonApi<>(ApiCodeEnum.OK, gridFSFile.getObjectId().toHexString());
+		Bson bson = bsonService.getBsonByMd5(md5);
+		if (bson != null) {
+			return new JsonApi<>(ApiCodeEnum.OK, bson.getId());
 		}
+		bson = new Bson(fileName, contentType, content.length, md5, content);
 		/* 将文件存储到mongodb中,mongodb 将会返回这个文件的具体信息 */
-		ObjectId objectId = gridFSService.upload(fileName, ins, contentType);
-		if (objectId != null) {
-			return new JsonApi<>(ApiCodeEnum.OK, objectId.toHexString());
+		Bson result = bsonService.insert(bson);
+		if (result != null) {
+			return new JsonApi<>(ApiCodeEnum.OK, result.getId());
 		}
 		return new JsonApi<>(ApiCodeEnum.FAIL);
 	}
 
 	/**
-	 * download下载单个文件
+	 * download 下载
 	 *
-	 * @author LiuGangQiang Create in 2020/01/26
-	 * @param id 文件ID
+	 * @author LiuGangQiang Create in 2020/02/05
+	 * @param id
 	 * @return {@link ResponseEntity}
 	 * @throws IllegalStateException
 	 * @throws IOException
 	 */
 	@GetMapping("/download/{id}")
 	public ResponseEntity<byte[]> download(@PathVariable String id) throws IllegalStateException, IOException {
-		GridFsResource gridFsResource = gridFSService.download(id);
-		if (gridFsResource != null) {
+		Bson bson = bsonService.download(id);
+		if (bson != null) {
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentDispositionFormData("attachment",
-					URLEncoder.encode(gridFsResource.getFilename().replaceAll(" ", ""), "UTF-8"));
+					URLEncoder.encode(bson.getName().replaceAll(" ", ""), "UTF-8"));
 			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-			headers.setContentLength(gridFsResource.contentLength());
+			byte[] content = bson.getContent();
+			headers.setContentLength(content.length);
 			headers.setConnection("close");
-			return new ResponseEntity<byte[]>(IoUtil.toByteArray(gridFsResource.getInputStream()), headers,
-					HttpStatus.OK);
+			return new ResponseEntity<byte[]>(content, headers, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<byte[]>(HttpStatus.NOT_FOUND);
 		}
 	}
 
 	/**
-	 * view 预览文件 主要是图片资源
+	 * view 预览
 	 *
-	 * @author LiuGangQiang Create in 2020/01/26
-	 * @param id 文件ID
+	 * @author LiuGangQiang Create in 2020/02/05
+	 * @param id
 	 * @return {@link ResponseEntity}
 	 * @throws IOException
 	 */
 	@GetMapping("/view/{id}")
 	public ResponseEntity<byte[]> view(@PathVariable String id) throws IOException {
-		GridFsResource gridFsResource = gridFSService.download(id);
-		if (gridFsResource != null) {
+		Bson bson = bsonService.download(id);
+		if (bson != null) {
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentDisposition(ContentDisposition.builder("inline").build());
-			headers.setContentType(MediaType.parseMediaType(gridFsResource.getContentType()));
-			headers.setContentLength(gridFsResource.contentLength());
+			headers.setContentType(MediaType.parseMediaType(bson.getContentType()));
+			byte[] content = bson.getContent();
+			headers.setContentLength(content.length);
 			headers.setConnection("close");
-			return new ResponseEntity<byte[]>(IoUtil.toByteArray(gridFsResource.getInputStream()), headers,
-					HttpStatus.OK);
+			return new ResponseEntity<byte[]>(content, headers, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<byte[]>(HttpStatus.NOT_FOUND);
 		}
 	}
 
 	/**
-	 * delete 删除文件
+	 * delete 删除
 	 *
-	 * @author LiuGangQiang Create in 2020/01/26
-	 * @param id 文件ID
+	 * @author LiuGangQiang Create in 2020/02/05
+	 * @param id
 	 * @return {@link JsonApi}
 	 */
 	@DeleteMapping("/delete/{id}")
 	public JsonApi<?> delete(@PathVariable String id) {
-		if (gridFSService.remove(id)) {
+		if (bsonService.remove(id)) {
 			return new JsonApi<>(ApiCodeEnum.OK);
 		}
 		return new JsonApi<>(ApiCodeEnum.FAIL);
 	}
-
 }

@@ -7,12 +7,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * File
+ * Bson 这里是一个示例对象
  *
- * @author LiuGangQiang Create in 2020/01/24
+ * @author LiuGangQiang Create in 2020/02/01
  */
 @Document
-public class File {
+public class Bson {
 
 	@Id
 	private String id;
@@ -29,14 +29,23 @@ public class File {
 
 	private byte[] content;
 
-	protected File() {
+	protected Bson() {
 	}
 
-	public File(String name, String contentType, long size, byte[] content) {
+	public Bson(String name, String contentType, long size, byte[] content) {
 		this.name = name;
 		this.contentType = contentType;
 		this.size = size;
 		this.uploadDate = new Date();
+		this.content = content;
+	}
+
+	public Bson(String name, String contentType, long size, String md5, byte[] content) {
+		this.name = name;
+		this.contentType = contentType;
+		this.size = size;
+		this.uploadDate = new Date();
+		this.md5 = md5;
 		this.content = content;
 	}
 
@@ -104,7 +113,7 @@ public class File {
 		if (object == null || getClass() != object.getClass()) {
 			return false;
 		}
-		File fileInfo = (File) object;
+		Bson fileInfo = (Bson) object;
 		return Objects.equals(size, fileInfo.size) && Objects.equals(name, fileInfo.name)
 				&& Objects.equals(contentType, fileInfo.contentType) && Objects.equals(uploadDate, fileInfo.uploadDate)
 				&& Objects.equals(md5, fileInfo.md5) && Objects.equals(id, fileInfo.id);
@@ -117,7 +126,7 @@ public class File {
 
 	@Override
 	public String toString() {
-		return "File{" + "name='" + name + '\'' + ", contentType='" + contentType + '\'' + ", size=" + size
+		return "Bson{" + "name='" + name + '\'' + ", contentType='" + contentType + '\'' + ", size=" + size
 				+ ", uploadDate=" + uploadDate + ", md5='" + md5 + '\'' + ", id='" + id + '\'' + '}';
 	}
 }
