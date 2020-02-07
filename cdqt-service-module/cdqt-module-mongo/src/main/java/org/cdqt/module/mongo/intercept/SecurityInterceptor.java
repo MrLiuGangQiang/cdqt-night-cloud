@@ -136,4 +136,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 			return false;
 		}
 	}
+	public static void main(String[] args) {
+		System.out.println(System.currentTimeMillis());
+	}
 }
