@@ -61,4 +61,4 @@ eureka: #注册中心设置
 info:
    version: '@project.version@'
    groupId: '@project.groupId@'
-   artifactId: '@project.artifactId@'
+   artifactId: '@project.artifactId@' 
