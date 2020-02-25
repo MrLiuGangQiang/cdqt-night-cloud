@@ -29,7 +29,7 @@ spring:
          max-lifetime: 1800000
          connection-timeout: 30000
          connection-test-query: SELECT 1
-management: #跨域设置
+management: #端点暴露配置
    endpoints:
       web:
          exposure:

@@ -13,25 +13,22 @@ import org.springframework.web.util.pattern.PathPatternParser;
  */
 public class CorsWebConfiguration {
 	/**
-	 * 配置跨域
-	 * @return
+	 * corsWebFilter
+	 *
+	 * @author LiuGangQiang Create in 2020/02/25
+	 * @return {@link CorsWebFilter}
 	 */
 	@Bean
-	public CorsWebFilter corsFilter() {
-	    CorsConfiguration config = new CorsConfiguration();
-	    // cookie跨域
-	    config.setAllowCredentials(Boolean.TRUE);
-	    config.addAllowedMethod("*");
-	    config.addAllowedOrigin("*");
-	    config.addAllowedHeader("*");
-	    config.setMaxAge(1800L);
-	
-	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(new PathPatternParser());
-	    source.registerCorsConfiguration("/**", config);
-	
-	    return new CorsWebFilter(source);
+	public CorsWebFilter corsWebFilter() {
+		CorsConfiguration config = new CorsConfiguration();
+		/* 跨域配置 */
+		config.setAllowCredentials(Boolean.TRUE);
+		config.addAllowedMethod("*");
+		config.addAllowedOrigin("*");
+		config.addAllowedHeader("*");
+		config.setMaxAge(3600L);
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource(new PathPatternParser());
+		source.registerCorsConfiguration("/**", config);
+		return new CorsWebFilter(source);
 	}
-	
-	
 }
- 
