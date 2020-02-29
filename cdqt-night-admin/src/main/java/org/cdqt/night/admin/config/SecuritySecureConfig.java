@@ -8,36 +8,52 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import de.codecentric.boot.admin.server.config.AdminServerProperties;
 
 /**
- * SecuritySecureConfig
+ * SecuritySecureConfig 权限【配置
  *
  * @author LiuGangQiang Create in 2020/01/20
  */
 @Configuration
 public class SecuritySecureConfig extends WebSecurityConfigurerAdapter {
- 
-    private final String adminContextPath;
- 
-    public SecuritySecureConfig(AdminServerProperties adminServerProperties) {
-        this.adminContextPath = adminServerProperties.getContextPath();
-    }
- 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        // @formatter:off
-        SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
-        successHandler.setTargetUrlParameter("redirectTo");
- 
-        http.authorizeRequests()
-                .antMatchers(adminContextPath + "/assets/**").permitAll()
-                .antMatchers(adminContextPath + "/login").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin().loginPage(adminContextPath + "/login").successHandler(successHandler).and()
-                .logout().logoutUrl(adminContextPath + "/logout").and()
-                .httpBasic().and()
-                .csrf().disable();
-        
-    }
- 
- 
+
+	/**
+	 * adminContextPath
+	 *
+	 * @author LiuGangQiang Create in 2020/02/29
+	 */
+	private final String adminContextPath;
+
+	/**
+	 * SecuritySecureConfig
+	 *
+	 * @author LiuGangQiang Create in 2020/02/29
+	 * @param adminServerProperties
+	 */
+	public SecuritySecureConfig(AdminServerProperties adminServerProperties) {
+		this.adminContextPath = adminServerProperties.getContextPath();
+	}
+
+	/**
+	 * @see org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter#configure(org.springframework.security.config.annotation.web.builders.HttpSecurity)
+	 */
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+		successHandler.setTargetUrlParameter("redirectTo");
+		/* 配置权限 */
+		http.authorizeRequests()
+				/* 放行资源文件 */
+				.antMatchers(adminContextPath + "/assets/**").permitAll()
+				/* 放行登录请求 */
+				.antMatchers(adminContextPath + "/login").permitAll()
+				/* 其他任意请求都需要认证 */
+				.anyRequest().authenticated()
+				/* 开启formLogin配置 */
+				.and().formLogin().loginPage(adminContextPath + "/login").successHandler(successHandler)
+				/* 开启logout配置 */
+				.and().logout().logoutUrl(adminContextPath + "/logout")
+				/* 开启httpBasic认证 */
+				.and().httpBasic()
+				/* 禁用csrf保护 */
+				.and().csrf().disable();
+	}
 }
