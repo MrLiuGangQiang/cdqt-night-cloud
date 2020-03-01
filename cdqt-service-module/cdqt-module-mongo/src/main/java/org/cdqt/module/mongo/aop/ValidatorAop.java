@@ -8,9 +8,8 @@ import org.cdqt.night.core.result.JsonApi;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 
-
 /**
- * ValidatorAop
+ * 校验切面配置
  *
  * @author LiuGangQiang Create in 2020/01/23
  */
@@ -18,12 +17,12 @@ import org.springframework.validation.BindingResult;
 @Aspect
 public class ValidatorAop {
 
-	/** 
-	 * around 环绕校验
+	/**
+	 * 环绕校验
 	 *
 	 * @author LiuGangQiang Create in 2020/01/23
-	 * @param point
-	 * @return {@link Object}
+	 * @param point 切点
+	 * @return {@link Object} 校验不通过时返回{@link JsonApi}对象
 	 * @throws Throwable
 	 */
 	@Around("execution(public * org.cdqt.module.mongo.controller..*.*(..))")

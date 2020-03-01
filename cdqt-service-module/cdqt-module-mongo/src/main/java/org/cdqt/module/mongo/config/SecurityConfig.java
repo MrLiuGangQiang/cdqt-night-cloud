@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * SecurityConfig
+ * 权限拦截器配置
  *
  * @author LiuGangQiang Create in 2020/01/23
  */
@@ -17,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class SecurityConfig implements WebMvcConfigurer {
 
 	/**
-	 * getSecurityInterceptor
+	 * 实例化 {@link SecurityInterceptor}
 	 *
 	 * @author LiuGangQiang Create in 2020/01/23
 	 * @return {@link SecurityInterceptor}

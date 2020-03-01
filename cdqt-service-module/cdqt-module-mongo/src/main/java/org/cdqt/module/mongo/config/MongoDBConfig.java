@@ -13,7 +13,7 @@ import com.mongodb.client.gridfs.GridFSBucket;
 import com.mongodb.client.gridfs.GridFSBuckets;
 
 /**
- * MongoDBConfig
+ * 配置MongoDB
  *
  * @author LiuGangQiang Create in 2020/01/24
  */
@@ -21,7 +21,7 @@ import com.mongodb.client.gridfs.GridFSBuckets;
 public class MongoDBConfig {
 
 	/**
-	 * bucketName
+	 * 存储桶的名字
 	 *
 	 * @author LiuGangQiang Create in 2020/02/01
 	 */
@@ -29,10 +29,10 @@ public class MongoDBConfig {
 	private String bucketName;
 
 	/**
-	 * mongoTemplate
+	 * 配置 {@link MongoTemplate}
 	 *
 	 * @author LiuGangQiang Create in 2020/02/03
-	 * @param dbFactory
+	 * @param dbFactory MongoDbFactory
 	 * @return {@link MongoTemplate}
 	 */
 	@Bean
@@ -41,11 +41,11 @@ public class MongoDBConfig {
 	}
 
 	/**
-	 * gridFsTemplate
+	 * 配置 {@link GridFsTemplate}
 	 *
 	 * @author LiuGangQiang Create in 2020/02/01
-	 * @param dbFactory
-	 * @param converter
+	 * @param dbFactory MongoDbFactory
+	 * @param converter MongoConverter
 	 * @return {@link GridFsTemplate}
 	 */
 	@Bean
@@ -54,14 +54,14 @@ public class MongoDBConfig {
 	}
 
 	/**
-	 * getGridFSBuckets
+	 * 配置 {@link GridFSBucket}
 	 *
 	 * @author LiuGangQiang Create in 2020/02/01
 	 * @param dbFactory
 	 * @return {@link GridFSBucket}
 	 */
 	@Bean
-	public GridFSBucket getGridFSBuckets(MongoDbFactory dbFactory) {
+	public GridFSBucket gridFSBuckets(MongoDbFactory dbFactory) {
 		MongoDatabase db = dbFactory.getDb();
 		return GridFSBuckets.create(db, bucketName);
 	}

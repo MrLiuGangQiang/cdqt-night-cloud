@@ -8,7 +8,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 /**
- * ValidatorConfiguration
+ * 实体类校验资源配置
  *
  * @author LiuGangQiang Create in 2020/01/23
  */
@@ -16,7 +16,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 public class ValidatorConfiguration {
 
 	/**
-	 * getMessageSource
+	 * 获取资源路径
 	 *
 	 * @author LiuGangQiang Create in 2020/01/23
 	 * @return {@link ResourceBundleMessageSource}
@@ -29,10 +29,10 @@ public class ValidatorConfiguration {
 	}
 
 	/**
-	 * getValidator
+	 * 实例校验器
 	 *
 	 * @author LiuGangQiang Create in 2020/01/23
-	 * @return {@link Validator}
+	 * @return {@link Validator} 对象
 	 */
 	@Bean
 	public Validator getValidator() {
