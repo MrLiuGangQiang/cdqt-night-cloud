@@ -5,41 +5,41 @@ import java.util.List;
 
 /**
  * 实体类基类（程序内的实体类都应继承此类）
- * 
- * @author LiuGangQiang Create in 2020/01/20
+ *
+ * @author LiuGangQiang Create in 2020/02/29
  */
 @SuppressWarnings("serial")
 public class BaseEntity implements Serializable {
 	/**
-	 * 默认页数
+	 * 默认页数 默认值为 {@value}
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/02/29
 	 */
 	private static final int DEFAULT_PAGE = 1;
 	/**
-	 * 默认每页记录数
+	 * 默认每页记录数 默认值为 {@value}
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/02/29
 	 */
 	private static final int DEFAULT_PAGESIZE = 10;
 
 	/**
-	 * 当前页 默认为第一页
+	 * 当前页 默认值为 {@value #DEFAULT_PAGE}
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/02/29
 	 */
 	transient Integer page;
 
 	/**
-	 * 每页记录数 默认每页十条
+	 * 每页记录数 默认值为 {@value #DEFAULT_PAGESIZE}
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/02/29
 	 */
 	transient Integer pageSize;
 	/**
 	 * 排序集合 支持多字段组合排序
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/02/29
 	 */
 	transient List<Sort> sorts;
 

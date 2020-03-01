@@ -4,11 +4,10 @@ import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
 
-
 /**
- * GatewayApplication
+ * 程序主入口类
  *
- * @author LiuGangQiang Create in 2020/02/25
+ * @author LiuGangQiang Create in 2020/03/02
  */
 @SpringCloudApplication
 public class GatewayApplication {

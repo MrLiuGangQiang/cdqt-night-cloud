@@ -6,14 +6,17 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 /**
- * WebSecurityConfig
+ * 权限认证配置
  *
- * @author LiuGangQiang Create in 2020/01/20
+ * @author LiuGangQiang Create in 2020/03/01
  */
 @EnableWebSecurity
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecuritySecureConfig extends WebSecurityConfigurerAdapter {
 
+	/**
+	 * @see org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter#configure(org.springframework.security.config.annotation.web.builders.HttpSecurity)
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		/* 关闭CSRF */

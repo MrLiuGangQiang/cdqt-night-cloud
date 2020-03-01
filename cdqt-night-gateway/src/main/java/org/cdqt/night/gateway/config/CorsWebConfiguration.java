@@ -7,16 +7,16 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import org.springframework.web.util.pattern.PathPatternParser;
 
 /**
- * CorsWebConfiguration 跨域配置
+ * 跨域配置类
  *
- * @author LiuGangQiang Create in 2020/02/25
+ * @author LiuGangQiang Create in 2020/03/01
  */
 public class CorsWebConfiguration {
 	/**
-	 * corsWebFilter
+	 * 跨域配置 注意网关配置了跨域其代理的微服务就不能再配置跨域不然会造成重复跨域的问题
 	 *
-	 * @author LiuGangQiang Create in 2020/02/25
-	 * @return {@link CorsWebFilter}
+	 * @author LiuGangQiang Create in 2020/03/01
+	 * @return {@link CorsWebFilter} 对象
 	 */
 	@Bean
 	public CorsWebFilter corsWebFilter() {

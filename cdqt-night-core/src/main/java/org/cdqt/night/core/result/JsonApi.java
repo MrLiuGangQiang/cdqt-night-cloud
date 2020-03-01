@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * 请求响应通用对象
  * 
- * @author LiuGangQiang Create in 2020/01/21
+ * @author LiuGangQiang Create in 2020/03/01
  */
 public class JsonApi<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -13,28 +13,28 @@ public class JsonApi<T> implements Serializable {
 	/**
 	 * 状态码
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	private Integer code;
 
 	/**
 	 * 数据
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	private T data;
 
 	/**
 	 * 提示消息
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	private String msg;
 
 	/**
 	 * 无参构造器
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	public JsonApi() {
 	}
@@ -42,7 +42,7 @@ public class JsonApi<T> implements Serializable {
 	/**
 	 * 构造器
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param code 状态枚举
 	 */
 	public JsonApi(ApiCodeEnum code) {
@@ -54,7 +54,7 @@ public class JsonApi<T> implements Serializable {
 	/**
 	 * 构造器
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param code 状态枚举
 	 * @param data 数据
 	 */
@@ -67,7 +67,7 @@ public class JsonApi<T> implements Serializable {
 	/**
 	 * 构造器
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param code    自定义状态码
 	 * @param message 提示消息
 	 */
@@ -80,7 +80,7 @@ public class JsonApi<T> implements Serializable {
 	/**
 	 * 构造器
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param code    自定义状态码
 	 * @param message 提示消息
 	 * @param data    数据
@@ -142,7 +142,7 @@ public class JsonApi<T> implements Serializable {
 	/**
 	 * 比较两个状态码是否一致
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param code 状态枚举
 	 * @return 是否一致
 	 */

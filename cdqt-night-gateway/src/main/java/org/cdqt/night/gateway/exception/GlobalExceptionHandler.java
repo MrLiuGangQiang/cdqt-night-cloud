@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 全局异常处理器
- * 
- * @author LiuGangQiang Create in 2020/01/21
+ *
+ * @author LiuGangQiang Create in 2020/03/01
  */
 @ControllerAdvice
 @ResponseBody
@@ -19,11 +19,11 @@ public class GlobalExceptionHandler {
 	private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
 	/**
-	 * 异常处理
+	 * 异常处理器
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param e 异常
-	 * @return 处理后的异常信息
+	 * @return {@link JsonApi} 对象
 	 */
 	@ExceptionHandler(Exception.class)
 	public JsonApi<?> defaultErrorHandler(Exception e) {

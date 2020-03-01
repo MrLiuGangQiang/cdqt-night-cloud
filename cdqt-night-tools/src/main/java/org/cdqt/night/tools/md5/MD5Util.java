@@ -7,28 +7,28 @@ import java.util.Random;
 /**
  * MD5工具类
  * 
- * @author LiuGangQiang Create in 2020/01/21
+ * @author LiuGangQiang Create in 2020/03/01
  */
 public class MD5Util {
 
 	/**
 	 * 私有化构造器
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	private MD5Util() {
 	}
 
 	/**
-	 * Copyright © 2019 ChengDu RongXing Technology Co.Ltd All Rights Reserved.
-	 * 
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * 内部实例化工具类
+	 *
+	 * @author LiuGangQiang Create in 2020/03/02
 	 */
 	private static class SingleMD5UtilHolder {
 		/**
 		 * {@link MD5Util} 静态常量实例
 		 *
-		 * @author LiuGangQiang Create in 2020/01/21
+		 * @author LiuGangQiang Create in 2020/03/01
 		 */
 		private static final MD5Util INSTANCE = new MD5Util();
 	}
@@ -36,7 +36,7 @@ public class MD5Util {
 	/**
 	 * 获取{@link SingleMD5UtilHolder#INSTANCE} 静态常量实例
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @return {@link SingleMD5UtilHolder#INSTANCE} 静态常量实例
 	 */
 	public static MD5Util getInstance() {
@@ -46,7 +46,7 @@ public class MD5Util {
 	/**
 	 * MD5加密
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param text 原文
 	 * @return 密文
 	 * @throws NoSuchAlgorithmException @{@link NoSuchAlgorithmException}
@@ -76,7 +76,7 @@ public class MD5Util {
 	/**
 	 * MD5随机加盐密文
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param text 原文
 	 * @return 随机加盐密文
 	 * @throws NoSuchAlgorithmException @{@link NoSuchAlgorithmException}
@@ -106,7 +106,7 @@ public class MD5Util {
 	/**
 	 * 比较原文和随机加盐密文
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param text   原文
 	 * @param cipher 密文
 	 * @return 是否相同

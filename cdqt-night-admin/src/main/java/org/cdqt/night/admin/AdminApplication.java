@@ -8,7 +8,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 
 /**
- * AdminApplication
+ * 程序主入口类
  *
  * @author LiuGangQiang Create in 2020/02/29
  */
@@ -16,12 +16,6 @@ import de.codecentric.boot.admin.server.config.EnableAdminServer;
 @EnableDiscoveryClient
 @EnableAdminServer
 public class AdminApplication {
-	/**
-	 * main 启动函数
-	 *
-	 * @author LiuGangQiang Create in 2020/02/29
-	 * @param args args
-	 */
 	public static void main(String[] args) {
 		SpringApplication app = new SpringApplication(AdminApplication.class);
 		app.setBannerMode(Banner.Mode.OFF);

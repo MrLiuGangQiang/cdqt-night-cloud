@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * 多行数据对象
  * 
- * @author LiuGangQiang Create in 2020/01/21
+ * @author LiuGangQiang Create in 2020/03/01
  */
 public class Rows<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -14,21 +14,21 @@ public class Rows<T> implements Serializable {
 	/**
 	 * 总记录数
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	private Long total;
 
 	/**
 	 * 数据结果集
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	private List<T> rows;
 
 	/**
 	 * 无参构造器
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	public Rows() {
 	}
@@ -36,7 +36,7 @@ public class Rows<T> implements Serializable {
 	/**
 	 * 构造器
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param total 总记录数
 	 * @param rows  数据结果集
 	 */
@@ -53,7 +53,10 @@ public class Rows<T> implements Serializable {
 	}
 
 	/**
-	 * @param total the total to set
+	 * 设置记录总数
+	 *
+	 * @author LiuGangQiang Create in 2020/03/01
+	 * @param total 记录总数
 	 * @return {@link Rows}
 	 */
 	public Rows<T> setTotal(Long total) {
@@ -69,7 +72,10 @@ public class Rows<T> implements Serializable {
 	}
 
 	/**
-	 * @param rows the rows to set
+	 * 设置多行记录
+	 *
+	 * @author LiuGangQiang Create in 2020/03/01
+	 * @param rows 多行记录
 	 * @return {@link Rows}
 	 */
 	public Rows<T> setRows(List<T> rows) {

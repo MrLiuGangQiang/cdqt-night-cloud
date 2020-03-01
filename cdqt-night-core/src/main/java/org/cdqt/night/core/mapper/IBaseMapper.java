@@ -7,35 +7,53 @@ import java.util.Map;
 import org.cdqt.night.core.entity.BaseEntity;
 
 /**
- * 通用Mapper
- * 
- * @author LiuGangQiang Create in 2020/01/20
+ * 基础通用Mapper
+ *
+ * @author LiuGangQiang Create in 2020/02/29
  */
 public abstract interface IBaseMapper<T extends BaseEntity, PK extends Serializable> {
 
 	/**
-	 * 通过实例新增记录
+	 * 通过实体对象新增记录
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20 Create in 2020/01/20
-	 * @param entity 实例
+	 * @author LiuGangQiang Create in 2020/03/01
+	 * @param entity 实例对象
 	 * @return 受影响行数
 	 */
 	abstract int insert(T entity);
 
 	/**
-	 * 通过Map新增记录
+	 * 通过Map对象新增记录
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
-	 * @param param 参数集合
+	 * @author LiuGangQiang Create in 2020/03/01
+	 * @param param 对象参数
 	 * @return 受影响行数
 	 */
 	abstract int insertByMap(Map<String, Object> param);
 
 	/**
-	 * 通过实例删除记录
+	 * 通过List批量新增记录
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
-	 * @param entity 实例
+	 * @author LiuGangQiang Create in 2020/03/01
+	 * @param entitys 对象集合
+	 * @return 受影响行数
+	 */
+	abstract int batchInsertByList(List<T> entitys);
+
+	/**
+	 * 通过数组批量新增记录
+	 *
+	 * @author LiuGangQiang Create in 2020/03/01
+	 * @param entitys 对象数组
+	 * @return 受影响行数
+	 */
+	abstract int batchInsertByArray(T[] entitys);
+
+	/**
+	 * 通过对象删除记录
+	 *
+	 * @author LiuGangQiang Create in 2020/03/01
+	 * @param entity 实例对象
 	 * @return 受影响行数
 	 */
 	abstract int delete(T entity);
@@ -43,7 +61,7 @@ public abstract interface IBaseMapper<T extends BaseEntity, PK extends Serializa
 	/**
 	 * 通过Map删除记录
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param param 参数集合
 	 * @return 受影响行数
 	 */
@@ -52,17 +70,17 @@ public abstract interface IBaseMapper<T extends BaseEntity, PK extends Serializa
 	/**
 	 * 通过主键删除记录
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param id 主键
 	 * @return 受影响行数
 	 */
 	abstract int deleteByPrimaryKey(PK id);
 
 	/**
-	 * 通过实例修改记录
+	 * 通过对象修改记录
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
-	 * @param entity 实例
+	 * @author LiuGangQiang Create in 2020/03/01
+	 * @param entity 实例对象
 	 * @return 受影响行数
 	 */
 	abstract int update(T entity);
@@ -70,7 +88,7 @@ public abstract interface IBaseMapper<T extends BaseEntity, PK extends Serializa
 	/**
 	 * 通过Map修改记录
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param param 参数集合
 	 * @return 受影响行数
 	 */
@@ -79,8 +97,8 @@ public abstract interface IBaseMapper<T extends BaseEntity, PK extends Serializa
 	/**
 	 * 通过实例查询单条记录（请谨慎使用，条件一定要明确，不然查询出多条记录会抛异常）
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
-	 * @param entity 实例
+	 * @author LiuGangQiang Create in 2020/03/01
+	 * @param entity 实例对象
 	 * @return 单条记录
 	 */
 	abstract Map<String, Object> queryOne(T entity);
@@ -88,7 +106,7 @@ public abstract interface IBaseMapper<T extends BaseEntity, PK extends Serializa
 	/**
 	 * 通过Map查询单条记录（请谨慎使用，条件一定要明确，不然查询出多条记录会抛异常）
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param param 参数集合
 	 * @return 单条记录
 	 */
@@ -97,7 +115,7 @@ public abstract interface IBaseMapper<T extends BaseEntity, PK extends Serializa
 	/**
 	 * 通过主键查询单条记录（请谨慎使用，条件一定要明确，不然查询出多条记录会抛异常）
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param id 主键
 	 * @return 单条记录
 	 */
@@ -106,35 +124,35 @@ public abstract interface IBaseMapper<T extends BaseEntity, PK extends Serializa
 	/**
 	 * 通过实例查询单条记录（请谨慎使用，条件一定要明确，不然查询出多条记录会抛异常）
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
-	 * @param entity 实例
-	 * @return 单个实例
+	 * @author LiuGangQiang Create in 2020/03/01
+	 * @param entity 实例对象
+	 * @return 单个实例对象
 	 */
 	abstract T queryOneForEntity(T entity);
 
 	/**
 	 * 通过Map查询单条记录（请谨慎使用，条件一定要明确，不然查询出多条记录会抛异常）
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param param 参数集合
-	 * @return 单个实例
+	 * @return 单个实例对象
 	 */
 	abstract T queryOneForEntityByMap(Map<String, Object> param);
 
 	/**
 	 * 通过主键查询单条记录（请谨慎使用，条件一定要明确，不然查询出多条记录会抛异常）
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param id 主键
-	 * @return 单个实例
+	 * @return 单个实例对象
 	 */
 	abstract T queryOneForEntityByPrimaryKey(PK id);
 
 	/**
 	 * 通过实例查询多条记录
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
-	 * @param entity 实例
+	 * @author LiuGangQiang Create in 2020/03/01
+	 * @param entity 实例对象
 	 * @return 多条记录
 	 */
 	abstract List<Map<String, Object>> queryList(T entity);
@@ -142,7 +160,7 @@ public abstract interface IBaseMapper<T extends BaseEntity, PK extends Serializa
 	/**
 	 * 通过Map查询多条记录
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param param 参数集合
 	 * @return 多条记录
 	 */
@@ -151,8 +169,8 @@ public abstract interface IBaseMapper<T extends BaseEntity, PK extends Serializa
 	/**
 	 * 通过实例查询多条记录
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
-	 * @param entity 实例
+	 * @author LiuGangQiang Create in 2020/03/01
+	 * @param entity 实例对象
 	 * @return 多个实例
 	 */
 	abstract List<T> queryListForEntity(T entity);
@@ -160,7 +178,7 @@ public abstract interface IBaseMapper<T extends BaseEntity, PK extends Serializa
 	/**
 	 * 通过Map查询多条记录
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param param 参数集合
 	 * @return 多个实例
 	 */
@@ -169,8 +187,8 @@ public abstract interface IBaseMapper<T extends BaseEntity, PK extends Serializa
 	/**
 	 * 通过实例查询唯一记录（适用于通过唯一键或者组合唯一键来查询记录）
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
-	 * @param entity 实例
+	 * @author LiuGangQiang Create in 2020/03/01
+	 * @param entity 实例对象
 	 * @return 单条记录
 	 */
 	abstract Map<String, Object> queryUnique(T entity);
@@ -178,7 +196,7 @@ public abstract interface IBaseMapper<T extends BaseEntity, PK extends Serializa
 	/**
 	 * 通过Map查询唯一记录（适用于通过唯一键或者组合唯一键来查询记录）
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param param 参数集合
 	 * @return 单条记录
 	 */
@@ -187,8 +205,8 @@ public abstract interface IBaseMapper<T extends BaseEntity, PK extends Serializa
 	/**
 	 * 通过实例查询唯一记录（适用于通过唯一键或者组合唯一键来查询记录）
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
-	 * @param entity 实例
+	 * @author LiuGangQiang Create in 2020/03/01
+	 * @param entity 实例对象
 	 * @return 单个实例
 	 */
 	abstract T queryUniqueForEntity(T entity);
@@ -196,7 +214,7 @@ public abstract interface IBaseMapper<T extends BaseEntity, PK extends Serializa
 	/**
 	 * 通过Map查询唯一记录（适用于通过唯一键或者组合唯一键来查询记录）
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param param 参数集合
 	 * @return 单个实例
 	 */

@@ -28,25 +28,25 @@ import javax.crypto.NoSuchPaddingException;
  */
 public class RSAUtil {
 	/**
-	 * 秘钥算法
+	 * 秘钥算法 值为 {@value}
 	 *
 	 * @author LiuGangQiang Create in 2020/01/21
 	 */
 	private static final String KEY_ALGORITHM = "RSA";
 	/**
-	 * 秘钥模值长度{@value}
+	 * 秘钥模值长度 值为 {@value}
 	 *
 	 * @author LiuGangQiang Create in 2020/01/21
 	 */
 	private static final int KEY_INIT_DEFAULT_SIZE = 1024;
 	/**
-	 * 最大加密明文长度{@value}（超出就采用分段加密）
+	 * 最大加密明文长度 值为{@value}（超出就采用分段加密）
 	 *
 	 * @author LiuGangQiang Create in 2020/01/21
 	 */
 	private static final int MAX_ENCRYPT_BLOCK = 117;
 	/**
-	 * 最大解密明文长度{@value}（超出就采用分段解密）
+	 * 最大解密明文长度 值为{@value}（超出就采用分段解密）
 	 *
 	 * @author LiuGangQiang Create in 2020/01/21
 	 */
@@ -61,9 +61,9 @@ public class RSAUtil {
 	}
 
 	/**
-	 * Copyright © 2019 ChengDu RongXing Technology Co.Ltd All Rights Reserved.
-	 * 
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * 内部实例化工具类
+	 *
+	 * @author LiuGangQiang Create in 2020/03/02
 	 */
 	private static class SingleRSAUtilHolder {
 		/**
@@ -171,19 +171,18 @@ public class RSAUtil {
 	/**
 	 * RSA加密
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/02
 	 * @param publicKey 公钥
-	 * @param plainText 明文
+	 * @param plainText 原文
 	 * @return 密文
-	 * @throws InvalidKeyException       @{@link InvalidKeyException}
-	 * @throws NoSuchAlgorithmException  @{@link NoSuchAlgorithmException}
-	 * @throws NoSuchPaddingException    @{@link NoSuchPaddingException}
-	 * @throws IllegalBlockSizeException @{@link IllegalBlockSizeException}
-	 * @throws BadPaddingException       @{@link BadPaddingException}
-	 * @throws IOException               @{@link IOException}
+	 * @throws InvalidKeyException
+	 * @throws NoSuchAlgorithmException
+	 * @throws NoSuchPaddingException
+	 * @throws IllegalBlockSizeException
+	 * @throws BadPaddingException
+	 * @throws IOException
 	 */
-	public String RSAEncode(PublicKey publicKey, String plainText) throws InvalidKeyException, NoSuchAlgorithmException,
-			NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
+	public String RSAEncode(PublicKey publicKey, String plainText) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		byte[] b = plainText.getBytes("UTF-8");
 		int inputLen = b.length;
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -210,19 +209,18 @@ public class RSAUtil {
 	/**
 	 * RSA加密
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/02
 	 * @param publicKey 公钥
-	 * @param plainText 明文
+	 * @param plainText 原文
 	 * @return 密文
-	 * @throws NoSuchAlgorithmException  @{@link NoSuchAlgorithmException}
-	 * @throws NoSuchPaddingException    @{@link NoSuchPaddingException}
-	 * @throws InvalidKeyException       @{@link InvalidKeyException}
-	 * @throws IllegalBlockSizeException @{@link IllegalBlockSizeException}
-	 * @throws BadPaddingException       @{@link BadPaddingException}
-	 * @throws IOException               @{@link IOException}
+	 * @throws NoSuchAlgorithmException
+	 * @throws NoSuchPaddingException
+	 * @throws InvalidKeyException
+	 * @throws IllegalBlockSizeException
+	 * @throws BadPaddingException
+	 * @throws IOException
 	 */
-	public String RSAEncode(String publicKey, String plainText) throws NoSuchAlgorithmException, NoSuchPaddingException,
-			InvalidKeyException, IllegalBlockSizeException, BadPaddingException, IOException {
+	public String RSAEncode(String publicKey, String plainText) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, IOException {
 		byte[] b = plainText.getBytes("UTF-8");
 		int inputLen = b.length;
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -249,19 +247,18 @@ public class RSAUtil {
 	/**
 	 * RSA解密
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/02
 	 * @param privateKey  私钥
 	 * @param encodedText 密文
 	 * @return 原文
-	 * @throws IllegalBlockSizeException @{@link IllegalBlockSizeException}
-	 * @throws BadPaddingException       @{@link BadPaddingException}
-	 * @throws NoSuchAlgorithmException  @{@link NoSuchAlgorithmException}
-	 * @throws NoSuchPaddingException    @{@link NoSuchPaddingException}
-	 * @throws InvalidKeyException       @{@link InvalidKeyException}
-	 * @throws IOException               @{@link IOException}
+	 * @throws IllegalBlockSizeException
+	 * @throws BadPaddingException
+	 * @throws NoSuchAlgorithmException
+	 * @throws NoSuchPaddingException
+	 * @throws InvalidKeyException
+	 * @throws IOException
 	 */
-	public static String RSADecode(PrivateKey privateKey, String encodedText) throws IllegalBlockSizeException,
-			BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IOException {
+	public static String RSADecode(PrivateKey privateKey, String encodedText) throws IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IOException {
 		byte[] b = Base64.getDecoder().decode(encodedText);
 		int inputLen = b.length;
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -288,19 +285,18 @@ public class RSAUtil {
 	/**
 	 * RSA解密
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/02
 	 * @param privateKey  私钥
 	 * @param encodedText 密文
-	 * @return 明文
-	 * @throws IllegalBlockSizeException @{@link IllegalBlockSizeException}
-	 * @throws BadPaddingException       @{@link BadPaddingException}
-	 * @throws NoSuchAlgorithmException  @{@link NoSuchAlgorithmException}
-	 * @throws NoSuchPaddingException    @{@link NoSuchPaddingException}
-	 * @throws InvalidKeyException       @{@link InvalidKeyException}
-	 * @throws IOException               @{@link IOException}
+	 * @return 原文
+	 * @throws IllegalBlockSizeException
+	 * @throws BadPaddingException
+	 * @throws NoSuchAlgorithmException
+	 * @throws NoSuchPaddingException
+	 * @throws InvalidKeyException
+	 * @throws IOException
 	 */
-	public String RSADecode(String privateKey, String encodedText) throws IllegalBlockSizeException,
-			BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IOException {
+	public String RSADecode(String privateKey, String encodedText) throws IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IOException {
 		byte[] b = Base64.getDecoder().decode(encodedText);
 		int inputLen = b.length;
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -367,8 +363,7 @@ public class RSAUtil {
 	 * System.arraycopy(data, 1, temp, 0, len - 1); } else temp = data; return temp;
 	 * }
 	 */
-	public static void main(String[] args) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException,
-			IllegalBlockSizeException, BadPaddingException, IOException {
+	public static void main(String[] args) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		RSAUtil util = RSAUtil.getInstance();
 		RSAKey key = util.init();
 		String cipher = util.RSAEncode(key.getPublicKey(),

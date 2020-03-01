@@ -5,90 +5,94 @@ import org.cdqt.night.core.message.Prompt;
 /**
  * 请求响应状态枚举
  * 
- * @author LiuGangQiang Create in 2020/01/21
+ * @author LiuGangQiang Create in 2020/03/01
  */
 public enum ApiCodeEnum {
+	/**
+	 * 成功状态码
+	 *
+	 * @author LiuGangQiang Create in 2020/03/01
+	 */
+	OK(200, "night.api.code.ok"),
 
 	/**
-	 * 成功
+	 * 失败状态码
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	OK(200, "smile.api.code.ok"),
+	FAIL(202, "night.api.code.fail"),
 
 	/**
-	 * 失败
+	 * 参数有误状态码
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	FAIL(202, "smile.api.code.fail"),
+	BAD_REQUEST(400, "night.api.code.bad.request"),
 
 	/**
-	 * 参数有误
+	 * 未登录状态码
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	BAD_REQUEST(400, "smile.api.code.bad.request"),
+	UNAUTHORIZED(401, "night.api.code.unauthorized"),
 
 	/**
-	 * 未登录
+	 * 无权限状态码
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	UNAUTHORIZED(401, "smile.api.code.unauthorized"),
+	FORBIDDEN(403, "night.api.code.forbidden"),
 
 	/**
-	 * 无权限
+	 * 数据未找到状态码
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	FORBIDDEN(403, "smile.api.code.forbidden"),
+	NOT_FOUND(404, "night.api.code.not.found"),
 
 	/**
-	 * 数据未找到
+	 * 数据冲突状态码（适用于新增时违反逻辑约束产生重复记录）
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	NOT_FOUND(404, "smile.api.code.not.found"),
+	CONFLICT(409, "night.api.code.conflict"),
 
 	/**
-	 * 数据冲突（适用于新增时违反逻辑约束产生重复记录）
+	 * 系统异常状态码
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	CONFLICT(409, "smile.api.code.conflict"),
+	ERROR(500, "night.api.code.error"),
 
 	/**
-	 * 系统异常
+	 * 方法不安全状态码 系统内多指为经过权限验证的方法
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	ERROR(500, "smile.api.code.error"),
+	UNIMPLEMENTED(501, "night.api.code.unimplemented"),
 
 	/**
-	 * 方法不安全 没有经过权限注解验证
+	 * 网关超时状态码（适用于微服务网关或服务间调用）
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	UNIMPLEMENTED(501, "smile.api.code.unimplemented"),
-
+	TIMEOUT(504, "night.api.code.timeout");
 	/**
-	 * 网关超时（适用于微服务网关或服务间调用）
+	 * 资源文件路径 值为 {@value}
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	TIMEOUT(504, "smile.api.code.timeout");
-
+	private final static String filePath = "i18n.night_core";
 	/**
 	 * 状态码
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	private int value;
 	/**
 	 * 提示消息
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	private String message;
 
@@ -109,12 +113,12 @@ public enum ApiCodeEnum {
 	/**
 	 * 构造器
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param value   状态码
 	 * @param message 提示消息
 	 */
 	ApiCodeEnum(int value, String message) {
 		this.value = value;
-		this.message = Prompt.bundle("i18n.night_core", message);
+		this.message = Prompt.bundle(filePath, message);
 	}
 }

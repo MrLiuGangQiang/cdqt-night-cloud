@@ -7,20 +7,20 @@ import java.util.ResourceBundle;
 /**
  * 国际化资源文件操作类
  * 
- * @author LiuGangQiang Create in 2020/01/20
+ * @author LiuGangQiang Create in 2020/03/01
  */
 public class Prompt {
 	/**
-	 * 默认资源文件路径
+	 * 默认资源文件路径 默认值为 {@value}
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	private final static String FILEPATH = "i18n.prompt";
 
 	/**
 	 * 构造器私有化
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	private Prompt() {
 	}
@@ -28,7 +28,7 @@ public class Prompt {
 	/**
 	 * 获取无占位符的属性值
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param key 键值
 	 * @return 属性值
 	 */
@@ -39,7 +39,7 @@ public class Prompt {
 	/**
 	 * 获取有占位符的属性值并赋值
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param key       键值
 	 * @param arguments 参数（数组或不定参数）
 	 * @return 替换占位符后的属性值
@@ -51,7 +51,7 @@ public class Prompt {
 	/**
 	 * 获取无占位符的属性值
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param path 文件路径
 	 * @param key  键值
 	 * @return 属性值
@@ -63,7 +63,7 @@ public class Prompt {
 	/**
 	 * 获取有占位符的属性值并赋值
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param path      文件路径
 	 * @param key       键值
 	 * @param arguments 参数（数组或不定参数）

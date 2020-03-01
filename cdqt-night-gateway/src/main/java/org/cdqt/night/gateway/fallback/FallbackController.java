@@ -11,25 +11,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 全局断路器
- * 
- * @author LiuGangQiang Create in 2020/01/21
+ *
+ * @author LiuGangQiang Create in 2020/03/01
  */
 @RestController
 public class FallbackController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(FallbackController.class);
 	/**
-	 * PATH 资源路径
+	 * 提示资源文件路径 值为 {@value}
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	private static final String PATH = "i18n.night_gateway";
 
-	/**
-	 * 处理所有断路请求
+	/** 
+	 * 异常断路处理器
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
-	 * @param lb 服务实例
-	 * @return 提示信息
+	 * @author LiuGangQiang Create in 2020/03/01
+	 * @param lb 服务实例名
+	 * @return {@link JsonApi} 对象
 	 */
 	@RequestMapping("/fallback/{lb}")
 	public JsonApi<?> fallback(@PathVariable("lb") String lb) {

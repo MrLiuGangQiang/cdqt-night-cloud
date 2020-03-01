@@ -9,34 +9,34 @@ import java.util.Date;
 /**
  * 日期工具类
  * 
- * @author LiuGangQiang Create in 2020/01/21
+ * @author LiuGangQiang Create in 2020/03/01
  */
 public class DateCalcUtil {
 	/**
 	 * 毫秒到秒的换算值
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	private static final long MILLIS_IN_A_SECOND = 1000;
 
 	/**
 	 * 秒到分钟的换算值
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	private static final long SECONDS_IN_A_MINUTE = 60;
 
 	/**
 	 * 月到年的换算值
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	private static final int MONTHS_IN_A_YEAR = 12;
 
 	/**
 	 * 私有化构造器
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	private DateCalcUtil() {
 	}
@@ -44,13 +44,13 @@ public class DateCalcUtil {
 	/**
 	 * Copyright © 2019 ChengDu RongXing Technology Co.Ltd All Rights Reserved.
 	 * 
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	private static class SingleDateCalcUtilHolder {
 		/**
 		 * {@link DateCalcUtil} 静态常量实例
 		 *
-		 * @author LiuGangQiang Create in 2020/01/21
+		 * @author LiuGangQiang Create in 2020/03/01
 		 */
 		private static final DateCalcUtil INSTANCE = new DateCalcUtil();
 	}
@@ -58,7 +58,7 @@ public class DateCalcUtil {
 	/**
 	 * 获取{@link SingleDateCalcUtilHolder#INSTANCE} 静态常量实例
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @return {@link SingleDateCalcUtilHolder#INSTANCE} 静态常量实例
 	 */
 	public static DateCalcUtil getInstance() {
@@ -68,7 +68,7 @@ public class DateCalcUtil {
 	/**
 	 * 判断某个年份是否是闰年
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param year 年份数
 	 * @return 是否是闰年
 	 */
@@ -83,7 +83,7 @@ public class DateCalcUtil {
 	/**
 	 * 获取一年中最后的日期（精确到秒） 例如2019 —— 2019-12-31 23:59:59
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param date 目标日期
 	 * @return 一年中最后的日期（精确到秒）
 	 */
@@ -97,7 +97,7 @@ public class DateCalcUtil {
 	/**
 	 * 获取某个年份最后的日期（精确到秒） 例如2019 —— 2019-12-31 23:59:59
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param year 年份数
 	 * @return 一年中最后的日期（精确到秒）
 	 */
@@ -116,7 +116,7 @@ public class DateCalcUtil {
 	/**
 	 * 获取某年某月有多少天 例如2019-02 —— 28
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param year  年份数
 	 * @param month 月份数
 	 * @return 天数
@@ -153,7 +153,7 @@ public class DateCalcUtil {
 	/**
 	 * 获取某个日期之后的日期
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param target   目标日期
 	 * @param amount   差量
 	 * @param timeUnit 单位 请使用{@link Calendar}内的常量
@@ -169,7 +169,7 @@ public class DateCalcUtil {
 	/**
 	 * 获取某个日期之前的日期
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param target   目标日期
 	 * @param amount   差量
 	 * @param timeUnit 单位 请使用{@link Calendar}内的常量
@@ -185,7 +185,7 @@ public class DateCalcUtil {
 	/**
 	 * 计算两个日期之间的周年差
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param startDate 开始日期
 	 * @param endDate   结束日期
 	 * @return 两个日期之间的周年差
@@ -221,7 +221,7 @@ public class DateCalcUtil {
 	/**
 	 * 计算两个日期之间的月份差
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param startDate 开始日期
 	 * @param endDate   结束日期
 	 * @return 两个日期之间的月份差
@@ -260,7 +260,7 @@ public class DateCalcUtil {
 	/**
 	 * 计算两个日期之间的天数差
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param startDate 开始日期
 	 * @param endDate   结束日期
 	 * @return 两个日期之间的天数差
@@ -290,7 +290,7 @@ public class DateCalcUtil {
 	/**
 	 * 计算两个日期之前的分钟差（忽略年月日）
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param startTime 开始日期
 	 * @param endTime   结束日期
 	 * @return 两个日期之前的分钟差（忽略年月日）
@@ -311,7 +311,7 @@ public class DateCalcUtil {
 	/**
 	 * 判断两个日期是否是同一天
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param dateA 日期A
 	 * @param dateB 日期B
 	 * @return 是否是同一天
@@ -319,18 +319,15 @@ public class DateCalcUtil {
 	public boolean areSameDay(Date dateA, Date dateB) {
 		Calendar calDateA = Calendar.getInstance();
 		calDateA.setTime(dateA);
-
 		Calendar calDateB = Calendar.getInstance();
 		calDateB.setTime(dateB);
-		return calDateA.get(Calendar.YEAR) == calDateB.get(Calendar.YEAR)
-				&& calDateA.get(Calendar.MONTH) == calDateB.get(Calendar.MONTH)
-				&& calDateA.get(Calendar.DAY_OF_MONTH) == calDateB.get(Calendar.DAY_OF_MONTH);
+		return calDateA.get(Calendar.YEAR) == calDateB.get(Calendar.YEAR) && calDateA.get(Calendar.MONTH) == calDateB.get(Calendar.MONTH) && calDateA.get(Calendar.DAY_OF_MONTH) == calDateB.get(Calendar.DAY_OF_MONTH);
 	}
 
 	/**
 	 * 判断某个日期是否是未来的日期
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param target 目标日期
 	 * @return 是否是未来日期
 	 */
@@ -344,15 +341,10 @@ public class DateCalcUtil {
 		return nowTime.before(endTime);
 	}
 
-	public static void main(String[] args) throws ParseException {
-		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		System.out.println(DateCalcUtil.getInstance().isBeforeNow(sf.parse("2019-06-05 16:20:00")));
-	}
-
 	/**
 	 * 判断某个日期是否在两个日期之间
 	 *
-	 * @author LiuGangQiang Create in 2020/01/21
+	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param target    目标日期
 	 * @param startTime 开始日期
 	 * @param endTime   结束日期

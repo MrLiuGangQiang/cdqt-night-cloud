@@ -3,20 +3,20 @@ package org.cdqt.night.core.entity;
 /**
  * 排序辅助类
  * 
- * @author LiuGangQiang Create in 2020/01/20
+ * @author LiuGangQiang Create in 2020/02/29
  */
 public class Sort {
 
 	/**
 	 * 排序字段名
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/02/29
 	 */
 	private String field;
 	/**
 	 * 排序规则 只支持ASC和DESC 默认ASC
 	 *
-	 * @author LiuGangQiang Create in 2020/01/20
+	 * @author LiuGangQiang Create in 2020/02/29
 	 */
 	private String direction;
 

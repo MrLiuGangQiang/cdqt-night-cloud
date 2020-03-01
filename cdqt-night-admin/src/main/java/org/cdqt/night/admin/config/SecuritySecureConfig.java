@@ -8,25 +8,25 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import de.codecentric.boot.admin.server.config.AdminServerProperties;
 
 /**
- * SecuritySecureConfig 权限【配置
+ * 权限认证配置
  *
- * @author LiuGangQiang Create in 2020/01/20
+ * @author LiuGangQiang Create in 2020/02/29
  */
 @Configuration
 public class SecuritySecureConfig extends WebSecurityConfigurerAdapter {
 
 	/**
-	 * adminContextPath
+	 * 项目根路径
 	 *
 	 * @author LiuGangQiang Create in 2020/02/29
 	 */
 	private final String adminContextPath;
 
 	/**
-	 * SecuritySecureConfig
+	 * 配置项目根路径
 	 *
 	 * @author LiuGangQiang Create in 2020/02/29
-	 * @param adminServerProperties
+	 * @param adminServerProperties 服务配置
 	 */
 	public SecuritySecureConfig(AdminServerProperties adminServerProperties) {
 		this.adminContextPath = adminServerProperties.getContextPath();
@@ -39,6 +39,8 @@ public class SecuritySecureConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
 		successHandler.setTargetUrlParameter("redirectTo");
+		/* 关闭CSRF */
+		http.csrf().disable();
 		/* 配置权限 */
 		http.authorizeRequests()
 				/* 放行资源文件 */
@@ -52,8 +54,6 @@ public class SecuritySecureConfig extends WebSecurityConfigurerAdapter {
 				/* 开启logout配置 */
 				.and().logout().logoutUrl(adminContextPath + "/logout")
 				/* 开启httpBasic认证 */
-				.and().httpBasic()
-				/* 禁用csrf保护 */
-				.and().csrf().disable();
+				.and().httpBasic();
 	}
 }
