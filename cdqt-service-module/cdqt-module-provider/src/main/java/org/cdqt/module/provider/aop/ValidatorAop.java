@@ -1,4 +1,7 @@
-package org.cdqt.module.mongo.aop;
+/**
+ * Copyright © 2020 Night Technology Co.Ltd All Rights Reserved.
+ */
+package org.cdqt.module.provider.aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -9,23 +12,22 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 
 /**
- * 校验切面配置
+ * ValidatorAop 校验切点
  *
- * @author LiuGangQiang Create in 2020/01/23
+ * @author LiuGangQiang Create in 2020/02/26
  */
 @Component
 @Aspect
 public class ValidatorAop {
-
 	/**
-	 * 环绕校验
+	 * around
 	 *
-	 * @author LiuGangQiang Create in 2020/01/23
+	 * @author LiuGangQiang Create in 2020/02/26
 	 * @param point 切点
-	 * @return {@link Object} 校验不通过时返回{@link JsonApi}对象
+	 * @return {@link Object}
 	 * @throws Throwable
 	 */
-	@Around("execution(public * org.cdqt.module.mongo.controller..*.*(..))")
+	@Around("execution(public * org.cdqt.module.provider.controller..*.*(..))")
 	public Object around(ProceedingJoinPoint point) throws Throwable {
 		Object[] objects = point.getArgs();
 		for (Object object : objects) {

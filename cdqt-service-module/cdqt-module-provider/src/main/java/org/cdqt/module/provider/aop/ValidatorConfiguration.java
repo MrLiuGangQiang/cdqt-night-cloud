@@ -1,24 +1,25 @@
-package org.cdqt.module.mongo.aop;
+/**
+ * Copyright © 2020 Night Technology Co.Ltd All Rights Reserved.
+ */
+package org.cdqt.module.provider.aop;
 
 import javax.validation.Validator;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 /**
- * 实体类校验资源配置
+ * ValidatorConfiguration
  *
- * @author LiuGangQiang Create in 2020/01/23
+ * @author LiuGangQiang Create in 2020/02/26
  */
-@Configuration
 public class ValidatorConfiguration {
 
 	/**
-	 * 获取资源路径
+	 * getMessageSource 配置ResourceBundleMessageSource
 	 *
-	 * @author LiuGangQiang Create in 2020/01/23
+	 * @author LiuGangQiang Create in 2020/02/29
 	 * @return {@link ResourceBundleMessageSource}
 	 */
 	public ResourceBundleMessageSource getMessageSource() {
@@ -29,10 +30,10 @@ public class ValidatorConfiguration {
 	}
 
 	/**
-	 * 实例校验器
+	 * getValidator 获取Validator
 	 *
-	 * @author LiuGangQiang Create in 2020/01/23
-	 * @return {@link Validator} 对象
+	 * @author LiuGangQiang Create in 2020/02/29
+	 * @return {@link Validator}
 	 */
 	@Bean
 	public Validator getValidator() {
@@ -40,4 +41,5 @@ public class ValidatorConfiguration {
 		validator.setValidationMessageSource(getMessageSource());
 		return validator;
 	}
+
 }

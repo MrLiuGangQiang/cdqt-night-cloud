@@ -1,6 +1,6 @@
-package org.cdqt.module.mongo.config;
+package org.cdqt.module.provider.config;
 
-import org.cdqt.module.mongo.intercept.SecurityInterceptor;
+import org.cdqt.module.provider.intercept.SecurityInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * 权限拦截器配置
+ * SecurityConfig
  *
  * @author LiuGangQiang Create in 2020/01/23
  */
@@ -17,9 +17,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class SecurityConfig implements WebMvcConfigurer {
 
 	/**
-	 * 实例化 {@link SecurityInterceptor}
+	 * getSecuriJtyInterceptor 注册权限拦截器
 	 *
-	 * @author LiuGangQiang Create in 2020/01/23
+	 * @author LiuGangQiang Create in 2020/02/29
 	 * @return {@link SecurityInterceptor}
 	 */
 	@Bean
