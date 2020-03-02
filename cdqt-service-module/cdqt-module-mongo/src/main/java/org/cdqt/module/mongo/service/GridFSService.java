@@ -38,7 +38,7 @@ public class GridFSService {
 	private GridFSBucket gridFSBucket;
 
 	/**
-	 *  上传文件 最好不要使用此方法 因为不设置文件类型在预览时会出现异常
+	 * 上传文件 最好不要使用此方法 因为不设置文件类型在预览时会出现异常
 	 *
 	 * @author LiuGangQiang Create in 2020/01/25
 	 * @param fileName 文件名
@@ -51,7 +51,7 @@ public class GridFSService {
 	}
 
 	/**
-	 *  上传文件
+	 * 上传文件
 	 *
 	 * @author LiuGangQiang Create in 2020/01/25
 	 * @param fileName    文件名
@@ -64,7 +64,7 @@ public class GridFSService {
 	}
 
 	/**
-	 *  通过文件ID下载文件
+	 * 通过文件ID下载文件
 	 *
 	 * @author LiuGangQiang Create in 2020/01/26
 	 * @param objectId 文件ID
@@ -82,7 +82,7 @@ public class GridFSService {
 	}
 
 	/**
-	 *  通过MD5下载文件（不包含文件数据值包含文件描述）
+	 * 通过MD5下载文件（不包含文件数据值包含文件描述）
 	 *
 	 * @author LiuGangQiang Create in 2020/01/27
 	 * @param md5 文件MD5编码
@@ -95,7 +95,7 @@ public class GridFSService {
 	}
 
 	/**
-	 * remove 删除文件
+	 * 通过文件ID删除文件
 	 *
 	 * @author LiuGangQiang Create in 2020/01/26
 	 * @param objectId 文件ID
