@@ -25,7 +25,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * SecurityInterceptor
+ * 权限拦截器
  *
  * @author LiuGangQiang Create in 2020/01/24
  */
@@ -33,27 +33,27 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 
 	private static final Logger logger = LoggerFactory.getLogger(SecurityInterceptor.class);
 	/**
-	 * SIGN 签名标识
+	 * 签名标识 值为 {@value}
 	 *
 	 * @author LiuGangQiang Create in 2020/01/24
 	 */
 	private static final String SIGN = "sign";
 	/**
-	 * key 私钥
+	 * 私钥
 	 *
 	 * @author LiuGangQiang Create in 2020/01/24
 	 */
 	@Value("${file.key}")
 	private String key;
 	/**
-	 * account 账号
+	 * 账号
 	 *
 	 * @author LiuGangQiang Create in 2020/01/24
 	 */
 	@Value("${file.account}")
 	private String account;
 	/**
-	 * password 密码
+	 * 密码
 	 *
 	 * @author LiuGangQiang Create in 2020/01/24
 	 */
@@ -61,11 +61,11 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 	private String password;
 
 	/**
-	 * @see org.springframework.web.servlet.handler.HandlerInterceptorAdapter#preHandle(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.Object) 
+	 * @see org.springframework.web.servlet.handler.HandlerInterceptorAdapter#preHandle(javax.servlet.http.HttpServletRequest,
+	 *      javax.servlet.http.HttpServletResponse, java.lang.Object)
 	 */
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws JsonProcessingException, IOException {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws JsonProcessingException, IOException {
 		/* 构造Json处理对象 */
 		ObjectMapper om = new ObjectMapper();
 		/* 设置响应头字符编码为UTF-8 */
@@ -83,8 +83,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 			try {
 				/* 解密签名 */
 				plaintext = RSAUtil.RSADecode(RSAUtil.getPrivateKey(key), sign);
-			} catch (InvalidKeyException | IllegalBlockSizeException | BadPaddingException | NoSuchAlgorithmException
-					| NoSuchPaddingException | IOException e) {
+			} catch (InvalidKeyException | IllegalBlockSizeException | BadPaddingException | NoSuchAlgorithmException | NoSuchPaddingException | IOException e) {
 				/* 解密异常提示无权限操作并打印日志 */
 				if (logger.isErrorEnabled()) {
 					logger.error("decrypt fail key<{}>", sign);
@@ -136,6 +135,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 			return false;
 		}
 	}
+
 	public static void main(String[] args) {
 		System.out.println(System.currentTimeMillis());
 	}

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * GlobalExceptionHandler
+ * 全局异常处理器
  *
  * @author LiuGangQiang Create in 2020/01/24
  */
@@ -17,11 +17,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class GlobalExceptionHandler {
 	private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
+	/**
+	 * 默认异常处理器
+	 *
+	 * @author LiuGangQiang Create in 2020/03/02
+	 * @param e 异常
+	 * @return {@link JsonApi}
+	 */
 	@ExceptionHandler(value = Exception.class)
 	@ResponseBody
 	public JsonApi<?> defaultErrorHandler(Exception e) {
 		if (logger.isErrorEnabled()) {
-			logger.error("system appear error msg:{}", e.getMessage());
+			logger.error("system appear error msg --> {}", e.getMessage());
 		}
 		return new JsonApi<>(ApiCodeEnum.ERROR).setMsg(e.getMessage());
 	}

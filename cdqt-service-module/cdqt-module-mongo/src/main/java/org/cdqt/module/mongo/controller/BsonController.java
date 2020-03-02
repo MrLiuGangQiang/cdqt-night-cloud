@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * BsonController
+ * Bson类型控制器
  *
  * @author LiuGangQiang Create in 2020/02/03
  */
@@ -33,7 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/bson")
 public class BsonController {
 	/**
-	 * bsonService
+	 * {@link BsonService} 实例
 	 *
 	 * @author LiuGangQiang Create in 2020/02/03
 	 */
@@ -41,10 +41,10 @@ public class BsonController {
 	private BsonService bsonService;
 
 	/**
-	 * upload 上传
+	 * 上传文件
 	 *
 	 * @author LiuGangQiang Create in 2020/02/03
-	 * @param multipartFile
+	 * @param multipartFile 文件
 	 * @return {@link JsonApi}
 	 * @throws IOException
 	 */
@@ -73,10 +73,10 @@ public class BsonController {
 	}
 
 	/**
-	 * download 下载
+	 * 下载文件
 	 *
 	 * @author LiuGangQiang Create in 2020/02/05
-	 * @param id
+	 * @param id 文件ID
 	 * @return {@link ResponseEntity}
 	 * @throws IllegalStateException
 	 * @throws IOException
@@ -86,8 +86,7 @@ public class BsonController {
 		Bson bson = bsonService.download(id);
 		if (bson != null) {
 			HttpHeaders headers = new HttpHeaders();
-			headers.setContentDispositionFormData("attachment",
-					URLEncoder.encode(bson.getName().replaceAll(" ", ""), "UTF-8"));
+			headers.setContentDispositionFormData("attachment", URLEncoder.encode(bson.getName().replaceAll(" ", ""), "UTF-8"));
 			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 			byte[] content = bson.getContent();
 			headers.setContentLength(content.length);
@@ -99,10 +98,10 @@ public class BsonController {
 	}
 
 	/**
-	 * view 预览
+	 * 预览文件
 	 *
 	 * @author LiuGangQiang Create in 2020/02/05
-	 * @param id
+	 * @param id 文件ID
 	 * @return {@link ResponseEntity}
 	 * @throws IOException
 	 */
@@ -123,10 +122,10 @@ public class BsonController {
 	}
 
 	/**
-	 * delete 删除
+	 * 删除文件
 	 *
 	 * @author LiuGangQiang Create in 2020/02/05
-	 * @param id
+	 * @param id 文件ID
 	 * @return {@link JsonApi}
 	 */
 	@DeleteMapping("/delete/{id}")

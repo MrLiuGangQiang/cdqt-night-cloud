@@ -31,7 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.mongodb.client.gridfs.model.GridFSFile;
 
 /**
- * GridFSController
+ * GridFS类型控制器
  *
  * @author LiuGangQiang Create in 2020/02/01
  */
@@ -42,7 +42,7 @@ public class GridFSController {
 	private GridFSService gridFSService;
 
 	/**
-	 * uploadFile 上传单个文件
+	 * 上传单个文件
 	 *
 	 * @author LiuGangQiang Create in 2020/01/24
 	 * @param file 文件
@@ -51,8 +51,7 @@ public class GridFSController {
 	 * @throws NoSuchAlgorithmException
 	 */
 	@PostMapping("/upload")
-	public JsonApi<?> upload(@RequestParam("file") MultipartFile multipartFile)
-			throws IOException, NoSuchAlgorithmException {
+	public JsonApi<?> upload(@RequestParam("file") MultipartFile multipartFile) throws IOException, NoSuchAlgorithmException {
 		/* 获得提交的文件名 */
 		String fileName = multipartFile.getOriginalFilename();
 		/* 获得文件输入流 */
@@ -75,7 +74,7 @@ public class GridFSController {
 	}
 
 	/**
-	 * download下载单个文件
+	 * 下载单个文件
 	 *
 	 * @author LiuGangQiang Create in 2020/01/26
 	 * @param id 文件ID
@@ -88,20 +87,18 @@ public class GridFSController {
 		GridFsResource gridFsResource = gridFSService.download(id);
 		if (gridFsResource != null) {
 			HttpHeaders headers = new HttpHeaders();
-			headers.setContentDispositionFormData("attachment",
-					URLEncoder.encode(gridFsResource.getFilename().replaceAll(" ", ""), "UTF-8"));
+			headers.setContentDispositionFormData("attachment", URLEncoder.encode(gridFsResource.getFilename().replaceAll(" ", ""), "UTF-8"));
 			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 			headers.setContentLength(gridFsResource.contentLength());
 			headers.setConnection("close");
-			return new ResponseEntity<byte[]>(IoUtil.toByteArray(gridFsResource.getInputStream()), headers,
-					HttpStatus.OK);
+			return new ResponseEntity<byte[]>(IoUtil.toByteArray(gridFsResource.getInputStream()), headers, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<byte[]>(HttpStatus.NOT_FOUND);
 		}
 	}
 
 	/**
-	 * view 预览文件 主要是图片资源
+	 * 预览文件 主要是图片资源
 	 *
 	 * @author LiuGangQiang Create in 2020/01/26
 	 * @param id 文件ID
@@ -117,15 +114,14 @@ public class GridFSController {
 			headers.setContentType(MediaType.parseMediaType(gridFsResource.getContentType()));
 			headers.setContentLength(gridFsResource.contentLength());
 			headers.setConnection("close");
-			return new ResponseEntity<byte[]>(IoUtil.toByteArray(gridFsResource.getInputStream()), headers,
-					HttpStatus.OK);
+			return new ResponseEntity<byte[]>(IoUtil.toByteArray(gridFsResource.getInputStream()), headers, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<byte[]>(HttpStatus.NOT_FOUND);
 		}
 	}
 
 	/**
-	 * delete 删除文件
+	 * 删除文件
 	 *
 	 * @author LiuGangQiang Create in 2020/01/26
 	 * @param id 文件ID

@@ -11,32 +11,32 @@ import org.springframework.stereotype.Service;
 import com.mongodb.client.result.DeleteResult;
 
 /**
- * BsonService
+ * Bson服务
  *
  * @author LiuGangQiang Create in 2020/02/03
  */
 @Service
 public class BsonService {
 	/**
-	 * mongoTemplate
+	 * {@link MongoTemplate} 实例
 	 *
 	 * @author LiuGangQiang Create in 2020/02/03
 	 */
 	@Resource
 	private MongoTemplate mongoTemplate;
 	/**
-	 * collectionName 集合名
+	 * 集合名 值为 {@value}
 	 *
 	 * @author LiuGangQiang Create in 2020/02/03
 	 */
 	private static final String collectionName = "bson";
 
 	/**
-	 * getBsonByMd5
+	 * 通过MD5编码获取 {@link Bson} 对象
 	 *
 	 * @author LiuGangQiang Create in 2020/02/03
-	 * @param md5
-	 * @return {@link Bson}
+	 * @param md5 MD5编码
+	 * @return {@link Bson}对象
 	 */
 	public Bson getBsonByMd5(String md5) {
 		Query query = new Query(Criteria.where("md5").is(md5));
@@ -44,22 +44,22 @@ public class BsonService {
 	}
 
 	/**
-	 * insert
+	 * 新增对象
 	 *
 	 * @author LiuGangQiang Create in 2020/02/03
-	 * @param bson
-	 * @return {@link Bson}
+	 * @param bson {@link Bson} 对象
+	 * @return {@link Bson} 对象
 	 */
 	public Bson insert(Bson bson) {
 		return mongoTemplate.insert(bson, collectionName);
 	}
 
 	/**
-	 * download
+	 * 通过ID下载 {@link Bson} 对象
 	 *
 	 * @author LiuGangQiang Create in 2020/02/05
-	 * @param id
-	 * @return {@link Bson}
+	 * @param id 文件ID
+	 * @return {@link Bson} 对象
 	 */
 	public Bson download(String id) {
 		Query query = new Query(Criteria.where("_id").is(id));
@@ -67,10 +67,10 @@ public class BsonService {
 	}
 
 	/**
-	 * remove
+	 * 移除对象
 	 *
 	 * @author LiuGangQiang Create in 2020/02/05
-	 * @param id
+	 * @param id 文件ID
 	 * @return {@link Boolean}
 	 */
 	public boolean remove(String id) {

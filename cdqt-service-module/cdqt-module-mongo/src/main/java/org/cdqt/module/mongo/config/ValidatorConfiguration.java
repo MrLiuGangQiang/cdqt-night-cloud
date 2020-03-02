@@ -1,4 +1,4 @@
-package org.cdqt.module.mongo.aop;
+package org.cdqt.module.mongo.config;
 
 import javax.validation.Validator;
 
