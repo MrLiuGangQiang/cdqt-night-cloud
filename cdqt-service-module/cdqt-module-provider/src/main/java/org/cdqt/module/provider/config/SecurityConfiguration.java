@@ -8,22 +8,21 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * SecurityConfig
+ * 权限拦截器配置
  *
- * @author LiuGangQiang Create in 2020/01/23
+ * @author LiuGangQiang Create in 2020/03/02
  */
 @Configuration
 @EnableWebMvc
-public class SecurityConfig implements WebMvcConfigurer {
-
+public class SecurityConfiguration implements WebMvcConfigurer {
 	/**
-	 * getSecuriJtyInterceptor 注册权限拦截器
+	 * 实例化 {@link SecurityInterceptor} 对象
 	 *
-	 * @author LiuGangQiang Create in 2020/02/29
-	 * @return {@link SecurityInterceptor}
+	 * @author LiuGangQiang Create in 2020/03/02
+	 * @return {@link SecurityInterceptor} 对象
 	 */
 	@Bean
-	public SecurityInterceptor getSecurityInterceptor() {
+	public SecurityInterceptor securityInterceptor() {
 		return new SecurityInterceptor();
 	}
 
@@ -32,6 +31,6 @@ public class SecurityConfig implements WebMvcConfigurer {
 	 */
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(getSecurityInterceptor()).addPathPatterns("/**");
+		registry.addInterceptor(securityInterceptor()).addPathPatterns("/**");
 	}
 }

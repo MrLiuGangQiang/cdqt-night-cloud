@@ -22,7 +22,7 @@ public class Session<T> implements Serializable {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	private T data;
+	private T cache;
 
 	/**
 	 * 无参构造器
@@ -37,11 +37,11 @@ public class Session<T> implements Serializable {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param identify 唯一区别串
-	 * @param data     缓存数据
+	 * @param cache    缓存数据
 	 */
-	public Session(String identify, T data) {
+	public Session(String identify, T cache) {
 		this.identify = identify;
-		this.data = data;
+		this.cache = cache;
 	}
 
 	/**
@@ -59,16 +59,16 @@ public class Session<T> implements Serializable {
 	}
 
 	/**
-	 * @return the data
+	 * @return the cache
 	 */
-	public T getData() {
-		return data;
+	public T getCache() {
+		return cache;
 	}
 
 	/**
-	 * @param data the data to set
+	 * @param data the cache to set
 	 */
-	public void setData(T data) {
-		this.data = data;
+	public void setCache(T cache) {
+		this.cache = cache;
 	}
 }

@@ -1,7 +1,7 @@
 /**
  * Copyright © 2020 Night Technology Co.Ltd All Rights Reserved.
  */
-package org.cdqt.module.provider.aop;
+package org.cdqt.module.provider.config;
 
 import javax.validation.Validator;
 

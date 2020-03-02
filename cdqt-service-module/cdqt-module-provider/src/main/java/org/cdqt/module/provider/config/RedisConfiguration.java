@@ -23,28 +23,26 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
 
 /**
- * Copyright © 2018 Fist Team. All rights reserved.
+ * Redis配置
  *
- * @author: LiuGangQiang
- * @date: 2018年12月17日
- * @description: Redis配置
+ * @author LiuGangQiang Create in 2020/03/02
  */
 @Configuration
 @EnableCaching
 public class RedisConfiguration extends CachingConfigurerSupport {
 	/**
-	 * 缓存名 值为{@value}
+	 * 缓存名 值为 {@value}
 	 *
 	 * @author LiuGangQiang Create in 2020/03/02
 	 */
 	private final static String CACHE_NAME = "cahce";
 
 	/**
-	 * @author: LiuGangQiang
-	 * @date: 2018年8月31日
-	 * @param factory
-	 * @return {@link RedisCacheManager}
-	 * @description: 配置RedisCacheManager
+	 * 实例化 {@link RedisCacheManager} 对象
+	 *
+	 * @author LiuGangQiang Create in 2020/03/02
+	 * @param factory {@link RedisConnectionFactory} 对象
+	 * @return {@link RedisCacheManager} 对象
 	 */
 	@Bean
 	public RedisCacheManager redisCacheManager(RedisConnectionFactory factory) {
@@ -59,6 +57,7 @@ public class RedisConfiguration extends CachingConfigurerSupport {
 
 		RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig();
 		config = config.entryTtl(Duration.ofMinutes(30))/* 设置默认过期时间 默认30分钟 */
+				.setDelay(true) /* 设置是否自动延期 扩展属性 */
 				.disableCachingNullValues()/* 不缓存空值 */
 				.serializeKeysWith(SerializationPair.fromSerializer(new StringRedisSerializer()))/* 序列化key */
 				.serializeValuesWith(SerializationPair.fromSerializer(jsonSerializer));/* 设置序列化方式 */
