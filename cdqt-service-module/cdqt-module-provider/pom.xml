@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.cdqt</groupId>
     <artifactId>cdqt-service-module</artifactId>
-    <version>1.1.1.20200121.RELEASE</version>
+    <version>1.1.1.20200405.RELEASE</version>
   </parent>
   <artifactId>cdqt-module-provider</artifactId>
   <version>1.1.1.20200207.RELEASE</version>
@@ -23,19 +23,19 @@
     <dependency>
       <groupId>com.cdqt</groupId>
       <artifactId>cdqt-night-core</artifactId>
-      <version>1.1.1.20200115.RELEASE</version>
+      <version>1.1.1.20200401.RELEASE</version>
     </dependency>
     <!-- 基础工具项目 -->
     <dependency>
       <groupId>com.cdqt</groupId>
       <artifactId>cdqt-night-tools</artifactId>
-      <version>1.1.1.20200115.RELEASE</version>
+      <version>1.1.1.20200401.RELEASE</version>
     </dependency>
     <!-- Redis二次封装项目 -->
     <dependency>
       <groupId>com.cdqt</groupId>
       <artifactId>cdqt-night-redis</artifactId>
-      <version>1.1.1.20200115.RELEASE</version>
+      <version>1.1.1.20200401.RELEASE</version>
     </dependency>
     <!-- Eureka Client -->
     <dependency>

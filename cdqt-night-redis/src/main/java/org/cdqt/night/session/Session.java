@@ -1,4 +1,4 @@
-package org.cdqt.night.core.session;
+package org.cdqt.night.session;
 
 import java.io.Serializable;
 

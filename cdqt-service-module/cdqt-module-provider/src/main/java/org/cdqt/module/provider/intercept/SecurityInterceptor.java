@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.cdqt.night.core.auth.Authentication;
 import org.cdqt.night.core.result.ApiCodeEnum;
 import org.cdqt.night.core.result.JsonApi;
-import org.cdqt.night.core.session.Session;
+import org.cdqt.night.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.method.HandlerMethod;

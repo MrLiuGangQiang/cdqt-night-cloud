@@ -5,10 +5,10 @@
   <parent>
     <groupId>com.cdqt</groupId>
     <artifactId>cdqt-night-cloud</artifactId>
-    <version>1.1.1.20200115.RELEASE</version>
+    <version>1.1.1.20200401.RELEASE</version>
   </parent>
   <artifactId>cdqt-service-module</artifactId>
-  <version>1.1.1.20200121.RELEASE</version>
+  <version>1.1.1.20200405.RELEASE</version>
   <packaging>pom</packaging>
 
   <!-- 构建配置 -->

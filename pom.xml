@@ -9,9 +9,10 @@
     <version>2.2.5.RELEASE</version>
   </parent>
 
+  <!-- 项目基本信息配置 -->
   <groupId>com.cdqt</groupId>
   <artifactId>cdqt-night-cloud</artifactId>
-  <version>1.1.1.20200115.RELEASE</version>
+  <version>1.1.1.20200401.RELEASE</version>
   <packaging>pom</packaging>
 
   <!-- 项目属性配置 -->
@@ -20,7 +21,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <!-- Spring Cloud版本 -->
-    <spring-cloud.version>Hoxton.SR2</spring-cloud.version>
+    <spring-cloud.version>Hoxton.SR3</spring-cloud.version>
     <!-- 项目编码配置 -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>

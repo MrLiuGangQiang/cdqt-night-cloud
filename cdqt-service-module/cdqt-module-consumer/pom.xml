@@ -5,9 +5,9 @@
   <parent>
     <groupId>com.cdqt</groupId>
     <artifactId>cdqt-service-module</artifactId>
-    <version>1.1.1.20200121.RELEASE</version>
+    <version>1.1.1.20200405.RELEASE</version>
   </parent>
   <artifactId>cdqt-module-consumer</artifactId>
-  <version>1.1.1.20200207.RELEASE</version>
+  <version>1.1.1.20200406.RELEASE</version>
   <name>cdqt-module-consumer</name>
 </project>
