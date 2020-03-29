@@ -1,5 +1,7 @@
 package org.cdqt.night.gateway.fallback;
 
+import java.util.Locale;
+
 import org.cdqt.night.core.message.Prompt;
 import org.cdqt.night.core.result.ApiCodeEnum;
 import org.cdqt.night.core.result.JsonApi;
@@ -24,7 +26,7 @@ public class FallbackController {
 	 */
 	private static final String PATH = "i18n.night_gateway";
 
-	/** 
+	/**
 	 * 异常断路处理器
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
@@ -36,6 +38,6 @@ public class FallbackController {
 		if (LOGGER.isErrorEnabled()) {
 			LOGGER.error("server instance [{}] tigger hystrix", lb);
 		}
-		return new JsonApi<>(ApiCodeEnum.TIMEOUT).setMsg(Prompt.bundle(PATH, "fallback.timeout", lb));
+		return new JsonApi<>(ApiCodeEnum.TIMEOUT).setMsg(Prompt.bundle(PATH, "fallback.timeout", Locale.getDefault(), lb));
 	}
 }

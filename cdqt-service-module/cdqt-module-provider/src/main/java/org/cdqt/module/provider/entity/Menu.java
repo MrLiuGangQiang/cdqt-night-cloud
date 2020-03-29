@@ -3,6 +3,7 @@ package org.cdqt.module.provider.entity;
 import java.util.Date;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.cdqt.night.core.entity.BaseEntity;
 import org.cdqt.night.core.valid.ValidGroup.Insert;
@@ -41,7 +42,7 @@ public class Menu extends BaseEntity {
 	 * 
 	 * @author LiuGangQiang Create in 2020/03/07
 	 */
-	@NotBlank(message = "编码不能为空", groups = { Insert.class })
+	@NotBlank(message = "{menu.code.not.blank}", groups = { Insert.class })
 	private String code;
 
 	/**
@@ -49,6 +50,7 @@ public class Menu extends BaseEntity {
 	 * 
 	 * @author LiuGangQiang Create in 2020/03/07
 	 */
+	@NotNull(message = "{menu.type.not.null}", groups = { Insert.class })
 	private Integer type;
 
 	/**

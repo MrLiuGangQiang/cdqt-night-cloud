@@ -1,5 +1,7 @@
 package org.cdqt.night.core.result;
 
+import java.util.Locale;
+
 import org.cdqt.night.core.message.Prompt;
 
 /**
@@ -78,12 +80,6 @@ public enum ApiCodeEnum {
 	 */
 	TIMEOUT(504, "night.api.code.timeout");
 	/**
-	 * 资源文件路径 值为 {@value}
-	 *
-	 * @author LiuGangQiang Create in 2020/03/01
-	 */
-	private final static String filePath = "i18n.night_core";
-	/**
 	 * 状态码
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
@@ -119,6 +115,6 @@ public enum ApiCodeEnum {
 	 */
 	ApiCodeEnum(int value, String message) {
 		this.value = value;
-		this.message = Prompt.bundle(filePath, message);
+		this.message = Prompt.bundle("i18n.night_core", message, Locale.getDefault());
 	}
 }
