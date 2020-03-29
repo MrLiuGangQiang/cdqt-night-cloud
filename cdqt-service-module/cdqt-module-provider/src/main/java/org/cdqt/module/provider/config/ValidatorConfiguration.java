@@ -3,17 +3,21 @@
  */
 package org.cdqt.module.provider.config;
 
+import javax.validation.Validation;
 import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
+import org.hibernate.validator.HibernateValidator;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 /**
  * ValidatorConfiguration
  *
  * @author LiuGangQiang Create in 2020/02/26
  */
+@Configuration
 public class ValidatorConfiguration {
 
 	/**
@@ -37,9 +41,9 @@ public class ValidatorConfiguration {
 	 */
 	@Bean
 	public Validator getValidator() {
-		LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
-		validator.setValidationMessageSource(getMessageSource());
-		return validator;
+		/* 配置校验器 设置快速失败模式 */
+		ValidatorFactory validatorFactory = Validation.byProvider(HibernateValidator.class).configure().failFast(true).buildValidatorFactory();
+		return validatorFactory.getValidator();
 	}
 
 }

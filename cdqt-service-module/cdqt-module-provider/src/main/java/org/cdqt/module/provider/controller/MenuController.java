@@ -2,6 +2,8 @@ package org.cdqt.module.provider.controller;
 
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.cdqt.module.provider.entity.Menu;
 import org.cdqt.module.provider.service.iface.IMenuService;
 import org.cdqt.night.core.result.ApiCodeEnum;
@@ -9,34 +11,35 @@ import org.cdqt.night.core.result.JsonApi;
 import org.cdqt.night.core.valid.ValidGroup.Insert;
 import org.cdqt.night.tools.valid.IntegerUtils;
 import org.cdqt.night.tools.valid.MapUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 菜单Controller
  *
  * @author LiuGangQiang Create in 2020/03/07
  */
+@RestController
 public class MenuController {
 	/**
 	 * 菜单Service
 	 *
 	 * @author LiuGangQiang Create in 2020/03/07
 	 */
+	@Resource
 	private IMenuService menuService;
 
 	/**
 	 * 新增菜单
 	 *
 	 * @author LiuGangQiang Create in 2020/03/07
-	 * @param menu   菜单实例
-	 * @param result 校验结果
+	 * @param menu 菜单实例
 	 * @return {@link JsonApi}
 	 */
 	@PostMapping("/menu")
-	public JsonApi<?> insert(@Validated({ Insert.class }) @RequestBody Menu menu, BindingResult result) {
+	public JsonApi<?> insert(@Validated({ Insert.class }) @RequestBody Menu menu) {
 		/* 1.判断数据是否重复 */
 		Map<String, Object> repeatMap = menuService.getRepeat(menu);
 		if (MapUtils.isNotEmpty(repeatMap)) {

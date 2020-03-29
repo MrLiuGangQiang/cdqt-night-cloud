@@ -16,7 +16,7 @@ spring:
       date-format: yyyy-MM-dd HH:mm:ss
    datasource: #数据源配置
       type: com.zaxxer.hikari.HikariDataSource
-      driver-class-name: com.mysql.jdbc.Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
       jdbc-url: jdbc:mysql://192.168.1.4:3306/cdqt?useUnicode=true&characterEncoding=utf8&mysqlEncoding=utf8&autoReconnect=true&serverTimezone=GMT%2B8
       username: cdqt
       password: 123456
@@ -29,6 +29,17 @@ spring:
          max-lifetime: 1800000
          connection-timeout: 30000
          connection-test-query: SELECT 1
+   redis:
+      database: 0
+      host: 192.168.1.4
+      port: 6379
+      password: 123456
+      timeout: 5000
+      pool:
+         max-active: 100
+         max-wait: 3000
+         min-idle: 5
+         max-idle: 15
 management: #端点暴露配置
    endpoints:
       web:

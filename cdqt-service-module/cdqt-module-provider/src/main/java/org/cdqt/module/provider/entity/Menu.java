@@ -1,7 +1,11 @@
 package org.cdqt.module.provider.entity;
 
 import java.util.Date;
+
+import javax.validation.constraints.NotBlank;
+
 import org.cdqt.night.core.entity.BaseEntity;
+import org.cdqt.night.core.valid.ValidGroup.Insert;
 
 /**
  * 机构菜单表
@@ -37,6 +41,7 @@ public class Menu extends BaseEntity {
 	 * 
 	 * @author LiuGangQiang Create in 2020/03/07
 	 */
+	@NotBlank(message = "编码不能为空", groups = { Insert.class })
 	private String code;
 
 	/**

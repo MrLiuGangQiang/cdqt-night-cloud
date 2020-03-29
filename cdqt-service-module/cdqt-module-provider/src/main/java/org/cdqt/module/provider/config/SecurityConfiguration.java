@@ -31,6 +31,6 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 	 */
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(securityInterceptor()).addPathPatterns("/**");
+		//registry.addInterceptor(securityInterceptor()).addPathPatterns("/**");
 	}
 }
