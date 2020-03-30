@@ -13,7 +13,7 @@ import de.codecentric.boot.admin.server.config.AdminServerProperties;
  * @author LiuGangQiang Create in 2020/02/29
  */
 @Configuration
-public class SecuritySecureConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	/**
 	 * 项目根路径
@@ -28,7 +28,7 @@ public class SecuritySecureConfig extends WebSecurityConfigurerAdapter {
 	 * @author LiuGangQiang Create in 2020/02/29
 	 * @param adminServerProperties 服务配置
 	 */
-	public SecuritySecureConfig(AdminServerProperties adminServerProperties) {
+	public SecurityConfiguration(AdminServerProperties adminServerProperties) {
 		this.adminContextPath = adminServerProperties.getContextPath();
 	}
 
