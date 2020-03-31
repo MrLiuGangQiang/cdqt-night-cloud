@@ -15,7 +15,7 @@ public abstract class Prompt {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	private final static String FILEPATH = "i18n.prompt";
+	private final static String FILEPATH = "i18n.message";
 
 	private Locale locale;
 

@@ -24,7 +24,7 @@ public class FallbackController {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	private static final String PATH = "i18n.night_gateway";
+	private static final String PATH = "i18n.gateway";
 
 	/**
 	 * 异常断路处理器
