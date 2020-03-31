@@ -35,6 +35,7 @@ public class Menu extends BaseEntity {
 	 * 
 	 * @author LiuGangQiang Create in 2020/03/07
 	 */
+	@NotBlank(message = "{menu.name.not.blank}",groups = {Insert.class})
 	private String name;
 
 	/**
@@ -58,6 +59,7 @@ public class Menu extends BaseEntity {
 	 * 
 	 * @author LiuGangQiang Create in 2020/03/07
 	 */
+	@NotNull(message = "{menu.sort.not.null}", groups = { Insert.class })
 	private Integer sort;
 
 	/**
@@ -65,6 +67,7 @@ public class Menu extends BaseEntity {
 	 * 
 	 * @author LiuGangQiang Create in 2020/03/07
 	 */
+	@NotNull(message = "{menu.enabled.not.null}", groups = { Insert.class })
 	private Boolean enabled;
 
 	/**
