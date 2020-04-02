@@ -1,5 +1,6 @@
 package org.cdqt.night.core.result;
 
+import java.beans.Transient;
 import java.io.Serializable;
 
 /**
@@ -7,8 +8,14 @@ import java.io.Serializable;
  * 
  * @author LiuGangQiang Create in 2020/03/01
  */
-public class JsonApi<T> implements Serializable {
+public class ResultSet<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
+	/**
+	 * 默认资源文件路径
+	 *
+	 * @author LiuGangQiang Create in 2020/04/02
+	 */
+	private static final String path = "i18n.core";
 
 	/**
 	 * 状态码
@@ -32,11 +39,25 @@ public class JsonApi<T> implements Serializable {
 	private String msg;
 
 	/**
+	 * 参数数组
+	 *
+	 * @author LiuGangQiang Create in 2020/04/02
+	 */
+	private Object[] args;
+
+	/**
+	 * 是否使用默认资源
+	 *
+	 * @author LiuGangQiang Create in 2020/04/02
+	 */
+	private Boolean isDefault;
+
+	/**
 	 * 无参构造器
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	public JsonApi() {
+	public ResultSet() {
 	}
 
 	/**
@@ -45,10 +66,10 @@ public class JsonApi<T> implements Serializable {
 	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param code 状态枚举
 	 */
-	public JsonApi(ApiCodeEnum code) {
-		this.data = null;
-		this.code = code.getValue();
-		this.msg = code.getMessage();
+	public ResultSet(CodeEnum codeEnum) {
+		this.isDefault = true;
+		this.code = codeEnum.getValue();
+		this.msg = codeEnum.getMessage();
 	}
 
 	/**
@@ -58,10 +79,11 @@ public class JsonApi<T> implements Serializable {
 	 * @param code 状态枚举
 	 * @param data 数据
 	 */
-	public JsonApi(ApiCodeEnum code, T data) {
+	public ResultSet(CodeEnum codeEnum, T data) {
+		this.isDefault = true;
 		this.data = data;
-		this.code = code.getValue();
-		this.msg = code.getMessage();
+		this.code = codeEnum.getValue();
+		this.msg = codeEnum.getMessage();
 	}
 
 	/**
@@ -71,7 +93,8 @@ public class JsonApi<T> implements Serializable {
 	 * @param code    自定义状态码
 	 * @param message 提示消息
 	 */
-	public JsonApi(int code, String message) {
+	public ResultSet(int code, String message) {
+		this.isDefault=false;
 		this.data = null;
 		this.code = code;
 		this.msg = message;
@@ -85,7 +108,8 @@ public class JsonApi<T> implements Serializable {
 	 * @param message 提示消息
 	 * @param data    数据
 	 */
-	public JsonApi(int code, String message, T data) {
+	public ResultSet(int code, String message, T data) {
+		this.isDefault=false;
 		this.data = null;
 		this.code = code;
 		this.msg = message;
@@ -100,9 +124,9 @@ public class JsonApi<T> implements Serializable {
 
 	/**
 	 * @param code the code to set
-	 * @return {@link JsonApi}
+	 * @return {@link ResultSet}
 	 */
-	public JsonApi<T> setCode(Integer code) {
+	public ResultSet<T> setCode(Integer code) {
 		this.code = code;
 		return this;
 	}
@@ -116,9 +140,9 @@ public class JsonApi<T> implements Serializable {
 
 	/**
 	 * @param data the data to set
-	 * @return {@link JsonApi}
+	 * @return {@link ResultSet}
 	 */
-	public JsonApi<T> setData(T data) {
+	public ResultSet<T> setData(T data) {
 		this.data = data;
 		return this;
 	}
@@ -132,11 +156,60 @@ public class JsonApi<T> implements Serializable {
 
 	/**
 	 * @param msg the msg to set
-	 * @return {@link JsonApi}
+	 * @return {@link ResultSet}
 	 */
-	public JsonApi<T> setMsg(String msg) {
+	public ResultSet<T> setMsg(String msg) {
+		this.isDefault=false;
 		this.msg = msg;
 		return this;
+	}
+
+	/**
+	 * @param msg the msg to set
+	 * @return {@link ResultSet}
+	 */
+	public ResultSet<T> setMsg(String msg, Object... args) {
+		this.isDefault=false;
+		this.msg = msg;
+		this.args = args;
+		return this;
+	}
+
+	/**
+	 * @return the args
+	 */
+	@Transient
+	public Object[] getArgs() {
+		return args;
+	}
+
+	/**
+	 * @param args the args to set
+	 */
+	public void setArgs(Object[] args) {
+		this.args = args;
+	}
+
+	/**
+	 * @return the isDefault
+	 */
+	@Transient
+	public Boolean getIsDefault() {
+		return isDefault;
+	}
+
+	/**
+	 * @param isDefault the isDefault to set
+	 */
+	public void setIsDefault(Boolean isDefault) {
+		this.isDefault = isDefault;
+	}
+
+	/**
+	 * @return the path
+	 */
+	public static String getPath() {
+		return path;
 	}
 
 	/**
@@ -146,7 +219,7 @@ public class JsonApi<T> implements Serializable {
 	 * @param code 状态枚举
 	 * @return 是否一致
 	 */
-	public boolean compare(ApiCodeEnum code) {
+	public boolean compare(CodeEnum code) {
 		return getCode() == code.getValue();
 	}
 }

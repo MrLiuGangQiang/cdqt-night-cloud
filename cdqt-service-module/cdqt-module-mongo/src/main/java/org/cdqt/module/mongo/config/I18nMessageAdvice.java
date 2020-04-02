@@ -1,4 +1,4 @@
-package org.cdqt.module.provider.config;
+package org.cdqt.module.mongo.config;
 
 import java.lang.reflect.AnnotatedElement;
 import java.util.Arrays;

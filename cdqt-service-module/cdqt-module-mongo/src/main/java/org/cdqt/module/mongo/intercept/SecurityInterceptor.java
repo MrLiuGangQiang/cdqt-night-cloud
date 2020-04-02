@@ -12,8 +12,8 @@ import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.cdqt.night.core.result.ApiCodeEnum;
-import org.cdqt.night.core.result.JsonApi;
+import org.cdqt.night.core.result.CodeEnum;
+import org.cdqt.night.core.result.ResultSet;
 import org.cdqt.night.tools.rsa.RSAUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,7 +76,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 		if (handler instanceof HandlerMethod) {
 			String sign = request.getHeader(SIGN);
 			if (sign == null || sign == "") {
-				response.getWriter().write(om.writeValueAsString(new JsonApi<>(ApiCodeEnum.BAD_REQUEST)));
+				response.getWriter().write(om.writeValueAsString(new ResultSet<>(CodeEnum.BAD_REQUEST)));
 				return false;
 			}
 			String plaintext = null;
@@ -88,7 +88,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 				if (logger.isErrorEnabled()) {
 					logger.error("decrypt fail key<{}>", sign);
 				}
-				response.getWriter().write(om.writeValueAsString(new JsonApi<>(ApiCodeEnum.UNAUTHORIZED)));
+				response.getWriter().write(om.writeValueAsString(new ResultSet<>(CodeEnum.UNAUTHORIZED)));
 				return false;
 			}
 			if (plaintext != null && !"".equals(plaintext)) {
@@ -110,28 +110,28 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 							if (logger.isWarnEnabled()) {
 								logger.warn("decrypt success but sign expiration info<{}>", infoMap);
 							}
-							response.getWriter().write(om.writeValueAsString(new JsonApi<>(ApiCodeEnum.FORBIDDEN)));
+							response.getWriter().write(om.writeValueAsString(new ResultSet<>(CodeEnum.FORBIDDEN)));
 							return false;
 						}
 					} else {
 						if (logger.isWarnEnabled()) {
 							logger.warn("decrypt success but incorrect information info<{}>", infoMap);
 						}
-						response.getWriter().write(om.writeValueAsString(new JsonApi<>(ApiCodeEnum.FORBIDDEN)));
+						response.getWriter().write(om.writeValueAsString(new ResultSet<>(CodeEnum.FORBIDDEN)));
 						return false;
 					}
 				} else {
 					if (logger.isWarnEnabled()) {
 						logger.warn("decrypt success but insufficient authority info<{}>", infoMap);
 					}
-					response.getWriter().write(om.writeValueAsString(new JsonApi<>(ApiCodeEnum.FORBIDDEN)));
+					response.getWriter().write(om.writeValueAsString(new ResultSet<>(CodeEnum.FORBIDDEN)));
 					return false;
 				}
 			}
-			response.getWriter().write(om.writeValueAsString(new JsonApi<>(ApiCodeEnum.FAIL)));
+			response.getWriter().write(om.writeValueAsString(new ResultSet<>(CodeEnum.FAIL)));
 			return false;
 		} else {
-			response.getWriter().write(om.writeValueAsString(new JsonApi<>(ApiCodeEnum.UNIMPLEMENTED)));
+			response.getWriter().write(om.writeValueAsString(new ResultSet<>(CodeEnum.UNIMPLEMENTED)));
 			return false;
 		}
 	}

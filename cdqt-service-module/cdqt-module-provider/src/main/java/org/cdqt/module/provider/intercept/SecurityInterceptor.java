@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.cdqt.night.core.auth.Authentication;
-import org.cdqt.night.core.result.ApiCodeEnum;
-import org.cdqt.night.core.result.JsonApi;
+import org.cdqt.night.core.result.CodeEnum;
+import org.cdqt.night.core.result.ResultSet;
 import org.cdqt.night.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,7 +67,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 				if (logger.isWarnEnabled()) {
 					logger.warn("the target method [{}#{}] is not defined", className, methodName);
 				}
-				response.getWriter().write(om.writeValueAsString(new JsonApi<>(ApiCodeEnum.UNIMPLEMENTED)));
+				response.getWriter().write(om.writeValueAsString(new ResultSet<>(CodeEnum.UNIMPLEMENTED)));
 				return false;
 			}
 			/* 权限注解不为空 则进行鉴权判断 */
@@ -78,13 +78,13 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 				/* 判断是否进行登录鉴权 */
 				if (token == null) {
 					/* token为空则返回参数有误状态 */
-					response.getWriter().write(om.writeValueAsString(new JsonApi<>(ApiCodeEnum.BAD_REQUEST)));
+					response.getWriter().write(om.writeValueAsString(new ResultSet<>(CodeEnum.BAD_REQUEST)));
 					return false;
 				}
 				/* TODO 这里应通过登录服务器获取用户缓存信息 */
 				// JsonApi<Session<Map<String, Object>>> sessionData = 这里远程获取;
-				JsonApi<Session<Map<String, Object>>> sessionData = new JsonApi<Session<Map<String, Object>>>();
-				if (sessionData != null && sessionData.compare(ApiCodeEnum.OK)) {
+				ResultSet<Session<Map<String, Object>>> sessionData = new ResultSet<Session<Map<String, Object>>>();
+				if (sessionData != null && sessionData.compare(CodeEnum.OK)) {
 					/* 登录信息不为空证明已登录，则放行 实际业务也可能更加严格 */
 					Session<?> session = sessionData.getData();
 					if (session != null) {
@@ -95,21 +95,21 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 				if (logger.isInfoEnabled()) {
 					logger.info("the access target method [{}#{}] is not logged in", className, methodName);
 				}
-				response.getWriter().write(om.writeValueAsString(new JsonApi<>(ApiCodeEnum.UNAUTHORIZED)));
+				response.getWriter().write(om.writeValueAsString(new ResultSet<>(CodeEnum.UNAUTHORIZED)));
 				return false;
 			} else {
 				/* 先获取用户id */
 				if (token == null) {
 					/* token为空则返回参数有误状态 */
-					response.getWriter().write(om.writeValueAsString(new JsonApi<>(ApiCodeEnum.BAD_REQUEST)));
+					response.getWriter().write(om.writeValueAsString(new ResultSet<>(CodeEnum.BAD_REQUEST)));
 					return false;
 				}
 				/* TODO 这里应通过登录服务器获取用户缓存信息 */
 				// JsonApi<Session<Map<String, Object>>> sessionData = 这里远程获取;
-				JsonApi<Session<Map<String, Object>>> sessionData = new JsonApi<Session<Map<String, Object>>>();
+				ResultSet<Session<Map<String, Object>>> sessionData = new ResultSet<Session<Map<String, Object>>>();
 				/* 权限信息为空获取请求状态不为成功则代表未登录 实际业务可能更加严格 */
-				if (sessionData == null || !sessionData.compare(ApiCodeEnum.OK)) {
-					response.getWriter().write(om.writeValueAsString(new JsonApi<>(ApiCodeEnum.UNAUTHORIZED)));
+				if (sessionData == null || !sessionData.compare(CodeEnum.OK)) {
+					response.getWriter().write(om.writeValueAsString(new ResultSet<>(CodeEnum.UNAUTHORIZED)));
 					return false;
 				}
 				/* 获取用户ID */
@@ -120,44 +120,44 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 				case ROLE:
 					/* TODO 这里应通过权限服务器获取该用户是否具有authentication的角色 */
 					// JsonApi<Map<String, Object>> role = 这里远程获取;
-					JsonApi<Map<String, Object>> role = new JsonApi<Map<String, Object>>();
+					ResultSet<Map<String, Object>> role = new ResultSet<Map<String, Object>>();
 					/* 角色不等于空并且请求数据有返回则认为具备权限 实际业务需要注意该远程方法的返回值 */
-					if (role != null && role.compare(ApiCodeEnum.OK)) {
+					if (role != null && role.compare(CodeEnum.OK)) {
 						if (role.getData() != null && role.getData().size() > 0) {
 							return true;
 						}
 					}
-					response.getWriter().write(om.writeValueAsString(new JsonApi<>(ApiCodeEnum.UNAUTHORIZED)));
+					response.getWriter().write(om.writeValueAsString(new ResultSet<>(CodeEnum.UNAUTHORIZED)));
 					return false;
 				case PERMISSION:
 					/* TODO 这里应通过权限服务器获取该用户是否具有authentication的权限 */
 					// JsonApi<Map<String, Object>> permission = 这里远程获取;
-					JsonApi<Map<String, Object>> permission = new JsonApi<Map<String, Object>>();
+					ResultSet<Map<String, Object>> permission = new ResultSet<Map<String, Object>>();
 					/* 权限不等于空并且请求数据有返回则认为具备权限 实际业务需要注意该远程方法的返回值 */
-					if (permission != null && permission.compare(ApiCodeEnum.OK)) {
+					if (permission != null && permission.compare(CodeEnum.OK)) {
 						if (permission.getData() != null && permission.getData().size() > 0) {
 							return true;
 						}
 					}
-					response.getWriter().write(om.writeValueAsString(new JsonApi<>(ApiCodeEnum.UNAUTHORIZED)));
+					response.getWriter().write(om.writeValueAsString(new ResultSet<>(CodeEnum.UNAUTHORIZED)));
 					return false;
 				case OPERATION:
 					/* TODO 这里应通过权限服务器获取该用户是否具有operation操作的权限 */
 					// JsonApi<Map<String, Object>> operation = 这里远程获取;
-					JsonApi<Map<String, Object>> operation = new JsonApi<Map<String, Object>>();
-					if (operation != null && operation.compare(ApiCodeEnum.OK)) {
+					ResultSet<Map<String, Object>> operation = new ResultSet<Map<String, Object>>();
+					if (operation != null && operation.compare(CodeEnum.OK)) {
 						if (operation.getData() != null && operation.getData().size() > 0) {
 							return true;
 						}
 					}
-					response.getWriter().write(om.writeValueAsString(new JsonApi<>(ApiCodeEnum.UNAUTHORIZED)));
+					response.getWriter().write(om.writeValueAsString(new ResultSet<>(CodeEnum.UNAUTHORIZED)));
 					return false;
 				}
 			}
 			if (logger.isInfoEnabled()) {
 				logger.info("access target method [{}#{}] has no permissions", className, methodName);
 			}
-			response.getWriter().write(om.writeValueAsString(new JsonApi<>(ApiCodeEnum.FORBIDDEN)));
+			response.getWriter().write(om.writeValueAsString(new ResultSet<>(CodeEnum.FORBIDDEN)));
 			return false;
 		}
 		return true;

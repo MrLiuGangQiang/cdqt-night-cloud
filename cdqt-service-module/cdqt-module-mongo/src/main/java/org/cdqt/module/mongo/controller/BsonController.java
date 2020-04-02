@@ -7,8 +7,8 @@ import javax.annotation.Resource;
 
 import org.cdqt.module.mongo.entity.Bson;
 import org.cdqt.module.mongo.service.BsonService;
-import org.cdqt.night.core.result.ApiCodeEnum;
-import org.cdqt.night.core.result.JsonApi;
+import org.cdqt.night.core.result.CodeEnum;
+import org.cdqt.night.core.result.ResultSet;
 import org.cdqt.night.tools.md5.MD5Util;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
@@ -45,11 +45,11 @@ public class BsonController {
 	 *
 	 * @author LiuGangQiang Create in 2020/02/03
 	 * @param multipartFile 文件
-	 * @return {@link JsonApi}
+	 * @return {@link ResultSet}
 	 * @throws IOException
 	 */
 	@PostMapping("/upload")
-	public JsonApi<?> upload(@RequestParam("file") MultipartFile multipartFile) throws IOException {
+	public ResultSet<?> upload(@RequestParam("file") MultipartFile multipartFile) throws IOException {
 		/* 获得提交的文件名 */
 		String fileName = multipartFile.getOriginalFilename();
 		/* 获取文件类型 */
@@ -61,15 +61,15 @@ public class BsonController {
 		/* 根据MD5校验文件是否存在 */
 		Bson bson = bsonService.getBsonByMd5(md5);
 		if (bson != null) {
-			return new JsonApi<>(ApiCodeEnum.OK, bson.getId());
+			return new ResultSet<>(CodeEnum.OK, bson.getId());
 		}
 		bson = new Bson(fileName, contentType, content.length, md5, content);
 		/* 将文件存储到mongodb中,mongodb 将会返回这个文件的具体信息 */
 		Bson result = bsonService.insert(bson);
 		if (result != null) {
-			return new JsonApi<>(ApiCodeEnum.OK, result.getId());
+			return new ResultSet<>(CodeEnum.OK, result.getId());
 		}
-		return new JsonApi<>(ApiCodeEnum.FAIL);
+		return new ResultSet<>(CodeEnum.FAIL);
 	}
 
 	/**
@@ -126,13 +126,13 @@ public class BsonController {
 	 *
 	 * @author LiuGangQiang Create in 2020/02/05
 	 * @param id 文件ID
-	 * @return {@link JsonApi}
+	 * @return {@link ResultSet}
 	 */
 	@DeleteMapping("/delete/{id}")
-	public JsonApi<?> delete(@PathVariable String id) {
+	public ResultSet<?> delete(@PathVariable String id) {
 		if (bsonService.remove(id)) {
-			return new JsonApi<>(ApiCodeEnum.OK);
+			return new ResultSet<>(CodeEnum.OK);
 		}
-		return new JsonApi<>(ApiCodeEnum.FAIL);
+		return new ResultSet<>(CodeEnum.FAIL);
 	}
 }

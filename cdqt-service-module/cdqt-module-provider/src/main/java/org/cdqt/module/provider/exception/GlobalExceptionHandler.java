@@ -1,7 +1,7 @@
 package org.cdqt.module.provider.exception;
 
-import org.cdqt.night.core.result.ApiCodeEnum;
-import org.cdqt.night.core.result.JsonApi;
+import org.cdqt.night.core.result.CodeEnum;
+import org.cdqt.night.core.result.ResultSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindException;
@@ -26,15 +26,15 @@ public class GlobalExceptionHandler {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/29
 	 * @param e {@link BindException}
-	 * @return {@link JsonApi}
+	 * @return {@link ResultSet}
 	 */
 	@ExceptionHandler(BindException.class)
-	public JsonApi<?> bindErrorHandler(BindException e) {
+	public ResultSet<?> bindErrorHandler(BindException e) {
 		BindingResult result = e.getBindingResult();
 		if (logger.isErrorEnabled()) {
 			logger.error("validator message [from] --> {}", result.getFieldError().getDefaultMessage());
 		}
-		return new JsonApi<>(ApiCodeEnum.BAD_REQUEST).setMsg(result.getFieldError().getDefaultMessage());
+		return new ResultSet<>(CodeEnum.BAD_REQUEST).setMsg(result.getFieldError().getDefaultMessage());
 	}
 
 	/**
@@ -42,15 +42,15 @@ public class GlobalExceptionHandler {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/29
 	 * @param e {@link BindException}
-	 * @return {@link JsonApi}
+	 * @return {@link ResultSet}
 	 */
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public JsonApi<?> bindErrorHandler(MethodArgumentNotValidException e) {
+	public ResultSet<?> bindErrorHandler(MethodArgumentNotValidException e) {
 		BindingResult result = e.getBindingResult();
 		if (logger.isErrorEnabled()) {
 			logger.error("validator message [json] --> {}", result.getFieldError().getDefaultMessage());
 		}
-		return new JsonApi<>(ApiCodeEnum.BAD_REQUEST).setMsg(result.getFieldError().getDefaultMessage());
+		return new ResultSet<>(CodeEnum.BAD_REQUEST).setMsg(result.getFieldError().getDefaultMessage());
 	}
 
 	/**
@@ -58,15 +58,15 @@ public class GlobalExceptionHandler {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/02
 	 * @param e 异常
-	 * @return {@link JsonApi} 对象
+	 * @return {@link ResultSet} 对象
 	 */
 	@ExceptionHandler(Exception.class)
-	public JsonApi<?> defaultErrorHandler(Exception e) {
+	public ResultSet<?> defaultErrorHandler(Exception e) {
 		if (logger.isErrorEnabled()) {
 			e.printStackTrace();
 			logger.error("system appear error msg --> {}", e.getMessage());
 		}
-		return new JsonApi<>(ApiCodeEnum.ERROR).setMsg(e.getMessage());
+		return new ResultSet<>(CodeEnum.ERROR).setMsg(e.getMessage());
 	}
 
 }

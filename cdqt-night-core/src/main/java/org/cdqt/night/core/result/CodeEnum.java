@@ -1,15 +1,11 @@
 package org.cdqt.night.core.result;
 
-import java.util.Locale;
-
-import org.cdqt.night.core.message.Prompt;
-
 /**
  * 请求响应状态枚举
  * 
  * @author LiuGangQiang Create in 2020/03/01
  */
-public enum ApiCodeEnum {
+public enum CodeEnum {
 	/**
 	 * 成功状态码
 	 *
@@ -79,6 +75,7 @@ public enum ApiCodeEnum {
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	TIMEOUT(504, "night.api.code.timeout");
+
 	/**
 	 * 状态码
 	 *
@@ -113,8 +110,8 @@ public enum ApiCodeEnum {
 	 * @param value   状态码
 	 * @param message 提示消息
 	 */
-	ApiCodeEnum(int value, String message) {
+	CodeEnum(int value, String message) {
 		this.value = value;
-		this.message = Prompt.bundle("i18n.core", message, Locale.getDefault());
+		this.message = message;
 	}
 }

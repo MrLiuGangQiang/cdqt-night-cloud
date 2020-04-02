@@ -3,8 +3,8 @@ package org.cdqt.night.gateway.fallback;
 import java.util.Locale;
 
 import org.cdqt.night.core.message.Prompt;
-import org.cdqt.night.core.result.ApiCodeEnum;
-import org.cdqt.night.core.result.JsonApi;
+import org.cdqt.night.core.result.CodeEnum;
+import org.cdqt.night.core.result.ResultSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,13 +31,13 @@ public class FallbackController {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param lb 服务实例名
-	 * @return {@link JsonApi} 对象
+	 * @return {@link ResultSet} 对象
 	 */
 	@RequestMapping("/fallback/{lb}")
-	public JsonApi<?> fallback(@PathVariable("lb") String lb) {
+	public ResultSet<?> fallback(@PathVariable("lb") String lb) {
 		if (LOGGER.isErrorEnabled()) {
 			LOGGER.error("server instance [{}] tigger hystrix", lb);
 		}
-		return new JsonApi<>(ApiCodeEnum.TIMEOUT).setMsg(Prompt.bundle(PATH, "fallback.timeout", Locale.getDefault(), lb));
+		return new ResultSet<>(CodeEnum.TIMEOUT).setMsg(Prompt.bundle(PATH, Locale.getDefault(),"fallback.timeout", lb));
 	}
 }

@@ -9,8 +9,8 @@ import javax.annotation.Resource;
 
 import org.bson.types.ObjectId;
 import org.cdqt.module.mongo.service.GridFSService;
-import org.cdqt.night.core.result.ApiCodeEnum;
-import org.cdqt.night.core.result.JsonApi;
+import org.cdqt.night.core.result.CodeEnum;
+import org.cdqt.night.core.result.ResultSet;
 import org.cdqt.night.tools.file.IoUtil;
 import org.cdqt.night.tools.md5.MD5Util;
 import org.springframework.data.mongodb.gridfs.GridFsResource;
@@ -46,12 +46,12 @@ public class GridFSController {
 	 *
 	 * @author LiuGangQiang Create in 2020/01/24
 	 * @param file 文件
-	 * @return {@link JsonApi}
+	 * @return {@link ResultSet}
 	 * @throws IOException
 	 * @throws NoSuchAlgorithmException
 	 */
 	@PostMapping("/upload")
-	public JsonApi<?> upload(@RequestParam("file") MultipartFile multipartFile) throws IOException, NoSuchAlgorithmException {
+	public ResultSet<?> upload(@RequestParam("file") MultipartFile multipartFile) throws IOException, NoSuchAlgorithmException {
 		/* 获得提交的文件名 */
 		String fileName = multipartFile.getOriginalFilename();
 		/* 获得文件输入流 */
@@ -63,14 +63,14 @@ public class GridFSController {
 		/* 根据MD5校验文件是否存在 */
 		GridFSFile gridFSFile = gridFSService.queryByMD5(md5);
 		if (gridFSFile != null) {
-			return new JsonApi<>(ApiCodeEnum.OK, gridFSFile.getObjectId().toHexString());
+			return new ResultSet<>(CodeEnum.OK, gridFSFile.getObjectId().toHexString());
 		}
 		/* 将文件存储到mongodb中,mongodb 将会返回这个文件的具体信息 */
 		ObjectId objectId = gridFSService.upload(fileName, ins, contentType);
 		if (objectId != null) {
-			return new JsonApi<>(ApiCodeEnum.OK, objectId.toHexString());
+			return new ResultSet<>(CodeEnum.OK, objectId.toHexString());
 		}
-		return new JsonApi<>(ApiCodeEnum.FAIL);
+		return new ResultSet<>(CodeEnum.FAIL);
 	}
 
 	/**
@@ -125,14 +125,14 @@ public class GridFSController {
 	 *
 	 * @author LiuGangQiang Create in 2020/01/26
 	 * @param id 文件ID
-	 * @return {@link JsonApi}
+	 * @return {@link ResultSet}
 	 */
 	@DeleteMapping("/delete/{id}")
-	public JsonApi<?> delete(@PathVariable String id) {
+	public ResultSet<?> delete(@PathVariable String id) {
 		if (gridFSService.remove(id)) {
-			return new JsonApi<>(ApiCodeEnum.OK);
+			return new ResultSet<>(CodeEnum.OK);
 		}
-		return new JsonApi<>(ApiCodeEnum.FAIL);
+		return new ResultSet<>(CodeEnum.FAIL);
 	}
 
 }
