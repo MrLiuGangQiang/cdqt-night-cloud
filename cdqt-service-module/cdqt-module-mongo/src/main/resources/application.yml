@@ -1,5 +1,5 @@
 server:
-   port: 8001  #端口
+   port: 8000  #端口
 spring:
    application:
       name: cdqt-module-mongo
