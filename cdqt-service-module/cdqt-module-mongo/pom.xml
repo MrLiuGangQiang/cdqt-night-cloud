@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.cdqt</groupId>
     <artifactId>cdqt-service-module</artifactId>
     <version>1.1.1.20200405.RELEASE</version>
   </parent>
-  <artifactId>cdqt-module-mongo</artifactId>
-  <name>cdqt-module-mongo</name>
+  <artifactId>cdqt-module-mongodb</artifactId>
+  <name>cdqt-module-mongodb</name>
 
   <dependencies>
     <!-- 引入core项目 -->
@@ -61,7 +61,7 @@
   </dependencies>
   <!-- 构建配置 -->
   <build>
-    <finalName>cdqt-service-module</finalName>
+    <finalName>cdqt-module-mongodb</finalName>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>

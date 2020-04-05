@@ -10,7 +10,7 @@
 	<!-- 只有测试、正式环境才配置此项 appender必须在里面 不然依然会创建文件 -->
 	<springProfile name="test,prod">
 		<!-- 定义名称和日志路径 -->
-		<property name="application.name" value="cdqt-module-mongo" />
+		<property name="application.name" value="cdqt-module-mongodb" />
 		<property name="log.path" value="../logs" />
 
 		<!-- info级别日志控制 -->

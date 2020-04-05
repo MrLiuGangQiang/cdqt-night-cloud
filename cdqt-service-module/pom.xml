@@ -18,7 +18,7 @@
   <!-- 子项目配置 -->
   <modules>
     <!-- MongoDB项目 -->
-    <module>cdqt-module-mongo</module>
+    <module>cdqt-module-mongodb</module>
     <!-- 角色权限模块 -->
     <module>cdqt-module-security</module>
     <!-- 用户信息模块 -->
