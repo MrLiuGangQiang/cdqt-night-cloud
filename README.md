@@ -1,8 +1,8 @@
 ## 项目说明
 #### 该项目是一个典型的由Spring Cloud管理的微服务项目，主要包括如下模块
 ```
-> cdqt-night-cloud─────────────────顶层项目
-├──cloud-service-core───────────────基础核心模块
+├cdqt-night-cloud                  顶层项目
+├─cdqt-night-core                  基础核心模块
 ├──cloud-service-tools──────────────全局通用工具类
 ├──cloud-service-reids──────────────Redis二次封装
 ├──cloud-eureka-server──────────────服务注册中心[8761]
