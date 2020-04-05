@@ -19,13 +19,9 @@
   <modules>
     <!-- MongoDB项目 -->
     <module>cdqt-module-mongo</module>
-    <!-- Redis项目 -->
-    <module>cdqt-module-redis</module>
-    <!-- 服务提供者 -->
-    <module>cdqt-module-provider</module>
-    <!-- 服务消费者 -->
-    <module>cdqt-module-consumer</module>
-    <!-- 权限模块 -->
+    <!-- 角色权限模块 -->
     <module>cdqt-module-security</module>
+    <!-- 用户信息模块 -->
+    <module>cdqt-module-userinfo</module>
   </modules>
 </project>

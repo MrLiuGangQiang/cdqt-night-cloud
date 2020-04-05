@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cdqt.module.security.mapper.UserOrganizationRoleMapper">
+  <resultMap id="BaseResultMap" type="org.cdqt.module.security.entity.UserOrganizationRole">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_info_id" jdbcType="VARCHAR" property="userInfoId" />
+    <result column="organization_info_id" jdbcType="VARCHAR" property="organizationInfoId" />
+    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="enabled" jdbcType="BIT" property="enabled" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <insert id="insert" parameterType="org.cdqt.module.security.entity.UserOrganizationRole">
+    insert into base_user_organization_role (id, user_info_id, organization_info_id, 
+      role_id, enabled, update_time, 
+      create_time)
+    values (#{id,jdbcType=VARCHAR}, #{userInfoId,jdbcType=VARCHAR}, #{organizationInfoId,jdbcType=VARCHAR}, 
+      #{roleId,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, user_info_id, organization_info_id, role_id, enabled, update_time, create_time
+    from base_user_organization_role
+  </select>
+</mapper>

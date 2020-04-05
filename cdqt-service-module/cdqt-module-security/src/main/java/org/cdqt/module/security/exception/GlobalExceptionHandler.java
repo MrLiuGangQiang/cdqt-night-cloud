@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
 	public ResultSet<?> bindErrorHandler(BindException e) {
 		BindingResult result = e.getBindingResult();
 		if (logger.isErrorEnabled()) {
-			logger.error("validator message [from] --> {}", result.getFieldError().getDefaultMessage());
+			logger.error("validator message [form] --> {}", result.getFieldError().getDefaultMessage());
 		}
 		return new ResultSet<>(CodeEnum.BAD_REQUEST).setMsg(result.getFieldError().getDefaultMessage());
 	}

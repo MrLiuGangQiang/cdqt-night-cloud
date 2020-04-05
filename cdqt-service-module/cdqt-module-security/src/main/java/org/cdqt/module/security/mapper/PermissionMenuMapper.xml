@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cdqt.module.security.mapper.PermissionMenuMapper">
+  <resultMap id="BaseResultMap" type="org.cdqt.module.security.entity.PermissionMenu">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="permission_id" jdbcType="VARCHAR" property="permissionId" />
+    <result column="menu_id" jdbcType="VARCHAR" property="menuId" />
+    <result column="enabled" jdbcType="BIT" property="enabled" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <insert id="insert" parameterType="org.cdqt.module.security.entity.PermissionMenu">
+    insert into base_permission_menu (id, permission_id, menu_id, 
+      enabled, update_time, create_time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{permissionId,jdbcType=VARCHAR}, #{menuId,jdbcType=VARCHAR}, 
+      #{enabled,jdbcType=BIT}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, permission_id, menu_id, enabled, update_time, create_time
+    from base_permission_menu
+  </select>
+</mapper>

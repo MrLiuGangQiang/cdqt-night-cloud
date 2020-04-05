@@ -15,8 +15,7 @@
     </commentGenerator>
     <!-- <commentGenerator> <property name="suppressDate" value="true" /> <property name="suppressAllComments" value="true" /> </commentGenerator> -->
 
-    <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://192.168.1.4:3306/cdqt"
-      userId="cdqt" password="123456">
+    <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://192.168.1.4:3306/cdqt" userId="cdqt" password="123456">
     </jdbcConnection>
 
     <javaTypeResolver type="org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl">
@@ -24,21 +23,19 @@
     </javaTypeResolver>
 
 
-    <javaModelGenerator targetPackage="org.cdqt.module.provider.entity" targetProject="cdqt-module-provider">
+    <javaModelGenerator targetPackage="org.cdqt.module.security.entity" targetProject="cdqt-module-security">
       <property name="rootClass" value="org.cdqt.night.core.entity.BaseEntity" />
     </javaModelGenerator>
 
-    <sqlMapGenerator targetPackage="org.cdqt.module.provider.mapper" targetProject="cdqt-module-provider">
+    <sqlMapGenerator targetPackage="org.cdqt.module.security.mapper" targetProject="cdqt-module-security">
       <property name="enableSubPackages" value="ture" />
     </sqlMapGenerator>
-    <javaClientGenerator type="XMLMAPPER" targetPackage="org.cdqt.module.provider.mapper"
-      targetProject="cdqt-module-provider">
+    <javaClientGenerator type="XMLMAPPER" targetPackage="org.cdqt.module.security.mapper" targetProject="cdqt-module-security">
       <property name="rootInterface" value="org.cdqt.night.core.mapper.IBaseMapper" />
       <property name="enableSubPackages" value="ture" />
     </javaClientGenerator>
 
-    <table tableName="base_%" enableDeleteByPrimaryKey="false" enableSelectByPrimaryKey="false"
-      enableUpdateByPrimaryKey="false" >
+    <table tableName="base_%" enableDeleteByPrimaryKey="false" enableSelectByPrimaryKey="false" enableUpdateByPrimaryKey="false">
       <domainObjectRenamingRule searchString="^Base" replaceString="" />
     </table>
   </context>
