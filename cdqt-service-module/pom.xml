@@ -25,5 +25,7 @@
     <module>cdqt-module-provider</module>
     <!-- 服务消费者 -->
     <module>cdqt-module-consumer</module>
+    <!-- 权限模块 -->
+    <module>cdqt-module-security</module>
   </modules>
 </project>
