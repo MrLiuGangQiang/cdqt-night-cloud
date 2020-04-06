@@ -93,34 +93,37 @@
   </select>
   <!-- 修改 -->
   <update id="update" parameterType="org.cdqt.module.security.entity.Menu">
-    UPDATE base_menu m
+    UPDATE base_menu
     <set>
+      <if test="id != null and id != ''">
+        id=#{id},
+      </if>
       <if test="pid != null and pid != ''">
-        m.pid=#{pid},
+        pid=#{pid},
       </if>
       <if test="code !=null and code != ''">
-        m.'code'=#{code},
+        code=#{code},
       </if>
       <if test="name !=null and name != ''">
-        m.`name`=#{name},
+        name=#{name},
       </if>
       <if test="type !=null">
-        m.type=#{type},
+        type=#{type},
       </if>
       <if test="sort != null">
-        m.sort=#{sort},
+        sort=#{sort},
       </if>
       <if test="icon != null and icon != ''">
-        m.icon=#{icon},
+        icon=#{icon},
       </if>
       <if test="enabled !=null">
-        m.enabled=#{enabled},
+        enabled=#{enabled},
       </if>
       <if test="updateTime != null">
-        m.update_time=#{updateTime},
+        update_time=#{updateTime},
       </if>
     </set>
-    WHERE m.id=#{id}
+    WHERE id=#{id}
   </update>
   <!-- 删除 -->
   <delete id="delete" parameterType="org.cdqt.module.security.entity.Menu">

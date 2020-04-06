@@ -115,7 +115,7 @@ public class MenuController {
 	 */
 	@PutMapping("/menu/{id}")
 	@Authentication(value = "role:security:menu:update", level = Level.ROLE)
-	public ResultApi<?> update(@PathVariable("id") String id, @Validated({ Update.class }) Menu menu) {
+	public ResultApi<?> update(@PathVariable("id") String id, @Validated({ Update.class }) @RequestBody Menu menu) {
 		/* 设置主键 */
 		menu.setId(id);
 		/* 查询菜单信息是否存在 */
@@ -124,7 +124,13 @@ public class MenuController {
 			/* 数据不存在提示并返回 */
 			return new ResultApi<>(CodeEnum.NOT_FOUND);
 		}
-		/* 存在则修改数据 */
+		/* 查询菜单信息是否重复 */
+		Map<String, Object> menuUniqueMap = menuService.queryUnique(menu);
+		if (MapUtils.isNotEmpty(menuUniqueMap)) {
+			/* 数据存在提示并返回 */
+			return new ResultApi<>(CodeEnum.CONFLICT);
+		}
+		/* 存在且不冲突则修改数据 */
 		Integer row = menuService.update(menu);
 		if (IntegerUtils.isGtZero(row)) {
 			/* 受影响行数大于零证明修改成功 */
