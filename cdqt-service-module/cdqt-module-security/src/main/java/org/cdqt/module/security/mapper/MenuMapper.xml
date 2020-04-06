@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.cdqt.module.security.mapper.MenuMapper">
-  <resultMap id="BaseResultMap" type="org.cdqt.module.security.entity.Menu">
+  <resultMap id="BaseResultMap" autoMapping="false" type="map">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="pid" jdbcType="VARCHAR" property="pid" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -14,18 +14,133 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
+  <!-- 新增 -->
   <insert id="insert" parameterType="org.cdqt.module.security.entity.Menu">
-    insert into base_menu (id, pid, name, 
-      code, type, sort, enabled, 
-      icon, remark, update_time, 
-      create_time)
-    values (#{id,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{code,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{enabled,jdbcType=BIT}, 
-      #{icon,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{createTime,jdbcType=TIMESTAMP})
+    insert into base_menu (id, pid, name,code, type, sort, enabled,icon, remark, update_time,create_time)
+    values (#{id,jdbcType=VARCHAR},
+    #{pid,jdbcType=VARCHAR},
+    #{name,jdbcType=VARCHAR},
+    #{code,jdbcType=VARCHAR},
+    #{type,jdbcType=INTEGER},
+    #{sort,jdbcType=INTEGER},
+    #{enabled,jdbcType=BIT},
+    #{icon,jdbcType=VARCHAR},
+    #{remark,jdbcType=VARCHAR},
+    #{updateTime,jdbcType=TIMESTAMP},
+    #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, pid, name, code, type, sort, enabled, icon, remark, update_time, create_time
-    from base_menu
+  <!-- 查询重复 -->
+  <select id="queryUnique" parameterType="org.cdqt.module.security.entity.Menu" resultMap="BaseResultMap">
+    SELECT
+    m.id,
+    m.`code`
+    FROM
+    base_menu m
+    WHERE
+    m.`code` = #{code}
   </select>
+  <!-- 查询详情 -->
+  <select id="queryOne" parameterType="org.cdqt.module.security.entity.Menu" resultMap="BaseResultMap">
+    SELECT
+    m.id,
+    m.pid,
+    m.`code`,
+    m.`name`,
+    m.type,
+    m.sort,
+    m.icon,
+    m.enabled,
+    m.remark,
+    m.update_time,
+    m.create_time
+    FROM
+    base_menu m
+    WHERE
+    m.id=#{id}
+  </select>
+  <!-- 查询列表 -->
+  <select id="queryList" parameterType="org.cdqt.module.security.entity.Menu" resultMap="BaseResultMap">
+    SELECT
+    m.id,
+    m.pid,
+    m.`code`,
+    m.`name`,
+    m.type,
+    m.sort,
+    m.icon,
+    m.enabled,
+    m.update_time,
+    m.create_time
+    FROM
+    base_menu m
+    <where>
+      <if test="id !=null and id != ''">
+        m.id=#{id}
+      </if>
+      <if test="pid !=null and pid != ''">
+        AND m.pid=#{pid}
+      </if>
+      <if test="code !=null and code != ''">
+        AND m.'code'=#{code}
+      </if>
+      <if test="name !=null and name != ''">
+        AND m.`name` like CONCAT('%',#{name},'%')
+      </if>
+      <if test="enabled != null">
+        AND m.enabled=#{enabled}
+      </if>
+    </where>
+  </select>
+  <!-- 修改 -->
+  <update id="update" parameterType="org.cdqt.module.security.entity.Menu">
+    UPDATE base_menu m
+    <set>
+      <if test="pid != null and pid != ''">
+        m.pid=#{pid},
+      </if>
+      <if test="code !=null and code != ''">
+        m.'code'=#{code},
+      </if>
+      <if test="name !=null and name != ''">
+        m.`name`=#{name},
+      </if>
+      <if test="type !=null">
+        m.type=#{type},
+      </if>
+      <if test="sort != null">
+        m.sort=#{sort},
+      </if>
+      <if test="icon != null and icon != ''">
+        m.icon=#{icon},
+      </if>
+      <if test="enabled !=null">
+        m.enabled=#{enabled},
+      </if>
+      <if test="updateTime != null">
+        m.update_time=#{updateTime},
+      </if>
+    </set>
+    WHERE m.id=#{id}
+  </update>
+  <!-- 删除 -->
+  <delete id="delete" parameterType="org.cdqt.module.security.entity.Menu">
+    DELETE FROM base_menu
+    <where>
+      <if test="id !=null and id != ''">
+        id=#{id}
+      </if>
+      <if test="pid !=null and pid != ''">
+        AND pid=#{pid}
+      </if>
+      <if test="code !=null and code != ''">
+        AND 'code'=#{code}
+      </if>
+      <if test="name !=null and name != ''">
+        AND `name` like CONCAT('%',#{name},'%')
+      </if>
+      <if test="enabled != null">
+        AND enabled=#{enabled}
+      </if>
+    </where>
+  </delete>
 </mapper>

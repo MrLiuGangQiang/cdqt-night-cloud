@@ -8,7 +8,7 @@ import java.io.Serializable;
  * 
  * @author LiuGangQiang Create in 2020/03/01
  */
-public class ResultSet<T> implements Serializable {
+public class ResultApi<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * 默认资源文件路径
@@ -57,7 +57,7 @@ public class ResultSet<T> implements Serializable {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	public ResultSet() {
+	public ResultApi() {
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class ResultSet<T> implements Serializable {
 	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param code 状态枚举
 	 */
-	public ResultSet(CodeEnum codeEnum) {
+	public ResultApi(CodeEnum codeEnum) {
 		this.isDefault = true;
 		this.code = codeEnum.getValue();
 		this.msg = codeEnum.getMessage();
@@ -79,7 +79,7 @@ public class ResultSet<T> implements Serializable {
 	 * @param code 状态枚举
 	 * @param data 数据
 	 */
-	public ResultSet(CodeEnum codeEnum, T data) {
+	public ResultApi(CodeEnum codeEnum, T data) {
 		this.isDefault = true;
 		this.data = data;
 		this.code = codeEnum.getValue();
@@ -93,8 +93,8 @@ public class ResultSet<T> implements Serializable {
 	 * @param code    自定义状态码
 	 * @param message 提示消息
 	 */
-	public ResultSet(int code, String message) {
-		this.isDefault=false;
+	public ResultApi(int code, String message) {
+		this.isDefault = false;
 		this.data = null;
 		this.code = code;
 		this.msg = message;
@@ -108,8 +108,8 @@ public class ResultSet<T> implements Serializable {
 	 * @param message 提示消息
 	 * @param data    数据
 	 */
-	public ResultSet(int code, String message, T data) {
-		this.isDefault=false;
+	public ResultApi(int code, String message, T data) {
+		this.isDefault = false;
 		this.data = null;
 		this.code = code;
 		this.msg = message;
@@ -124,9 +124,9 @@ public class ResultSet<T> implements Serializable {
 
 	/**
 	 * @param code the code to set
-	 * @return {@link ResultSet}
+	 * @return {@link ResultApi}
 	 */
-	public ResultSet<T> setCode(Integer code) {
+	public ResultApi<T> setCode(Integer code) {
 		this.code = code;
 		return this;
 	}
@@ -140,9 +140,9 @@ public class ResultSet<T> implements Serializable {
 
 	/**
 	 * @param data the data to set
-	 * @return {@link ResultSet}
+	 * @return {@link ResultApi}
 	 */
-	public ResultSet<T> setData(T data) {
+	public ResultApi<T> setData(T data) {
 		this.data = data;
 		return this;
 	}
@@ -156,20 +156,20 @@ public class ResultSet<T> implements Serializable {
 
 	/**
 	 * @param msg the msg to set
-	 * @return {@link ResultSet}
+	 * @return {@link ResultApi}
 	 */
-	public ResultSet<T> setMsg(String msg) {
-		this.isDefault=false;
+	public ResultApi<T> setMsg(String msg) {
+		this.isDefault = false;
 		this.msg = msg;
 		return this;
 	}
 
 	/**
 	 * @param msg the msg to set
-	 * @return {@link ResultSet}
+	 * @return {@link ResultApi}
 	 */
-	public ResultSet<T> setMsg(String msg, Object... args) {
-		this.isDefault=false;
+	public ResultApi<T> setMsg(String msg, Object... args) {
+		this.isDefault = false;
 		this.msg = msg;
 		this.args = args;
 		return this;

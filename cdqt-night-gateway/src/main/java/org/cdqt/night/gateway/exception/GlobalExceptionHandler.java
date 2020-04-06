@@ -1,7 +1,7 @@
 package org.cdqt.night.gateway.exception;
 
 import org.cdqt.night.core.result.CodeEnum;
-import org.cdqt.night.core.result.ResultSet;
+import org.cdqt.night.core.result.ResultApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -23,13 +23,13 @@ public class GlobalExceptionHandler {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param e 异常
-	 * @return {@link ResultSet} 对象
+	 * @return {@link ResultApi} 对象
 	 */
 	@ExceptionHandler(Exception.class)
-	public ResultSet<?> defaultErrorHandler(Exception e) {
+	public ResultApi<?> defaultErrorHandler(Exception e) {
 		if (LOGGER.isErrorEnabled()) {
 			LOGGER.error("system appear error msg --> {}", e.toString());
 		}
-		return new ResultSet<>(CodeEnum.ERROR).setMsg(e.toString());
+		return new ResultApi<>(CodeEnum.ERROR).setMsg(e.toString());
 	}
 }

@@ -1,7 +1,7 @@
 package org.cdqt.module.security.exception;
 
 import org.cdqt.night.core.result.CodeEnum;
-import org.cdqt.night.core.result.ResultSet;
+import org.cdqt.night.core.result.ResultApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindException;
@@ -26,15 +26,15 @@ public class GlobalExceptionHandler {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/29
 	 * @param e {@link BindException}
-	 * @return {@link ResultSet}
+	 * @return {@link ResultApi}
 	 */
 	@ExceptionHandler(BindException.class)
-	public ResultSet<?> bindErrorHandler(BindException e) {
+	public ResultApi<?> bindErrorHandler(BindException e) {
 		BindingResult result = e.getBindingResult();
 		if (logger.isErrorEnabled()) {
 			logger.error("validator message [form] --> {}", result.getFieldError().getDefaultMessage());
 		}
-		return new ResultSet<>(CodeEnum.BAD_REQUEST).setMsg(result.getFieldError().getDefaultMessage());
+		return new ResultApi<>(CodeEnum.BAD_REQUEST).setMsg(result.getFieldError().getDefaultMessage());
 	}
 
 	/**
@@ -42,15 +42,15 @@ public class GlobalExceptionHandler {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/29
 	 * @param e {@link BindException}
-	 * @return {@link ResultSet}
+	 * @return {@link ResultApi}
 	 */
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResultSet<?> bindErrorHandler(MethodArgumentNotValidException e) {
+	public ResultApi<?> bindErrorHandler(MethodArgumentNotValidException e) {
 		BindingResult result = e.getBindingResult();
 		if (logger.isErrorEnabled()) {
 			logger.error("validator message [json] --> {}", result.getFieldError().getDefaultMessage());
 		}
-		return new ResultSet<>(CodeEnum.BAD_REQUEST).setMsg(result.getFieldError().getDefaultMessage());
+		return new ResultApi<>(CodeEnum.BAD_REQUEST).setMsg(result.getFieldError().getDefaultMessage());
 	}
 
 	/**
@@ -58,15 +58,15 @@ public class GlobalExceptionHandler {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/02
 	 * @param e 异常
-	 * @return {@link ResultSet} 对象
+	 * @return {@link ResultApi} 对象
 	 */
 	@ExceptionHandler(Exception.class)
-	public ResultSet<?> defaultErrorHandler(Exception e) {
+	public ResultApi<?> defaultErrorHandler(Exception e) {
 		if (logger.isErrorEnabled()) {
 			e.printStackTrace();
 			logger.error("system appear error msg --> {}", e.getMessage());
 		}
-		return new ResultSet<>(CodeEnum.ERROR).setMsg(e.getMessage());
+		return new ResultApi<>(CodeEnum.ERROR).setMsg(e.getMessage());
 	}
 
 }

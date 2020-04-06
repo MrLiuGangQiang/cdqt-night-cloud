@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 
 import org.cdqt.night.core.entity.BaseEntity;
 import org.cdqt.night.core.valid.ValidGroup.Insert;
+import org.cdqt.night.core.valid.ValidGroup.QueryList;
 
 /**
  * 机构菜单表
@@ -35,7 +36,7 @@ public class Menu extends BaseEntity {
 	 * 
 	 * @author LiuGangQiang Create in 2020/03/07
 	 */
-	@NotBlank(message = "{menu.name.not.blank}",groups = {Insert.class})
+	@NotBlank(message = "{menu.name.not.blank}", groups = { Insert.class })
 	private String name;
 
 	/**
@@ -97,6 +98,24 @@ public class Menu extends BaseEntity {
 	 * @author LiuGangQiang Create in 2020/03/07
 	 */
 	private Date createTime;
+
+	/**
+	 * @see org.cdqt.night.core.entity.BaseEntity#getPage()
+	 */
+	@Override
+	@NotNull(message = "{page.not.null}", groups = { QueryList.class })
+	public Integer getPage() {
+		return super.getPage();
+	}
+
+	/**
+	 * @see org.cdqt.night.core.entity.BaseEntity#getPageSize()
+	 */
+	@Override
+	@NotNull(message = "{page.size.not.null}", groups = { QueryList.class })
+	public Integer getPageSize() {
+		return super.getPageSize();
+	}
 
 	/**
 	 * @return the id

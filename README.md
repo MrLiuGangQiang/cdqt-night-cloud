@@ -16,12 +16,6 @@
 ├────cdqt-module-security───────────────────────────────基础权限数据模块(端口：8010)
 └────cdqt-module-userinfo───────────────────────────────用户信息模块(端口：8020)
 ```
-* 修改日志
-
-|修改日志|修改人|修改日期|版本计划|
-|:----:|:----|:----:|:---|
-|[V1.0](https://github.com/MrLiuGangQiang/cdqt-night-cloud/blob/master/README.md)|刘岗强|2020-04-05 |项目初始化|
-|[V1.1](https://github.com/MrLiuGangQiang/cdqt-night-cloud/blob/master/README.md)|刘岗强|2020-04-06 |完成基础框架|
 
 * 项目介绍
 

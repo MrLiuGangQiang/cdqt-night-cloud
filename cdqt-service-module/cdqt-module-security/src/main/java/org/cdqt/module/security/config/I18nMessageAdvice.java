@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Locale;
 
 import org.cdqt.night.core.message.Prompt;
-import org.cdqt.night.core.result.ResultSet;
+import org.cdqt.night.core.result.ResultApi;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -34,13 +34,13 @@ public class I18nMessageAdvice implements ResponseBodyAdvice<Object> {
 
 	@Override
 	public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
-		if (body instanceof ResultSet<?>) {
-			ResultSet<?> result = (ResultSet<?>) body;
+		if (body instanceof ResultApi<?>) {
+			ResultApi<?> result = (ResultApi<?>) body;
 			Locale locale = LocaleContextHolder.getLocale();
 			/* 如果消息等于空则认为是默认消息 */
 			if (result.getIsDefault()) {
 				/* 获取默认路径下的资源文件 */
-				result.setMsg(Prompt.bundle(ResultSet.getPath(), locale, result.getMsg()));
+				result.setMsg(Prompt.bundle(ResultApi.getPath(), locale, result.getMsg()));
 			} else {
 				result.setMsg(Prompt.bundle(locale, result.getMsg(), result.getArgs()));
 			}
