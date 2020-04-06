@@ -3,7 +3,6 @@ package org.cdqt.module.mongo.config;
 import org.cdqt.module.mongo.intercept.SecurityInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -13,7 +12,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author LiuGangQiang Create in 2020/01/23
  */
 @Configuration
-@EnableWebMvc
 public class SecurityConfiguration implements WebMvcConfigurer {
 
 	/**

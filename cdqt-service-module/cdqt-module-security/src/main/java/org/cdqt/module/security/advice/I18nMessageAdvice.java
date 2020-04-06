@@ -1,4 +1,4 @@
-package org.cdqt.module.security.config;
+package org.cdqt.module.security.advice;
 
 import java.lang.reflect.AnnotatedElement;
 import java.util.Arrays;
