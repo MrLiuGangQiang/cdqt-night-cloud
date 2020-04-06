@@ -1,5 +1,6 @@
 package org.cdqt.module.security.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import org.cdqt.night.core.valid.ValidGroup.Insert;
 import org.cdqt.night.core.valid.ValidGroup.QueryList;
 import org.cdqt.night.core.valid.ValidGroup.QueryOne;
 import org.cdqt.night.core.valid.ValidGroup.Update;
+import org.cdqt.night.tools.code.UUIDUtil;
 import org.cdqt.night.tools.valid.IntegerUtils;
 import org.cdqt.night.tools.valid.ListUtils;
 import org.cdqt.night.tools.valid.MapUtils;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.Page;
@@ -50,12 +53,17 @@ public class MenuController {
 	 */
 	@PostMapping("/menu")
 	@Authentication(value = "role:security:menu:insert", level = Level.ROLE)
-	public ResultApi<?> insert(@Validated({ Insert.class }) Menu menu) {
+	public ResultApi<?> insert(@Validated({ Insert.class }) @RequestBody Menu menu) {
 		/* 先校验菜单信息是否存在 */
 		Map<String, Object> menuMap = menuService.queryUnique(menu);
 		if (MapUtils.isNotEmpty(menuMap)) {
 			return new ResultApi<>(CodeEnum.CONFLICT);
 		}
+		/* 设置主键及其他默认值 */
+		menu.setId(UUIDUtil.uuid());
+		Date now = new Date();
+		menu.setUpdateTime(now);
+		menu.setCreateTime(now);
 		/* 不存在新增菜单 */
 		Integer row = menuService.insert(menu);
 		if (IntegerUtils.isGtZero(row)) {

@@ -27,5 +27,4 @@ public class ValidatorConfiguration implements WebMvcConfigurer {
 		localValidatorFactoryBean.getValidationPropertyMap().put(HibernateValidatorConfiguration.FAIL_FAST, "true");
 		return localValidatorFactoryBean;
 	}
-
 }

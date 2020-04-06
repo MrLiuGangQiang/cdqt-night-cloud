@@ -9,6 +9,7 @@ spring:
          max-file-size: 128MB #单个文件最大大小
          max-request-size: 1024MB #上传总数据量大小
    jackson: #jackson时间序列化配置
+      default-property-inclusion: always #序列化参数
       date-format: yyyy-MM-dd HH:mm:ss
       time-zone: GMT+8
    mvc: #spring mvc 时间序列化配置
@@ -28,6 +29,9 @@ spring:
          max-lifetime: 1800000
          connection-timeout: 30000
          connection-test-query: SELECT 1
+mybatis:
+   configuration:
+      call-setters-on-nulls: true #为null也返回
 management: #端点暴露配置
    endpoints:
       web:

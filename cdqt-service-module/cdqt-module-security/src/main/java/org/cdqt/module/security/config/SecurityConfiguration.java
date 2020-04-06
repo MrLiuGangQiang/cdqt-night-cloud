@@ -3,7 +3,6 @@ package org.cdqt.module.security.config;
 import org.cdqt.module.security.intercept.SecurityInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -13,7 +12,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author LiuGangQiang Create in 2020/03/02
  */
 @Configuration
-@EnableWebMvc
 public class SecurityConfiguration implements WebMvcConfigurer {
 	/**
 	 * 实例化 {@link SecurityInterceptor} 对象
@@ -31,6 +29,6 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 	 */
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		//registry.addInterceptor(securityInterceptor()).addPathPatterns("/**");
+		registry.addInterceptor(securityInterceptor()).addPathPatterns("/**");
 	}
 }
