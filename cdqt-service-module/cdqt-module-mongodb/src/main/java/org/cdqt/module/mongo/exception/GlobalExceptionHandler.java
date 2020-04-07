@@ -4,12 +4,15 @@ import org.cdqt.night.core.result.CodeEnum;
 import org.cdqt.night.core.result.ResultApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.method.HandlerMethod;
 
 /**
  * 全局异常处理器
@@ -17,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author LiuGangQiang Create in 2020/03/02
  */
 @ControllerAdvice
-@ResponseBody
 public class GlobalExceptionHandler {
 	private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
@@ -29,6 +31,7 @@ public class GlobalExceptionHandler {
 	 * @return {@link ResultApi}
 	 */
 	@ExceptionHandler(BindException.class)
+	@ResponseBody
 	public ResultApi<?> bindErrorHandler(BindException e) {
 		BindingResult result = e.getBindingResult();
 		if (logger.isErrorEnabled()) {
@@ -45,6 +48,7 @@ public class GlobalExceptionHandler {
 	 * @return {@link ResultApi}
 	 */
 	@ExceptionHandler(MethodArgumentNotValidException.class)
+	@ResponseBody
 	public ResultApi<?> bindErrorHandler(MethodArgumentNotValidException e) {
 		BindingResult result = e.getBindingResult();
 		if (logger.isErrorEnabled()) {
@@ -58,15 +62,18 @@ public class GlobalExceptionHandler {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/02
 	 * @param e 异常
-	 * @return {@link ResultApi} 对象
+	 * @return {@link Object} 对象
 	 */
 	@ExceptionHandler(Exception.class)
-	public ResultApi<?> defaultErrorHandler(Exception e) {
+	@ResponseBody
+	public Object defaultErrorHandler(Exception e, HandlerMethod method) {
 		if (logger.isErrorEnabled()) {
-			e.printStackTrace();
 			logger.error("system appear error msg --> {}", e.getMessage());
+		}
+		/* 如果是下载文件则返回 {@link ResponseEntity} */
+		if (method.getMethod().getReturnType() == ResponseEntity.class) {
+			return new ResponseEntity<byte[]>(HttpStatus.NOT_FOUND);
 		}
 		return new ResultApi<>(CodeEnum.ERROR).setMsg(e.getMessage());
 	}
-
 }
