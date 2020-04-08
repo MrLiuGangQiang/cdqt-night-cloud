@@ -3,67 +3,67 @@ package org.cdqt.module.security.service.iface;
 import java.util.List;
 import java.util.Map;
 
-import org.cdqt.module.security.entity.Menu;
+import org.cdqt.module.security.entity.Operation;
 
 /**
- * IMenuService
+ * IOperationService
  *
  * @author LiuGangQiang Create in 2020/04/06
  */
-public interface IMenuService {
+public interface IOperationService {
 
 	/**
 	 * 查询重复
 	 *
 	 * @author LiuGangQiang Create in 2020/04/08
-	 * @param menu 菜单对象
+	 * @param operation 操作对象
 	 * @return {@link Map}
 	 */
-	Map<String, Object> queryUnique(Menu menu);
+	Map<String, Object> queryUnique(Operation operation);
 
 	/**
-	 * 新增菜单
+	 * 新增操作
 	 *
 	 * @author LiuGangQiang Create in 2020/04/08
-	 * @param menu 菜单对象
+	 * @param operation 操作对象
 	 * @return {@link Integer}
 	 */
-	Integer insert(Menu menu);
+	Integer insert(Operation operation);
 
 	/**
 	 * 查询详情
 	 *
 	 * @author LiuGangQiang Create in 2020/04/08
-	 * @param menu 菜单对象
+	 * @param operation 操作对象
 	 * @return {@link Map}
 	 */
-	Map<String, Object> queryOne(Menu menu);
+	Map<String, Object> queryOne(Operation operation);
 
 	/**
-	 * 删除菜单
+	 * 删除操作
 	 *
 	 * @author LiuGangQiang Create in 2020/04/08
-	 * @param menu 菜单对象
+	 * @param operation 操作对象
 	 * @return {@link Integer}
 	 */
-	Integer delete(Menu menu);
+	Integer delete(Operation operation);
 
 	/**
-	 * 修改菜单
+	 * 修改操作
 	 *
 	 * @author LiuGangQiang Create in 2020/04/08
-	 * @param menu 菜单对象
+	 * @param operation 操作对象
 	 * @return {@link Integer}
 	 */
-	Integer update(Menu menu);
+	Integer update(Operation operation);
 
 	/**
 	 * 查询列表
 	 *
 	 * @author LiuGangQiang Create in 2020/04/08
-	 * @param menu 菜单对象
+	 * @param operation 操作对象
 	 * @return {@link List}
 	 */
-	List<Map<String, Object>> queryList(Menu menu);
+	List<Map<String, Object>> queryList(Operation operation);
 
 }
