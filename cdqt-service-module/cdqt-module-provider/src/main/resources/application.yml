@@ -1,0 +1,37 @@
+server:
+   port: 8020 #端口
+spring:
+   application:
+      name: cdqt-module-provider #应用名称
+   servlet:
+      multipart:
+         enabled: true #是否开启批量上传
+         max-file-size: 128MB #单个文件最大大小
+         max-request-size: 1024MB #上传总数据量大小
+   jackson: #jackson时间序列化配置
+      default-property-inclusion: always #序列化参数
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8
+   mvc: #spring mvc 时间序列化配置
+      date-format: yyyy-MM-dd HH:mm:ss
+management: #端点暴露配置
+   endpoints:
+      web:
+         exposure:
+            include: '*'
+         cors:
+            allowed-origins: '*'
+            allowed-methods: '*'
+eureka: #注册中心设置
+   instance:
+      prefer-ip-address: true
+      instance-id: ${spring.cloud.client.ip-address}:${server.port}:${spring.application.name}
+   client:
+      healthcheck:
+         enabled: true
+      service-url:
+         defaultZone: http://admin:123456@localhost:8761/eureka/
+info:
+   version: '@project.version@'
+   groupId: '@project.groupId@'
+   artifactId: '@project.artifactId@'

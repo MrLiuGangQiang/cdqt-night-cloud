@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
@@ -7,13 +6,8 @@
     <artifactId>cdqt-service-module</artifactId>
     <version>1.1.1.20200405.RELEASE</version>
   </parent>
-  <artifactId>cdqt-module-security</artifactId>
-
-  <!-- 属性配置 -->
-  <properties>
-    <mybatis.version>2.1.1</mybatis.version>
-    <pagehelper.version>1.2.13</pagehelper.version>
-  </properties>
+  <artifactId>cdqt-module-consumer</artifactId>
+  <version>1.1.1.20200415.RELEASE</version>
 
   <!-- 项目依赖配置 -->
   <dependencies>
@@ -56,34 +50,16 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-undertow</artifactId>
     </dependency>
-    <!-- Spring Boot Mybatis -->
+    <!-- openfeign -->
     <dependency>
-      <groupId>org.mybatis.spring.boot</groupId>
-      <artifactId>mybatis-spring-boot-starter</artifactId>
-      <version>${mybatis.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.apache.tomcat</groupId>
-          <artifactId>tomcat-jdbc</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <!-- Pagehelper -->
-    <dependency>
-      <groupId>com.github.pagehelper</groupId>
-      <artifactId>pagehelper-spring-boot-starter</artifactId>
-      <version>${pagehelper.version}</version>
-    </dependency>
-    <!-- MySQL驱动 -->
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-openfeign</artifactId>
     </dependency>
   </dependencies>
 
   <!-- 编译配置 -->
   <build>
-    <finalName>cdqt-module-security</finalName>
+    <finalName>cdqt-module-consumer</finalName>
     <resources>
       <resource>
         <directory>src/main/resources</directory>

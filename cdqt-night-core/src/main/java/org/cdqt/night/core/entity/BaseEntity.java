@@ -1,5 +1,6 @@
 package org.cdqt.night.core.entity;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.util.List;
 
@@ -46,6 +47,7 @@ public class BaseEntity implements Serializable {
 	/**
 	 * @return the page
 	 */
+	@Transient
 	public Integer getPage() {
 		return page;
 	}
@@ -64,6 +66,7 @@ public class BaseEntity implements Serializable {
 	/**
 	 * @return the pageSize
 	 */
+	@Transient
 	public Integer getPageSize() {
 		return pageSize;
 	}
@@ -82,6 +85,7 @@ public class BaseEntity implements Serializable {
 	/**
 	 * @return the sorts
 	 */
+	@Transient
 	public List<Sort> getSorts() {
 		return sorts;
 	}
@@ -92,4 +96,5 @@ public class BaseEntity implements Serializable {
 	public void setSorts(List<Sort> sorts) {
 		this.sorts = sorts;
 	}
+
 }
