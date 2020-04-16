@@ -6,17 +6,27 @@ spring:
    cloud:
       gateway:
          routes: #路由设置
-         -  id: smile-service
-            uri: lb://smile-service
+         -  id: cdqt-module-provider
+            uri: lb://cdqt-module-provider
             predicates:
-            - Path=/api-service/**
+            - Path=/api-provider/**
             filters:
             - StripPrefix=1
             -  name: Hystrix
                args:
                   name: fallbackcmd
-                  fallbackUri: forward:/fallback/smile-service
-smile-service: #单个服务负载均衡设置
+                  fallbackUri: forward:/fallback/cdqt-module-provider
+         -  id: cdqt-module-consumer
+            uri: lb://cdqt-module-consumer
+            predicates:
+            - Path=/api-consumer/**
+            filters:
+            - StripPrefix=1
+            -  name: Hystrix
+               args:
+                  name: fallbackcmd
+                  fallbackUri: forward:/fallback/cdqt-module-consumer
+cdqt-module-consumer: #单个服务负载均衡设置
    ribbon:
       NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
 management: #跨域设置
@@ -61,4 +71,4 @@ eureka: #注册中心设置
 info:
    version: '@project.version@'
    groupId: '@project.groupId@'
-   artifactId: '@project.artifactId@' 
+   artifactId: '@project.artifactId@'
