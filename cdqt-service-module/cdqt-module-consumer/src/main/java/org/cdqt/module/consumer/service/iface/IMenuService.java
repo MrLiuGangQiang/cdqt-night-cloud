@@ -24,12 +24,12 @@ public interface IMenuService {
 	ResultApi<?> delete(@PathVariable("id") String id, Menu menu);
 
 	@RequestMapping(value = "/menu/{id}", method = RequestMethod.PUT)
-	ResultApi<?> update(@PathVariable String id, @RequestBody Menu menu);
+	ResultApi<?> update(@PathVariable("id") String id, @RequestBody Menu menu);
 
 	@RequestMapping(value = "/menu/{id}", method = RequestMethod.GET)
-	ResultApi<?> queryOne(@PathVariable String id, @SpringQueryMap Menu menu);
+	ResultApi<?> queryOne(@PathVariable("id") String id, @SpringQueryMap Menu menu);
 
 	@RequestMapping(value = "/menus", method = RequestMethod.GET)
-	ResultApi<?> queryList(@SpringQueryMap  Menu menu);
+	ResultApi<?> queryList(@SpringQueryMap Menu menu);
 
 }

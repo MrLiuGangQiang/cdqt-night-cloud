@@ -17,6 +17,8 @@ spring:
 feign:
    httpclient:
       enable: true
+      max-connections: 200 #feign的最大连接数
+      max-connections-per-route: 50 #fegin单个路径的最大连接数      
    hystrix:
       enabled: true
    client:
@@ -35,6 +37,7 @@ hystrix:
             timeout:
                enabled: true
             isolation:
+               strategy: THREAD #SEMAPHORE信号量隔离适合高并发 默认THREAD线程隔离 
                thread:
                   timeoutInMilliseconds: 25000
 management: #端点暴露配置
