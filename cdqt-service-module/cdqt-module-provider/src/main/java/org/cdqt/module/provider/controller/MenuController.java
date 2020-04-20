@@ -90,10 +90,10 @@ public class MenuController {
 	 * @param menu 菜单对象
 	 * @return {@link ResultApi}
 	 */
-	@GetMapping("/menu/{id}")
+	@GetMapping("/menus/{id}")
 	@Authentication(value = "role:security:menu:query-one", level = Level.ROLE)
 	public ResultApi<?> queryOne(@PathVariable("id") String id, @Validated({ QueryOne.class }) Menu menu) {
-		menu.setId(id);
+		//menu.setId(id);
 		return new ResultApi<>(CodeEnum.OK, menu).setMsg("provider.port", port);
 	}
 

@@ -93,7 +93,7 @@ public class MenuController {
 		Map<String, Object> menuMap = menuService.queryOne(menu);
 		if (MapUtils.isEmpty(menuMap)) {
 			/* 数据不存在提示并返回 */
-			return new ResultApi<>(CodeEnum.NOT_FOUND);
+			return new ResultApi<>(CodeEnum.DATA_NOT_FOUND);
 		}
 		/* 存在则删除数据 */
 		Integer row = menuService.delete(menu);
@@ -123,7 +123,7 @@ public class MenuController {
 		Map<String, Object> menuMap = menuService.queryOne(menu);
 		if (MapUtils.isEmpty(menuMap)) {
 			/* 数据不存在提示并返回 */
-			return new ResultApi<>(CodeEnum.NOT_FOUND);
+			return new ResultApi<>(CodeEnum.DATA_NOT_FOUND);
 		}
 		/* 查询菜单信息是否重复 */
 		Map<String, Object> menuUniqueMap = menuService.queryUnique(menu);
@@ -162,7 +162,7 @@ public class MenuController {
 			return new ResultApi<>(CodeEnum.OK, menuMap);
 		} else {
 			/* 数据不存在返回数据未找到 */
-			return new ResultApi<>(CodeEnum.NOT_FOUND);
+			return new ResultApi<>(CodeEnum.DATA_NOT_FOUND);
 		}
 	}
 
@@ -185,7 +185,7 @@ public class MenuController {
 			return new ResultApi<>(CodeEnum.OK, new Rows<>(page.getTotal(), menuList));
 		} else {
 			/* 数据不存在返回数据未找到 */
-			return new ResultApi<>(CodeEnum.NOT_FOUND);
+			return new ResultApi<>(CodeEnum.DATA_NOT_FOUND);
 		}
 	}
 }

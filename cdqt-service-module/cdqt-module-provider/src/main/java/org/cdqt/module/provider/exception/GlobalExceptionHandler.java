@@ -8,10 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.method.HandlerMethod;
 
 /**
@@ -24,6 +26,23 @@ public class GlobalExceptionHandler {
 	private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
 	/**
+	 * 方法不被允许异常处理
+	 *
+	 * @author LiuGangQiang Create in 2020/04/20
+	 * @param e {@link HttpRequestMethodNotSupportedException}
+	 * @return {@link ResultApi}
+	 */
+	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+	@ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+	@ResponseBody
+	public ResultApi<?> httpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+		if (logger.isWarnEnabled()) {
+			logger.warn("method not allowed message --> {}", e.getMessage());
+		}
+		return new ResultApi<>(CodeEnum.METHOD_NOT_ALLOWED).setMsg(e.getMessage());
+	}
+
+	/**
 	 * 数据校验异常处理(用于表单)
 	 *
 	 * @author LiuGangQiang Create in 2020/03/29
@@ -31,6 +50,7 @@ public class GlobalExceptionHandler {
 	 * @return {@link ResultApi}
 	 */
 	@ExceptionHandler(BindException.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ResponseBody
 	public ResultApi<?> bindErrorHandler(BindException e) {
 		BindingResult result = e.getBindingResult();
@@ -48,6 +68,7 @@ public class GlobalExceptionHandler {
 	 * @return {@link ResultApi}
 	 */
 	@ExceptionHandler(MethodArgumentNotValidException.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ResponseBody
 	public ResultApi<?> bindErrorHandler(MethodArgumentNotValidException e) {
 		BindingResult result = e.getBindingResult();
@@ -65,6 +86,7 @@ public class GlobalExceptionHandler {
 	 * @return {@link Object} 对象
 	 */
 	@ExceptionHandler(Exception.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ResponseBody
 	public Object defaultErrorHandler(Exception e, HandlerMethod method) {
 		if (logger.isErrorEnabled()) {

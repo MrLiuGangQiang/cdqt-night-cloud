@@ -46,7 +46,21 @@ public enum CodeEnum {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	NOT_FOUND(404, "night.api.code.not.found"),
+	DATA_NOT_FOUND(404, "night.api.code.not.found"),
+	
+	/**
+	 * 方法找不到状态码
+	 *
+	 * @author LiuGangQiang Create in 2020/04/20
+	 */
+	METHOD_NOT_FOUND(404, "night.api.code.method.not.found"),
+	
+	/**
+	 * 方法不允许状态码
+	 *
+	 * @author LiuGangQiang Create in 2020/04/20
+	 */
+	METHOD_NOT_ALLOWED(405, "night.api.code.method.not.allowed"),
 
 	/**
 	 * 数据冲突状态码（适用于新增时违反逻辑约束产生重复记录）
