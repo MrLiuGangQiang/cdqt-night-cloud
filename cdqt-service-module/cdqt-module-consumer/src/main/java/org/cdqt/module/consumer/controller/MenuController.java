@@ -7,10 +7,8 @@ import org.cdqt.module.consumer.service.iface.IMenuService;
 import org.cdqt.night.core.auth.Authentication;
 import org.cdqt.night.core.auth.Level;
 import org.cdqt.night.core.result.ResultApi;
-import org.cdqt.night.core.valid.ValidGroup.Delete;
 import org.cdqt.night.core.valid.ValidGroup.Insert;
 import org.cdqt.night.core.valid.ValidGroup.QueryList;
-import org.cdqt.night.core.valid.ValidGroup.QueryOne;
 import org.cdqt.night.core.valid.ValidGroup.Update;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,7 +36,7 @@ public class MenuController {
 	 * @param menu 菜单对象
 	 * @return {@link ResultApi}
 	 */
-	@PostMapping("/menu")
+	@PostMapping("/menus")
 	@Authentication(value = "role:security:menu:insert", level = Level.ROLE)
 	public ResultApi<?> insert(@Validated({ Insert.class }) @RequestBody Menu menu) {
 		return menuService.insert(menu);
@@ -49,13 +47,12 @@ public class MenuController {
 	 *
 	 * @author LiuGangQiang Create in 2020/04/06
 	 * @param id   主键
-	 * @param menu 菜单对象
 	 * @return {@link ResultApi}
 	 */
-	@DeleteMapping("/menu/{id}")
+	@DeleteMapping("/menus/{id}")
 	@Authentication(value = "role:security:menu:delete", level = Level.ROLE)
-	public ResultApi<?> delete(@PathVariable("id") String id, @Validated({ Delete.class }) Menu menu) {
-		return menuService.delete(id, menu);
+	public ResultApi<?> delete(@PathVariable("id") String id) {
+		return menuService.delete(id);
 	}
 
 	/**
@@ -66,7 +63,7 @@ public class MenuController {
 	 * @param menu 菜单对象
 	 * @return {@link ResultApi}
 	 */
-	@PutMapping("/menu/{id}")
+	@PutMapping("/menus/{id}")
 	@Authentication(value = "role:security:menu:update", level = Level.ROLE)
 	public ResultApi<?> update(@PathVariable("id") String id, @Validated({ Update.class }) @RequestBody Menu menu) {
 		return menuService.update(id, menu);
@@ -77,13 +74,12 @@ public class MenuController {
 	 *
 	 * @author LiuGangQiang Create in 2020/04/06
 	 * @param id   主键
-	 * @param menu 菜单对象
 	 * @return {@link ResultApi}
 	 */
-	@GetMapping("/menu/{id}")
+	@GetMapping("/menus/{id}")
 	@Authentication(value = "role:security:menu:query-one", level = Level.ROLE)
-	public ResultApi<?> queryOne(@PathVariable("id") String id, @Validated({ QueryOne.class }) Menu menu) {
-		return menuService.queryOne(id, menu);
+	public ResultApi<?> queryOne(@PathVariable("id") String id) {
+		return menuService.queryOne(id);
 	}
 
 	/**

@@ -17,17 +17,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @FeignClient(value = "${feign.client.provider}", fallback = MenuServiceFallback.class)
 public interface IMenuService {
-	@RequestMapping(value = "/menu", method = RequestMethod.POST)
+	@RequestMapping(value = "/menus", method = RequestMethod.POST)
 	ResultApi<?> insert(@RequestBody Menu menu);
 
-	@RequestMapping(value = "/menu/{id}", method = RequestMethod.DELETE)
-	ResultApi<?> delete(@PathVariable("id") String id, Menu menu);
+	@RequestMapping(value = "/menus/{id}", method = RequestMethod.DELETE)
+	ResultApi<?> delete(@PathVariable("id") String id);
 
-	@RequestMapping(value = "/menu/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/menus/{id}", method = RequestMethod.PUT)
 	ResultApi<?> update(@PathVariable("id") String id, @RequestBody Menu menu);
 
-	@RequestMapping(value = "/menu/{id}", method = RequestMethod.GET)
-	ResultApi<?> queryOne(@PathVariable("id") String id, @SpringQueryMap Menu menu);
+	@RequestMapping(value = "/menus/{id}", method = RequestMethod.GET)
+	ResultApi<?> queryOne(@PathVariable("id") String id);
 
 	@RequestMapping(value = "/menus", method = RequestMethod.GET)
 	ResultApi<?> queryList(@SpringQueryMap Menu menu);

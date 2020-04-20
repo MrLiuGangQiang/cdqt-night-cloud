@@ -20,7 +20,7 @@ public class MenuServiceFallback implements IMenuService {
 	}
 
 	@Override
-	public ResultApi<?> delete(String id, Menu menu) {
+	public ResultApi<?> delete(String id) {
 		return new ResultApi<>(CodeEnum.TIMEOUT);
 	}
 
@@ -30,7 +30,7 @@ public class MenuServiceFallback implements IMenuService {
 	}
 
 	@Override
-	public ResultApi<?> queryOne(String id, Menu menu) {
+	public ResultApi<?> queryOne(String id) {
 		return new ResultApi<>(CodeEnum.TIMEOUT);
 	}
 
