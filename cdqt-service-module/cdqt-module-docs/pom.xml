@@ -11,6 +11,7 @@
 
   <properties>
     <swagger.version>2.9.2</swagger.version>
+    <swagger.ui.version>1.9.6</swagger.ui.version>
   </properties>
 
   <dependencies>
@@ -43,9 +44,9 @@
       <version>${swagger.version}</version>
     </dependency>
     <dependency>
-      <groupId>io.springfox</groupId>
-      <artifactId>springfox-swagger-ui</artifactId>
-      <version>${swagger.version}</version>
+      <groupId>com.github.xiaoymin</groupId>
+      <artifactId>swagger-bootstrap-ui</artifactId>
+      <version>${swagger.ui.version}</version>
     </dependency>
   </dependencies>
   <!-- 项目构建配置 -->
