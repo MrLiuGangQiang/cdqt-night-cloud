@@ -1,17 +1,26 @@
 package org.cdqt.module.provider.exception;
 
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.cdqt.night.core.message.Prompt;
 import org.cdqt.night.core.result.CodeEnum;
 import org.cdqt.night.core.result.ResultApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.method.HandlerMethod;
@@ -22,8 +31,25 @@ import org.springframework.web.method.HandlerMethod;
  * @author LiuGangQiang Create in 2020/03/02
  */
 @ControllerAdvice
-public class GlobalExceptionHandler {
+@Controller
+public class GlobalExceptionHandler implements ErrorController {
 	private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
+	@RequestMapping(value = { "/error" })
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ResponseBody
+	public ResultApi<?> error(HttpServletRequest request) {
+		ResultApi<?> result = new ResultApi<>(CodeEnum.METHOD_NOT_FOUND);
+		Locale locale = LocaleContextHolder.getLocale();
+		/* 如果消息等于空则认为是默认消息 */
+		if (result.getIsDefault()) {
+			/* 获取默认路径下的资源文件 */
+			result.setMsg(Prompt.bundle(ResultApi.getPath(), locale, result.getMsg()));
+		} else {
+			result.setMsg(Prompt.bundle(locale, result.getMsg(), result.getArgs()));
+		}
+		return result;
+	}
 
 	/**
 	 * 方法不被允许异常处理
@@ -97,5 +123,13 @@ public class GlobalExceptionHandler {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		return new ResultApi<>(CodeEnum.ERROR).setMsg(e.getMessage());
+	}
+
+	/**
+	 * @see org.springframework.boot.web.servlet.error.ErrorController#getErrorPath()
+	 */
+	@Override
+	public String getErrorPath() {
+		return "/error";
 	}
 }
