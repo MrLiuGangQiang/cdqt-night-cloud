@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 
 import org.cdqt.module.mongo.entity.Bson;
 import org.cdqt.module.mongo.service.BsonService;
-import org.cdqt.night.core.result.CodeEnum;
+import org.cdqt.night.core.result.ApiStatus;
 import org.cdqt.night.core.result.ResultApi;
 import org.cdqt.night.tools.md5.MD5Util;
 import org.springframework.http.ContentDisposition;
@@ -61,15 +61,15 @@ public class BsonController {
 		/* 根据MD5校验文件是否存在 */
 		Bson bson = bsonService.getBsonByMd5(md5);
 		if (bson != null) {
-			return new ResultApi<>(CodeEnum.OK, bson.getId());
+			return new ResultApi<>(ApiStatus.OK, bson.getId());
 		}
 		bson = new Bson(fileName, contentType, content.length, md5, content);
 		/* 将文件存储到mongodb中,mongodb 将会返回这个文件的具体信息 */
 		Bson result = bsonService.insert(bson);
 		if (result != null) {
-			return new ResultApi<>(CodeEnum.OK, result.getId());
+			return new ResultApi<>(ApiStatus.OK, result.getId());
 		}
-		return new ResultApi<>(CodeEnum.FAIL);
+		return new ResultApi<>(ApiStatus.FAIL);
 	}
 
 	/**
@@ -131,8 +131,8 @@ public class BsonController {
 	@DeleteMapping("/delete/{id}")
 	public ResultApi<?> delete(@PathVariable String id) {
 		if (bsonService.remove(id)) {
-			return new ResultApi<>(CodeEnum.OK);
+			return new ResultApi<>(ApiStatus.OK);
 		}
-		return new ResultApi<>(CodeEnum.FAIL);
+		return new ResultApi<>(ApiStatus.FAIL);
 	}
 }

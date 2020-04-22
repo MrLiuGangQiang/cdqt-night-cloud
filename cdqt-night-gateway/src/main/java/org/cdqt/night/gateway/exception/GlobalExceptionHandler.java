@@ -1,6 +1,6 @@
 package org.cdqt.night.gateway.exception;
 
-import org.cdqt.night.core.result.CodeEnum;
+import org.cdqt.night.core.result.ApiStatus;
 import org.cdqt.night.core.result.ResultApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +30,6 @@ public class GlobalExceptionHandler {
 		if (LOGGER.isErrorEnabled()) {
 			LOGGER.error("system appear error msg --> {}", e.toString());
 		}
-		return new ResultApi<>(CodeEnum.ERROR).setMsg(e.toString());
+		return new ResultApi<>(ApiStatus.ERROR).setMsg(e.toString());
 	}
 }

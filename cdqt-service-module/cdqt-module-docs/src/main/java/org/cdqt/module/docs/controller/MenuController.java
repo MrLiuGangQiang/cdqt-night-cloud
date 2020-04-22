@@ -6,7 +6,7 @@ import java.util.List;
 import org.cdqt.module.docs.entity.Menu;
 import org.cdqt.night.core.auth.Authentication;
 import org.cdqt.night.core.auth.Level;
-import org.cdqt.night.core.result.CodeEnum;
+import org.cdqt.night.core.result.ApiStatus;
 import org.cdqt.night.core.result.ResultApi;
 import org.cdqt.night.core.result.Rows;
 import org.cdqt.night.core.valid.ValidGroup.Insert;
@@ -47,7 +47,7 @@ public class MenuController {
 	@PostMapping("/menus")
 	@Authentication(value = "role:security:menu:insert", level = Level.ROLE)
 	public ResultApi<?> insert(@Validated({ Insert.class }) @RequestBody Menu menu) {
-		return new ResultApi<>(CodeEnum.OK, menu).setMsg("provider.port", port);
+		return new ResultApi<>(ApiStatus.OK, menu).setKey("provider.port", port);
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class MenuController {
 	public ResultApi<?> delete(@PathVariable("id") String id) {
 		Menu menu = new Menu();
 		menu.setId(id);
-		return new ResultApi<>(CodeEnum.OK).setMsg("provider.port", port);
+		return new ResultApi<>(ApiStatus.OK).setKey("provider.port", port);
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class MenuController {
 	@Authentication(value = "role:security:menu:update", level = Level.ROLE)
 	public ResultApi<?> update(@PathVariable("id") String id, @Validated({ Update.class }) @RequestBody Menu menu) {
 		menu.setId(id);
-		return new ResultApi<>(CodeEnum.OK).setMsg("provider.port", port);
+		return new ResultApi<>(ApiStatus.OK).setKey("provider.port", port);
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class MenuController {
 	public ResultApi<?> queryOne(@PathVariable("id") String id) {
 		Menu menu = new Menu();
 		menu.setId(id);
-		return new ResultApi<>(CodeEnum.OK, menu).setMsg("provider.port", port);
+		return new ResultApi<>(ApiStatus.OK, menu).setKey("provider.port", port);
 	}
 
 	/**
@@ -106,6 +106,6 @@ public class MenuController {
 	public ResultApi<?> queryList(@Validated({ QueryList.class }) Menu menu) {
 		List<Menu> list = new ArrayList<Menu>();
 		list.add(menu);
-		return new ResultApi<>(CodeEnum.OK, new Rows<>(1, list)).setMsg("provider.port", port);
+		return new ResultApi<>(ApiStatus.OK, new Rows<>(1, list)).setKey("provider.port", port);
 	}
 }

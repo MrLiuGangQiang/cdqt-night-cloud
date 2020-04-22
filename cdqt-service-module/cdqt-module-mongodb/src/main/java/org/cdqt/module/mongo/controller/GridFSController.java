@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 
 import org.bson.types.ObjectId;
 import org.cdqt.module.mongo.service.GridFSService;
-import org.cdqt.night.core.result.CodeEnum;
+import org.cdqt.night.core.result.ApiStatus;
 import org.cdqt.night.core.result.ResultApi;
 import org.cdqt.night.tools.file.IoUtil;
 import org.cdqt.night.tools.md5.MD5Util;
@@ -63,14 +63,14 @@ public class GridFSController {
 		/* 根据MD5校验文件是否存在 */
 		GridFSFile gridFSFile = gridFSService.queryByMD5(md5);
 		if (gridFSFile != null) {
-			return new ResultApi<>(CodeEnum.OK, gridFSFile.getObjectId().toHexString());
+			return new ResultApi<>(ApiStatus.OK, gridFSFile.getObjectId().toHexString());
 		}
 		/* 将文件存储到mongodb中,mongodb 将会返回这个文件的具体信息 */
 		ObjectId objectId = gridFSService.upload(fileName, ins, contentType);
 		if (objectId != null) {
-			return new ResultApi<>(CodeEnum.OK, objectId.toHexString());
+			return new ResultApi<>(ApiStatus.OK, objectId.toHexString());
 		}
-		return new ResultApi<>(CodeEnum.FAIL);
+		return new ResultApi<>(ApiStatus.FAIL);
 	}
 
 	/**
@@ -130,9 +130,9 @@ public class GridFSController {
 	@DeleteMapping("/delete/{id}")
 	public ResultApi<?> delete(@PathVariable String id) {
 		if (gridFSService.remove(id)) {
-			return new ResultApi<>(CodeEnum.OK);
+			return new ResultApi<>(ApiStatus.OK);
 		}
-		return new ResultApi<>(CodeEnum.FAIL);
+		return new ResultApi<>(ApiStatus.FAIL);
 	}
 
 }

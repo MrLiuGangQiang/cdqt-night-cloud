@@ -1,4 +1,4 @@
-package org.cdqt.night.core.message;
+package org.cdqt.night.core.result;
 
 import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
@@ -102,7 +102,7 @@ public abstract class Prompt {
 	 * @param key    键值
 	 * @return {@link String} @
 	 */
-	public static String bundle(String path,Locale locale, String key) {
+	public static String bundle(String path, Locale locale, String key) {
 		return getMessage(locale, path, key);
 	}
 
@@ -130,7 +130,7 @@ public abstract class Prompt {
 	 * @param arguments 参数（数组或不定参数）
 	 * @return {@link String} @
 	 */
-	public static String bundle(String path,Locale locale, String key,  Object... arguments) {
+	public static String bundle(String path, Locale locale, String key, Object... arguments) {
 		return getMessage(locale, path, key, arguments);
 	}
 
@@ -160,4 +160,12 @@ public abstract class Prompt {
 		}
 		return null;
 	}
+
+	/**
+	 * @return the filepath
+	 */
+	protected static String getFilepath() {
+		return FILEPATH;
+	}
+
 }

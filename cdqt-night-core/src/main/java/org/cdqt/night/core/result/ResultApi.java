@@ -2,6 +2,7 @@ package org.cdqt.night.core.result;
 
 import java.beans.Transient;
 import java.io.Serializable;
+import java.util.Locale;
 
 /**
  * 请求响应通用对象
@@ -15,7 +16,7 @@ public class ResultApi<T> implements Serializable {
 	 *
 	 * @author LiuGangQiang Create in 2020/04/02
 	 */
-	private static final String path = "i18n.core";
+	private static final String DEFAULT_PATH = "i18n.core";
 
 	/**
 	 * 状态码
@@ -37,20 +38,37 @@ public class ResultApi<T> implements Serializable {
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	private String msg;
-
+	/**
+	 * 语言环境
+	 *
+	 * @author LiuGangQiang Create in 2020/04/22
+	 */
+	transient private Locale locale;
+	/**
+	 * 资源文件路径
+	 *
+	 * @author LiuGangQiang Create in 2020/04/22
+	 */
+	transient private String path;
+	/**
+	 * 资源文件键值
+	 *
+	 * @author LiuGangQiang Create in 2020/04/22
+	 */
+	transient private String key;
 	/**
 	 * 参数数组
 	 *
 	 * @author LiuGangQiang Create in 2020/04/02
 	 */
-	private Object[] args;
+	transient private Object[] args;
 
 	/**
 	 * 是否使用默认资源
 	 *
 	 * @author LiuGangQiang Create in 2020/04/02
 	 */
-	private Boolean isDefault;
+	transient private Boolean isDefault;
 
 	/**
 	 * 无参构造器
@@ -66,10 +84,10 @@ public class ResultApi<T> implements Serializable {
 	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param code 状态枚举
 	 */
-	public ResultApi(CodeEnum codeEnum) {
+	public ResultApi(ApiStatus apiStatus) {
 		this.isDefault = true;
-		this.code = codeEnum.getValue();
-		this.msg = codeEnum.getMessage();
+		this.code = apiStatus.getValue();
+		this.key = apiStatus.getKey();
 	}
 
 	/**
@@ -79,11 +97,11 @@ public class ResultApi<T> implements Serializable {
 	 * @param code 状态枚举
 	 * @param data 数据
 	 */
-	public ResultApi(CodeEnum codeEnum, T data) {
+	public ResultApi(ApiStatus apiStatus, T data) {
 		this.isDefault = true;
 		this.data = data;
-		this.code = codeEnum.getValue();
-		this.msg = codeEnum.getMessage();
+		this.code = apiStatus.getValue();
+		this.key = apiStatus.getKey();
 	}
 
 	/**
@@ -94,7 +112,6 @@ public class ResultApi<T> implements Serializable {
 	 * @param message 提示消息
 	 */
 	public ResultApi(int code, String message) {
-		this.isDefault = false;
 		this.data = null;
 		this.code = code;
 		this.msg = message;
@@ -109,7 +126,6 @@ public class ResultApi<T> implements Serializable {
 	 * @param data    数据
 	 */
 	public ResultApi(int code, String message, T data) {
-		this.isDefault = false;
 		this.data = null;
 		this.code = code;
 		this.msg = message;
@@ -151,7 +167,15 @@ public class ResultApi<T> implements Serializable {
 	 * @return the msg
 	 */
 	public String getMsg() {
-		return msg;
+		if (this.msg != null) {
+			return msg;
+		} else {
+			if (this.isDefault) {
+				return Prompt.bundle(DEFAULT_PATH, getLocale(), this.key);
+			} else {
+				return Prompt.bundle(getPath(), getLocale(), this.key, this.args);
+			}
+		}
 	}
 
 	/**
@@ -165,51 +189,59 @@ public class ResultApi<T> implements Serializable {
 	}
 
 	/**
-	 * @param msg the msg to set
+	 * @return the locale
+	 */
+	@Transient
+	public Locale getLocale() {
+		return locale == null ? Locale.getDefault() : locale;
+	}
+
+	/**
+	 * @param locale the locale to set
 	 * @return {@link ResultApi}
 	 */
-	public ResultApi<T> setMsg(String msg, Object... args) {
-		this.isDefault = false;
-		this.msg = msg;
-		this.args = args;
+	public ResultApi<T> setLocale(Locale locale) {
+		this.locale = locale;
 		return this;
-	}
-
-	/**
-	 * @return the args
-	 */
-	@Transient
-	public Object[] getArgs() {
-		return args;
-	}
-
-	/**
-	 * @param args the args to set
-	 */
-	public void setArgs(Object[] args) {
-		this.args = args;
-	}
-
-	/**
-	 * @return the isDefault
-	 */
-	@Transient
-	public Boolean getIsDefault() {
-		return isDefault;
-	}
-
-	/**
-	 * @param isDefault the isDefault to set
-	 */
-	public void setIsDefault(Boolean isDefault) {
-		this.isDefault = isDefault;
 	}
 
 	/**
 	 * @return the path
 	 */
-	public static String getPath() {
-		return path;
+	@Transient
+	public String getPath() {
+		return path == null ? Prompt.getFilepath() : path;
+	}
+
+	/**
+	 * @param path the path to set
+	 * @return {@link ResultApi}
+	 */
+	public ResultApi<T> setPath(String path) {
+		this.path = path;
+		return this;
+	}
+
+	/**
+	 * @param key the key to set
+	 * @return {@link ResultApi}
+	 */
+	public ResultApi<T> setKey(String key) {
+		this.isDefault = false;
+		this.key = key;
+		return this;
+	}
+
+	/**
+	 * @param key  the key to set
+	 * @param args the args to set
+	 * @return {@link ResultApi}
+	 */
+	public ResultApi<T> setKey(String key, Object... args) {
+		this.isDefault = false;
+		this.args = args;
+		this.key = key;
+		return this;
 	}
 
 	/**
@@ -219,7 +251,7 @@ public class ResultApi<T> implements Serializable {
 	 * @param code 状态枚举
 	 * @return 是否一致
 	 */
-	public boolean compare(CodeEnum code) {
+	public boolean compare(ApiStatus code) {
 		return getCode() == code.getValue();
 	}
 }

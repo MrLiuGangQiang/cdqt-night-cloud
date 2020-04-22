@@ -2,8 +2,8 @@ package org.cdqt.night.gateway.fallback;
 
 import java.util.Locale;
 
-import org.cdqt.night.core.message.Prompt;
-import org.cdqt.night.core.result.CodeEnum;
+import org.cdqt.night.core.result.ApiStatus;
+import org.cdqt.night.core.result.Prompt;
 import org.cdqt.night.core.result.ResultApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +38,6 @@ public class FallbackController {
 		if (LOGGER.isErrorEnabled()) {
 			LOGGER.error("server instance [{}] tigger hystrix", lb);
 		}
-		return new ResultApi<>(CodeEnum.TIMEOUT).setMsg(Prompt.bundle(PATH, Locale.getDefault(),"fallback.timeout", lb));
+		return new ResultApi<>(ApiStatus.TIMEOUT).setMsg(Prompt.bundle(PATH, Locale.getDefault(),"fallback.timeout", lb));
 	}
 }

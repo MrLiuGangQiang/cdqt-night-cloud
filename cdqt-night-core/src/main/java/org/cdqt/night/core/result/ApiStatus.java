@@ -5,7 +5,7 @@ package org.cdqt.night.core.result;
  * 
  * @author LiuGangQiang Create in 2020/03/01
  */
-public enum CodeEnum {
+public enum ApiStatus {
 	/**
 	 * 成功状态码
 	 *
@@ -46,15 +46,15 @@ public enum CodeEnum {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	DATA_NOT_FOUND(404, "night.api.code.not.found"),
-	
+	DATA_NOT_FOUND(404, "night.api.code.data.not.found"),
+
 	/**
 	 * 方法找不到状态码
 	 *
 	 * @author LiuGangQiang Create in 2020/04/20
 	 */
 	METHOD_NOT_FOUND(404, "night.api.code.method.not.found"),
-	
+
 	/**
 	 * 方法不允许状态码
 	 *
@@ -101,7 +101,7 @@ public enum CodeEnum {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	private String message;
+	private String key;
 
 	/**
 	 * @return the value
@@ -111,21 +111,21 @@ public enum CodeEnum {
 	}
 
 	/**
-	 * @return the message
+	 * @return the key
 	 */
-	public String getMessage() {
-		return message;
+	public String getKey() {
+		return key;
 	}
 
 	/**
 	 * 构造器
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
-	 * @param value   状态码
-	 * @param message 提示消息
+	 * @param value 状态码
+	 * @param key   提示消息
 	 */
-	CodeEnum(int value, String message) {
+	ApiStatus(int value, String key) {
 		this.value = value;
-		this.message = message;
+		this.key = key;
 	}
 }

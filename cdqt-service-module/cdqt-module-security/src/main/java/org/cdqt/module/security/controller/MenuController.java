@@ -10,7 +10,7 @@ import org.cdqt.module.security.entity.Menu;
 import org.cdqt.module.security.service.iface.IMenuService;
 import org.cdqt.night.core.auth.Authentication;
 import org.cdqt.night.core.auth.Level;
-import org.cdqt.night.core.result.CodeEnum;
+import org.cdqt.night.core.result.ApiStatus;
 import org.cdqt.night.core.result.ResultApi;
 import org.cdqt.night.core.result.Rows;
 import org.cdqt.night.core.valid.ValidGroup.Delete;
@@ -58,7 +58,7 @@ public class MenuController {
 		/* 先校验菜单信息是否存在 */
 		Map<String, Object> menuMap = menuService.queryUnique(menu);
 		if (MapUtils.isNotEmpty(menuMap)) {
-			return new ResultApi<>(CodeEnum.CONFLICT);
+			return new ResultApi<>(ApiStatus.CONFLICT);
 		}
 		/* 设置主键及其他默认值 */
 		menu.setId(UUIDUtil.uuid());
@@ -69,10 +69,10 @@ public class MenuController {
 		Integer row = menuService.insert(menu);
 		if (IntegerUtils.isGtZero(row)) {
 			/* 受影响行数大于零证明新增成功 */
-			return new ResultApi<>(CodeEnum.OK);
+			return new ResultApi<>(ApiStatus.OK);
 		} else {
 			/* 受影响行数不大于零证明新增失败 */
-			return new ResultApi<>(CodeEnum.FAIL);
+			return new ResultApi<>(ApiStatus.FAIL);
 		}
 	}
 
@@ -93,16 +93,16 @@ public class MenuController {
 		Map<String, Object> menuMap = menuService.queryOne(menu);
 		if (MapUtils.isEmpty(menuMap)) {
 			/* 数据不存在提示并返回 */
-			return new ResultApi<>(CodeEnum.DATA_NOT_FOUND);
+			return new ResultApi<>(ApiStatus.DATA_NOT_FOUND);
 		}
 		/* 存在则删除数据 */
 		Integer row = menuService.delete(menu);
 		if (IntegerUtils.isGtZero(row)) {
 			/* 受影响行数大于零证明删除成功 */
-			return new ResultApi<>(CodeEnum.OK);
+			return new ResultApi<>(ApiStatus.OK);
 		} else {
 			/* 受影响行数不大于零证明删除失败 */
-			return new ResultApi<>(CodeEnum.FAIL);
+			return new ResultApi<>(ApiStatus.FAIL);
 		}
 	}
 
@@ -123,22 +123,22 @@ public class MenuController {
 		Map<String, Object> menuMap = menuService.queryOne(menu);
 		if (MapUtils.isEmpty(menuMap)) {
 			/* 数据不存在提示并返回 */
-			return new ResultApi<>(CodeEnum.DATA_NOT_FOUND);
+			return new ResultApi<>(ApiStatus.DATA_NOT_FOUND);
 		}
 		/* 查询菜单信息是否重复 */
 		Map<String, Object> menuUniqueMap = menuService.queryUnique(menu);
 		if (MapUtils.isNotEmpty(menuUniqueMap)) {
 			/* 数据存在提示并返回 */
-			return new ResultApi<>(CodeEnum.CONFLICT);
+			return new ResultApi<>(ApiStatus.CONFLICT);
 		}
 		/* 存在且不冲突则修改数据 */
 		Integer row = menuService.update(menu);
 		if (IntegerUtils.isGtZero(row)) {
 			/* 受影响行数大于零证明修改成功 */
-			return new ResultApi<>(CodeEnum.OK);
+			return new ResultApi<>(ApiStatus.OK);
 		} else {
 			/* 受影响行数不大于零证明修改失败 */
-			return new ResultApi<>(CodeEnum.FAIL);
+			return new ResultApi<>(ApiStatus.FAIL);
 		}
 	}
 
@@ -159,10 +159,10 @@ public class MenuController {
 		Map<String, Object> menuMap = menuService.queryOne(menu);
 		if (MapUtils.isNotEmpty(menuMap)) {
 			/* 数据存在返回数据 */
-			return new ResultApi<>(CodeEnum.OK, menuMap);
+			return new ResultApi<>(ApiStatus.OK, menuMap);
 		} else {
 			/* 数据不存在返回数据未找到 */
-			return new ResultApi<>(CodeEnum.DATA_NOT_FOUND);
+			return new ResultApi<>(ApiStatus.DATA_NOT_FOUND);
 		}
 	}
 
@@ -182,10 +182,10 @@ public class MenuController {
 		List<Map<String, Object>> menuList = menuService.queryList(menu);
 		if (ListUtils.isNotEmpty(menuList)) {
 			/* 数据存在返回数据 */
-			return new ResultApi<>(CodeEnum.OK, new Rows<>(page.getTotal(), menuList));
+			return new ResultApi<>(ApiStatus.OK, new Rows<>(page.getTotal(), menuList));
 		} else {
 			/* 数据不存在返回数据未找到 */
-			return new ResultApi<>(CodeEnum.DATA_NOT_FOUND);
+			return new ResultApi<>(ApiStatus.DATA_NOT_FOUND);
 		}
 	}
 }
