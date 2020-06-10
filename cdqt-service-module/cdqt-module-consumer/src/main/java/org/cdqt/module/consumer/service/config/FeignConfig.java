@@ -13,6 +13,10 @@ import feign.RequestTemplate;
 @Configuration
 public class FeignConfig implements RequestInterceptor {
 	public void apply(RequestTemplate template) {
-		template.header("token", "123456");
+		/*
+		 * ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes(); if (attributes != null) { HttpServletRequest
+		 * request = attributes.getRequest(); template.header("token",request.getHeader("token")); }
+		 */
+		template.header("token", "xxx");
 	}
 }
