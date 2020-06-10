@@ -1,6 +1,7 @@
 package org.cdqt.module.consumer.service.iface;
 
 import org.cdqt.module.consumer.entity.Menu;
+import org.cdqt.module.consumer.service.config.FeignConfig;
 import org.cdqt.module.consumer.service.fallback.MenuServiceFallback;
 import org.cdqt.night.core.result.ResultApi;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  * @author LiuGangQiang Create in 2020/04/16
  */
-@FeignClient(value = "${feign.client.provider}", fallback = MenuServiceFallback.class)
+@FeignClient(value = "${feign.client.provider}", fallback = MenuServiceFallback.class, configuration = FeignConfig.class)
 public interface IMenuService {
 	@RequestMapping(value = "/menus", method = RequestMethod.POST)
 	ResultApi<?> insert(@RequestBody Menu menu);
