@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  * @author LiuGangQiang Create in 2020/04/16
  */
-@FeignClient(value = "${feign.client.provider}", fallback = MenuServiceFallback.class, configuration = FeignConfig.class)
+@FeignClient(name = "${feign.client.provider}", fallback = MenuServiceFallback.class, configuration = FeignConfig.class)
 public interface IMenuService {
 	@RequestMapping(value = "/menus", method = RequestMethod.POST)
 	ResultApi<?> insert(@RequestBody Menu menu);
