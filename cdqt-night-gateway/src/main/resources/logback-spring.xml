@@ -76,6 +76,7 @@
 
   <!-- 特定包日志级别配置 -->
   <logger name="org.springframework" level="warn" />
+  <logger name="org.springframework.cloud.netflix.eureka" level="info" />
   <logger name="com.netflix" level="warn" />
 
   <!-- 默认,开发环境都输出到控制台 -->
