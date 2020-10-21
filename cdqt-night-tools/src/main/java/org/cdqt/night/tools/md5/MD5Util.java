@@ -124,7 +124,7 @@ public class MD5Util {
 		return encrypt(text + salt).equals(new String(cs1));
 	}
 
-	/** 
+	/**
 	 * encryptBytes 获取数组MD5编码
 	 *
 	 * @author LiuGangQiang Create in 2020/01/27

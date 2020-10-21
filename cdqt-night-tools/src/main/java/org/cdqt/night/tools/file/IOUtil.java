@@ -9,7 +9,7 @@ import java.io.InputStream;
  *
  * @author LiuGangQiang Create in 2020/03/02
  */
-public class IoUtil {
+public class IOUtil {
 	/**
 	 * 把输入流转换为字节数组
 	 *
