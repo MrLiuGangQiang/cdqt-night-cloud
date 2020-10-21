@@ -82,8 +82,6 @@
     <module>cdqt-night-admin</module>
     <!-- 模块项目 -->
     <module>cdqt-service-module</module>
-    <!-- mybatis逆向工程 -->
-    <module>cdqt-night-reverse</module>
   </modules>
 
   <!-- 构建配置 -->
