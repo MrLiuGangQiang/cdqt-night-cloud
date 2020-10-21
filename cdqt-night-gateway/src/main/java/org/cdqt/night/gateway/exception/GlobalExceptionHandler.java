@@ -4,11 +4,11 @@ import org.cdqt.night.core.result.ApiStatus;
 import org.cdqt.night.core.result.ResultApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+
+
 
 /**
  * 全局异常处理器
@@ -28,8 +28,6 @@ public class GlobalExceptionHandler {
 	 * @return {@link ResultApi} 对象
 	 */
 	@ExceptionHandler(Exception.class)
-	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	@ResponseBody
 	public ResultApi<?> defaultErrorHandler(Exception e) {
 		if (LOGGER.isErrorEnabled()) {
 			LOGGER.error("system appear error msg --> {}", e.toString());
