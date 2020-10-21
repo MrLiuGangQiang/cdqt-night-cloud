@@ -106,6 +106,7 @@
   <logger name="com.netflix" level="warn" />
   <logger name="org.springframework.cloud.netflix.eureka" level="info" />
   <logger name="org.springframework" level="warn" />
+  <logger name="org.cdqt.module.mongo" level="debug" />
 
   <!-- 默认、开发环境 输出日志到控制台 -->
   <springProfile name="default,dev">

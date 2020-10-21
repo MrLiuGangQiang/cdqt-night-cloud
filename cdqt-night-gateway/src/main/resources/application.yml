@@ -6,8 +6,8 @@ spring:
    cloud:
       gateway:
          routes: #路由设置
-         -  id: xzyk-file-service #文件
-            uri: lb://xzyk-file-service
+         -  id: cdqt-module-mongo #文件
+            uri: lb://cdqt-module-mongo
             predicates:
             - Path=/api-file/**
             filters:
@@ -15,8 +15,8 @@ spring:
             -  name: Hystrix
                args:
                   name: fallbackcmd
-                  fallbackUri: forward:/fallback/xzyk-file-service
-xzyk-file-service: #单个服务负载均衡设置
+                  fallbackUri: forward:/fallback/cdqt-module-mongo
+cdqt-module-mongo: #单个服务负载均衡设置
    ribbon:
       NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule
 management: #跨域设置

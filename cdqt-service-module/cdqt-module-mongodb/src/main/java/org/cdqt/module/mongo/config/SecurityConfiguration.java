@@ -30,6 +30,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 	 */
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		//registry.addInterceptor(getSecurityInterceptor()).addPathPatterns("/**");
+		/* 测试阶段暂时注释 */
+		/* registry.addInterceptor(getSecurityInterceptor()).addPathPatterns("/**"); */
 	}
 }

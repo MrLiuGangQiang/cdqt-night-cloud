@@ -9,6 +9,11 @@
   </parent>
   <artifactId>cdqt-module-mongodb</artifactId>
   <name>cdqt-module-mongodb</name>
+  <!-- 属性配置 -->
+  <properties>
+    <mybatis.version>2.1.0</mybatis.version>
+    <pagehelper.version>1.2.13</pagehelper.version>
+  </properties>
 
   <dependencies>
     <!-- 引入core项目 -->
@@ -38,7 +43,7 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-aop</artifactId>
     </dependency>
-    <!-- 引入eureka并 -->
+    <!-- 引入eureka客户端依赖 -->
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
@@ -53,10 +58,33 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
-    <!-- mongodb依赖 -->
+    <!-- MongoDB依赖 -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-mongodb</artifactId>
+    </dependency>
+    <!--引入mybatis依赖 -->
+    <dependency>
+      <groupId>org.mybatis.spring.boot</groupId>
+      <artifactId>mybatis-spring-boot-starter</artifactId>
+      <version>${mybatis.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.apache.tomcat</groupId>
+          <artifactId>tomcat-jdbc</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!-- Pagehelper -->
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper-spring-boot-starter</artifactId>
+      <version>${pagehelper.version}</version>
+    </dependency>
+    <!-- MySQL驱动 -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
     </dependency>
   </dependencies>
   <!-- 构建配置 -->
