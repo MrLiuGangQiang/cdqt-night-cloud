@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cdqt.module.mongo.mapper.QtFileMapper">
+  <!-- 文件实体 -->
+  <resultMap type="org.cdqt.module.mongo.entity.QtFile" id="qtFileEntity">
+    <result property="fileId" column="FILE_ID" javaType="String" />
+    <result property="fullName" column="FULL_NAME" javaType="String" />
+    <result property="fileName" column="FILE_NAME" javaType="String" />
+    <result property="fileSuffix" column="FILE_SUFFIX" javaType="String" />
+    <result property="fileSize" column="FILE_SIZE" javaType="Long" />
+    <result property="contentType" column="CONTENT_TYPE" javaType="String" />
+    <result property="md5" column="MD5" javaType="String" />
+    <result property="updateTime" column="UPDATE_TIME" javaType="Date" />
+    <result property="createTime" column="CREATE_TIME" javaType="Date" />
+  </resultMap>
+
+  <!-- 删除文件 -->
+  <delete id="deleteByPrimaryKey" parameterType="String">
+    DELETE FROM QT_FILE WHERE FILE_ID= #{fileId, jdbcType=VARCHAR}
+  </delete>
+
+  <!--新增文件 -->
+  <insert id="insert" parameterType="org.cdqt.module.mongo.entity.QtFile">
+    INSERT INTO QT_FILE(FILE_ID,
+    FULL_NAME,
+    FILE_NAME,
+    FILE_SUFFIX,
+    FILE_SIZE,
+    CONTENT_TYPE,
+    MD5,
+    UPDATE_TIME,
+    CREATE_TIME)
+    VALUES (#{fileId,jdbcType=VARCHAR},
+    #{fullName,jdbcType=VARCHAR},
+    #{fileName,jdbcType=VARCHAR},
+    #{fileSuffix,jdbcType=VARCHAR},
+    #{fileSize,jdbcType=NUMERIC},
+    #{contentType,jdbcType=VARCHAR},
+    #{md5,jdbcType=VARCHAR},
+    #{updateTime,jdbcType=TIMESTAMP},
+    #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+
+  <!-- 通过MD5查询文件 -->
+  <select id="queryByMD5" parameterType="org.cdqt.module.mongo.entity.QtFile" resultMap="qtFileEntity">
+    SELECT
+    QF.FILE_ID,
+    QF.FULL_NAME,
+    QF.FILE_NAME,
+    QF.FILE_SUFFIX,
+    QF.FILE_SIZE,
+    QF.CONTENT_TYPE,
+    QF.MD5,
+    QF.UPDATE_TIME,
+    QF.CREATE_TIME
+    FROM
+    QT_FILE QF
+    WHERE QF.MD5=#{md5,jdbcType=VARCHAR}
+  </select>
+
+  <!-- 通过ID查询文件 -->
+  <select id="queryByID" parameterType="org.cdqt.module.mongo.entity.QtFile" resultMap="qtFileEntity">
+    SELECT
+    QF.FILE_ID,
+    QF.FULL_NAME,
+    QF.FILE_NAME,
+    QF.FILE_SUFFIX,
+    QF.FILE_SIZE,
+    QF.CONTENT_TYPE,
+    QF.MD5,
+    QF.UPDATE_TIME,
+    QF.CREATE_TIME
+    FROM
+    QT_FILE QF
+    WHERE QF.FILE_ID=#{fileId,jdbcType=VARCHAR}
+  </select>
+</mapper>
