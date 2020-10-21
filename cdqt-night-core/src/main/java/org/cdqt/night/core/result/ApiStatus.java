@@ -11,84 +11,84 @@ public enum ApiStatus {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	OK(200, "night.api.code.ok"),
+	OK(200, "cdrx.api.code.ok"),
 
 	/**
 	 * 失败状态码
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	FAIL(202, "night.api.code.fail"),
+	FAIL(202, "cdrx.api.code.fail"),
 
 	/**
 	 * 参数有误状态码
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	BAD_REQUEST(400, "night.api.code.bad.request"),
+	BAD_REQUEST(400, "cdrx.api.code.bad.request"),
 
 	/**
 	 * 未登录状态码
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	UNAUTHORIZED(401, "night.api.code.unauthorized"),
+	UNAUTHORIZED(401, "cdrx.api.code.unauthorized"),
 
 	/**
 	 * 无权限状态码
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	FORBIDDEN(403, "night.api.code.forbidden"),
+	FORBIDDEN(403, "cdrx.api.code.forbidden"),
 
 	/**
 	 * 数据未找到状态码
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	DATA_NOT_FOUND(404, "night.api.code.data.not.found"),
+	DATA_NOT_FOUND(404, "cdrx.api.code.data.not.found"),
 
 	/**
 	 * 方法找不到状态码
 	 *
 	 * @author LiuGangQiang Create in 2020/04/20
 	 */
-	METHOD_NOT_FOUND(404, "night.api.code.method.not.found"),
+	METHOD_NOT_FOUND(404, "cdrx.api.code.method.not.found"),
 
 	/**
 	 * 方法不允许状态码
 	 *
 	 * @author LiuGangQiang Create in 2020/04/20
 	 */
-	METHOD_NOT_ALLOWED(405, "night.api.code.method.not.allowed"),
+	METHOD_NOT_ALLOWED(405, "cdrx.api.code.method.not.allowed"),
 
 	/**
 	 * 数据冲突状态码（适用于新增时违反逻辑约束产生重复记录）
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	CONFLICT(409, "night.api.code.conflict"),
+	CONFLICT(409, "cdrx.api.code.conflict"),
 
 	/**
 	 * 系统异常状态码
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	ERROR(500, "night.api.code.error"),
+	ERROR(500, "cdrx.api.code.error"),
 
 	/**
 	 * 方法不安全状态码 系统内多指为经过权限验证的方法
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	UNIMPLEMENTED(501, "night.api.code.unimplemented"),
+	UNIMPLEMENTED(501, "cdrx.api.code.unimplemented"),
 
 	/**
 	 * 网关超时状态码（适用于微服务网关或服务间调用）
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	TIMEOUT(504, "night.api.code.timeout");
+	TIMEOUT(504, "cdrx.api.code.timeout");
 
 	/**
 	 * 状态码

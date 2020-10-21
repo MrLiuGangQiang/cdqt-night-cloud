@@ -68,7 +68,13 @@ public class ResultApi<T> implements Serializable {
 	 *
 	 * @author LiuGangQiang Create in 2020/04/02
 	 */
-	transient private Boolean isDefault;
+	transient private Boolean isUseDefault;
+	/**
+	 * 是否设置自定义消息
+	 *
+	 * @author LiuGangQiang Create in 2020/06/28
+	 */
+	transient private Boolean isUseMsg;
 
 	/**
 	 * 无参构造器
@@ -85,7 +91,8 @@ public class ResultApi<T> implements Serializable {
 	 * @param code 状态枚举
 	 */
 	public ResultApi(ApiStatus apiStatus) {
-		this.isDefault = true;
+		this.isUseDefault = true;
+		this.isUseMsg = false;
 		this.code = apiStatus.getValue();
 		this.key = apiStatus.getKey();
 	}
@@ -98,37 +105,11 @@ public class ResultApi<T> implements Serializable {
 	 * @param data 数据
 	 */
 	public ResultApi(ApiStatus apiStatus, T data) {
-		this.isDefault = true;
+		this.isUseDefault = true;
+		this.isUseMsg = false;
 		this.data = data;
 		this.code = apiStatus.getValue();
 		this.key = apiStatus.getKey();
-	}
-
-	/**
-	 * 构造器
-	 *
-	 * @author LiuGangQiang Create in 2020/03/01
-	 * @param code    自定义状态码
-	 * @param message 提示消息
-	 */
-	public ResultApi(int code, String message) {
-		this.data = null;
-		this.code = code;
-		this.msg = message;
-	}
-
-	/**
-	 * 构造器
-	 *
-	 * @author LiuGangQiang Create in 2020/03/01
-	 * @param code    自定义状态码
-	 * @param message 提示消息
-	 * @param data    数据
-	 */
-	public ResultApi(int code, String message, T data) {
-		this.data = null;
-		this.code = code;
-		this.msg = message;
 	}
 
 	/**
@@ -167,10 +148,10 @@ public class ResultApi<T> implements Serializable {
 	 * @return the msg
 	 */
 	public String getMsg() {
-		if (this.msg != null) {
+		if (this.isUseMsg) {
 			return msg;
 		} else {
-			if (this.isDefault) {
+			if (this.isUseDefault) {
 				return Prompt.bundle(DEFAULT_PATH, getLocale(), this.key);
 			} else {
 				return Prompt.bundle(getPath(), getLocale(), this.key, this.args);
@@ -183,7 +164,8 @@ public class ResultApi<T> implements Serializable {
 	 * @return {@link ResultApi}
 	 */
 	public ResultApi<T> setMsg(String msg) {
-		this.isDefault = false;
+		this.isUseDefault = false;
+		this.isUseMsg = true;
 		this.msg = msg;
 		return this;
 	}
@@ -227,7 +209,8 @@ public class ResultApi<T> implements Serializable {
 	 * @return {@link ResultApi}
 	 */
 	public ResultApi<T> setKey(String key) {
-		this.isDefault = false;
+		this.isUseDefault = false;
+		this.isUseMsg = false;
 		this.key = key;
 		return this;
 	}
@@ -238,10 +221,19 @@ public class ResultApi<T> implements Serializable {
 	 * @return {@link ResultApi}
 	 */
 	public ResultApi<T> setKey(String key, Object... args) {
-		this.isDefault = false;
+		this.isUseDefault = false;
+		this.isUseMsg = false;
 		this.args = args;
 		this.key = key;
 		return this;
+	}
+
+	/**
+	 * @return the isUseMsg
+	 */
+	@Transient
+	public Boolean getIsUseMsg() {
+		return isUseMsg;
 	}
 
 	/**
@@ -254,4 +246,13 @@ public class ResultApi<T> implements Serializable {
 	public boolean compare(ApiStatus code) {
 		return getCode() == code.getValue();
 	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "ResultApi [code=" + code + ", data=" + data + ", msg=" + msg + "]";
+	}
+
 }

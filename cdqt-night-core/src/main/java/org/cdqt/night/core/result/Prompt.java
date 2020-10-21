@@ -37,7 +37,6 @@ public abstract class Prompt {
 	 * @param key 键值
 	 * @return {@link String} @
 	 */
-	@Deprecated
 	public static String bundle(String key) {
 		return getMessage(Locale.getDefault(), FILEPATH, key);
 	}
@@ -62,7 +61,6 @@ public abstract class Prompt {
 	 * @param arguments 参数（数组或不定参数）
 	 * @return {@link String} @
 	 */
-	@Deprecated
 	public static String bundle(String key, Object... arguments) {
 		return getMessage(Locale.getDefault(), FILEPATH, key, arguments);
 	}
@@ -88,7 +86,6 @@ public abstract class Prompt {
 	 * @param key  键值
 	 * @return {@link String} @
 	 */
-	@Deprecated
 	public static String bundle(String path, String key) {
 		return getMessage(Locale.getDefault(), path, key);
 	}
@@ -115,7 +112,6 @@ public abstract class Prompt {
 	 * @param arguments 参数（数组或不定参数）
 	 * @return {@link String} @
 	 */
-	@Deprecated
 	public static String bundle(String path, String key, Object... arguments) {
 		return getMessage(Locale.getDefault(), path, key, arguments);
 	}
@@ -148,7 +144,7 @@ public abstract class Prompt {
 		ResourceBundle bundle = ResourceBundle.getBundle(path, locale);
 		try {
 			String value = new String(bundle.getString(key).getBytes("ISO-8859-1"), "UTF-8");
-			if (arguments.length > 0) {
+			if (arguments != null && arguments.length > 0) {
 				return MessageFormat.format(value, arguments);
 			} else {
 				return value;

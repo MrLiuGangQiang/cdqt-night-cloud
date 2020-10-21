@@ -70,7 +70,7 @@
   <modules>
     <!-- 核心项目 -->
     <module>cdqt-night-core</module>
-    <!-- redis二次封装 -->
+    <!-- Redis二次封装 -->
     <module>cdqt-night-redis</module>
     <!-- 全局工具项目 -->
     <module>cdqt-night-tools</module>

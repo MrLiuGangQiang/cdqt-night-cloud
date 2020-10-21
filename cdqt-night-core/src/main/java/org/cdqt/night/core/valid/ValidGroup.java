@@ -11,7 +11,7 @@ import org.cdqt.night.core.mapper.IBaseMapper;
  */
 public abstract interface ValidGroup {
 	/**
-	 * 新增单条记录
+	 * 新增单条分组
 	 * 
 	 * @author LiuGangQiang Create in 2020/03/01
 	 * 
@@ -20,7 +20,7 @@ public abstract interface ValidGroup {
 	};
 
 	/**
-	 * 新增多条记录
+	 * 新增多条分组
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
@@ -28,7 +28,7 @@ public abstract interface ValidGroup {
 	};
 
 	/**
-	 * 删除单条记录
+	 * 删除单条分组
 	 * 
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
@@ -36,7 +36,7 @@ public abstract interface ValidGroup {
 	};
 
 	/**
-	 * 修改记录
+	 * 修改分组
 	 * 
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
@@ -44,7 +44,7 @@ public abstract interface ValidGroup {
 	};
 
 	/**
-	 * 查询单条记录
+	 * 查询单条分组
 	 * 
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
@@ -52,7 +52,7 @@ public abstract interface ValidGroup {
 	};
 
 	/**
-	 * 查询单条记录
+	 * 查询单条分组
 	 * 
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
@@ -60,7 +60,7 @@ public abstract interface ValidGroup {
 	};
 
 	/**
-	 * 查询多条记录
+	 * 查询多条分组
 	 * 
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
@@ -68,7 +68,7 @@ public abstract interface ValidGroup {
 	};
 
 	/**
-	 * 查询多条记录
+	 * 查询多条分组
 	 * 
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
@@ -76,7 +76,7 @@ public abstract interface ValidGroup {
 	};
 
 	/**
-	 * 查询重复记录
+	 * 查询重复分组
 	 * 
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
@@ -84,10 +84,17 @@ public abstract interface ValidGroup {
 	};
 
 	/**
-	 * 查询重复记录
+	 * 查询重复分组
 	 * 
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	public abstract interface QueryUniqueForEntity {
+	};
+	/**
+	 * 任务下发
+	 *
+	 * @author LiuGangQiang Create in 2020/03/01
+	 */
+	public abstract interface Dispatch {
 	};
 }

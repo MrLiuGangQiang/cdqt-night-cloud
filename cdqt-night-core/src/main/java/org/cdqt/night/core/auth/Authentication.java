@@ -24,9 +24,7 @@ public @interface Authentication {
 
 	/**
 	 * 权限描述值 默认值为 "" <br>
-	 * 建议命名规则 <font style="color:yellow;">[级别]</font>
-	 * <font style="color:orange;">[:模块(服务模块简称)]</font>
-	 * <font style="color:yellow;">[:对象(针对何种对象)]</font>
+	 * 建议命名规则 <font style="color:yellow;">[级别]</font> <font style="color:orange;">[:模块(服务模块简称)]</font> <font style="color:yellow;">[:对象(针对何种对象)]</font>
 	 * <font style="color:orange;">[:操作(一般使用方法名)]</font><br>
 	 * 每块内容有多个单词用"-"隔开<br>
 	 * 例如:<br>

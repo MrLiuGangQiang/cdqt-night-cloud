@@ -95,6 +95,24 @@ public abstract interface IBaseMapper<T extends BaseEntity, PK extends Serializa
 	abstract int updateByMap(Map<String, Object> param);
 
 	/**
+	 * 通过List批量更新记录
+	 *
+	 * @author LiuGangQiang Create in 2020/06/19
+	 * @param entitys 对象集合
+	 * @return 受影响行数
+	 */
+	abstract int batchUpdateByList(List<T> entitys);
+
+	/**
+	 * 通过数组批量更新记录
+	 *
+	 * @author LiuGangQiang Create in 2020/06/19
+	 * @param entitys 对象集合
+	 * @return 受影响行数
+	 */
+	abstract int batchUpdateByArray(T[] entitys);
+
+	/**
 	 * 通过实例查询单条记录（请谨慎使用，条件一定要明确，不然查询出多条记录会抛异常）
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
