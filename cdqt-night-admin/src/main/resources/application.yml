@@ -39,3 +39,4 @@ info: #项目信息配置
    version: '@project.version@'
    groupId: '@project.groupId@'
    artifactId: '@project.artifactId@'
+   description: 微服务监控中心

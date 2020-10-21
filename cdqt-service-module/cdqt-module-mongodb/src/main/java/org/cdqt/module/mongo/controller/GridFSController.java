@@ -11,7 +11,7 @@ import org.bson.types.ObjectId;
 import org.cdqt.module.mongo.service.GridFSService;
 import org.cdqt.night.core.result.ApiStatus;
 import org.cdqt.night.core.result.ResultApi;
-import org.cdqt.night.tools.file.IoUtil;
+import org.cdqt.night.tools.file.IOUtil;
 import org.cdqt.night.tools.md5.MD5Util;
 import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.http.ContentDisposition;
@@ -91,7 +91,7 @@ public class GridFSController {
 			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 			headers.setContentLength(gridFsResource.contentLength());
 			headers.setConnection("close");
-			return new ResponseEntity<byte[]>(IoUtil.toByteArray(gridFsResource.getInputStream()), headers, HttpStatus.OK);
+			return new ResponseEntity<byte[]>(IOUtil.toByteArray(gridFsResource.getInputStream()), headers, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<byte[]>(HttpStatus.NOT_FOUND);
 		}
@@ -114,7 +114,7 @@ public class GridFSController {
 			headers.setContentType(MediaType.parseMediaType(gridFsResource.getContentType()));
 			headers.setContentLength(gridFsResource.contentLength());
 			headers.setConnection("close");
-			return new ResponseEntity<byte[]>(IoUtil.toByteArray(gridFsResource.getInputStream()), headers, HttpStatus.OK);
+			return new ResponseEntity<byte[]>(IOUtil.toByteArray(gridFsResource.getInputStream()), headers, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<byte[]>(HttpStatus.NOT_FOUND);
 		}

@@ -7,8 +7,10 @@ import org.cdqt.night.core.result.Prompt;
 import org.cdqt.night.core.result.ResultApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -34,10 +36,11 @@ public class FallbackController {
 	 * @return {@link ResultApi} 对象
 	 */
 	@RequestMapping("/fallback/{lb}")
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	public ResultApi<?> fallback(@PathVariable("lb") String lb) {
 		if (LOGGER.isErrorEnabled()) {
 			LOGGER.error("server instance [{}] tigger hystrix", lb);
 		}
-		return new ResultApi<>(ApiStatus.TIMEOUT).setMsg(Prompt.bundle(PATH, Locale.getDefault(),"fallback.timeout", lb));
+		return new ResultApi<>(ApiStatus.TIMEOUT).setMsg(Prompt.bundle(PATH, Locale.getDefault(), "fallback.timeout", lb));
 	}
 }

@@ -6,7 +6,7 @@ server:
       buffer-size: 1024 #每块buffer的大小，越小利用越充分 建议保持1024
 spring:
    application:
-      name: cdrx-comlib-eureka #服务名配置
+      name: cdqt-night-eureka #服务名配置
    security: #权限信息配置
       user:
          name: admin #用户名

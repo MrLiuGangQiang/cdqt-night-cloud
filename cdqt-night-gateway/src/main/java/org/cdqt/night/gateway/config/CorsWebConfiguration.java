@@ -1,6 +1,7 @@
 package org.cdqt.night.gateway.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
@@ -11,6 +12,7 @@ import org.springframework.web.util.pattern.PathPatternParser;
  *
  * @author LiuGangQiang Create in 2020/03/01
  */
+@Configuration
 public class CorsWebConfiguration {
 	/**
 	 * 跨域配置 注意网关配置了跨域其代理的微服务就不能再配置跨域不然会造成重复跨域的问题
