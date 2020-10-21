@@ -19,7 +19,7 @@ public enum TerminalEnum {
 	 */
 	ANDROID("android"),
 	/**
-	 * Ios端标识
+	 * IOS端标识
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
@@ -31,7 +31,7 @@ public enum TerminalEnum {
 	 */
 	BOX("box"),
 	/**
-	 * Mobile端标识（包括Android、Ios等）
+	 * Mobile端标识（包括Android、IOS等）
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
