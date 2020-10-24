@@ -31,8 +31,8 @@ spring:
          connection-test-query: SELECT 1
    data:
       mongodb:
-         uri: mongodb://night:123456@192.168.1.4:27017/night #配置MongoDB连接
-         bucket: night
+         uri: mongodb://cdqt:123456@192.168.1.4:27017/cdqt #配置MongoDB连接
+         bucket: cdqt
 mybatis:
    configuration:
       call-setters-on-nulls: true #为null也返回           
