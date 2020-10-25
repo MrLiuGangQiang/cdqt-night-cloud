@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.cdqt.module.security.global.BaseGlobal;
 import org.cdqt.night.redis.RedisCacheConfiguration;
 import org.cdqt.night.redis.RedisCacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
@@ -31,19 +32,6 @@ import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator
 @Configuration
 @EnableCaching
 public class RedisConfiguration extends CachingConfigurerSupport {
-
-	/**
-	 * 缓存用户登录信息
-	 *
-	 * @author LiuGangQiang Create in 2020/10/25
-	 */
-	private static final String CACHE_WEB_USER = "user_cache";
-	/**
-	 * 缓存用户权限信息
-	 *
-	 * @author LiuGangQiang Create in 2020/10/25
-	 */
-	private static final String CACHE_USER_SECURITY = "user_security";
 
 	/**
 	 * Redis缓存管理
@@ -76,13 +64,13 @@ public class RedisConfiguration extends CachingConfigurerSupport {
 
 		/* 设置一个初始化的缓存空间set集合 */
 		Set<String> cacheNames = new HashSet<>();
-		cacheNames.add(CACHE_WEB_USER);
-		cacheNames.add(CACHE_USER_SECURITY);
+		cacheNames.add(BaseGlobal.CACHE_WEB_USER);
+		cacheNames.add(BaseGlobal.CACHE_USER_SECURITY);
 
 		/* 对每个缓存空间应用不同的配置 */
 		Map<String, RedisCacheConfiguration> configMap = new HashMap<>();
-		configMap.put(CACHE_WEB_USER, config);
-		configMap.put(CACHE_WEB_USER, config);
+		configMap.put(BaseGlobal.CACHE_WEB_USER, config);
+		configMap.put(BaseGlobal.CACHE_WEB_USER, config);
 
 		/* 使用自定义的缓存配置初始化一个RedisCacheManager */
 		RedisCacheManager cacheManager = RedisCacheManager.builder(factory)

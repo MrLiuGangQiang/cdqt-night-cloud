@@ -5,7 +5,7 @@ package org.cdqt.night.session;
  * 
  * @author LiuGangQiang Create in 2020/03/01
  */
-public enum TerminalEnum {
+public enum QtDeviceEnum {
 	/**
 	 * Web端标识
 	 *
@@ -42,6 +42,7 @@ public enum TerminalEnum {
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
 	WECHAT("wechat");
+
 	/**
 	 * 终端标识
 	 *
@@ -62,7 +63,7 @@ public enum TerminalEnum {
 	 * @author LiuGangQiang Create in 2020/03/01
 	 * @param falg 终端标识
 	 */
-	TerminalEnum(String falg) {
+	QtDeviceEnum(String falg) {
 		this.flag = falg;
 	}
 }

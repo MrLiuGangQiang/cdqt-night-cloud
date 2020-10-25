@@ -2,7 +2,10 @@ package org.cdqt.module.security.entity;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotBlank;
+
 import org.cdqt.night.core.entity.BaseEntity;
+import org.hibernate.validator.constraints.Length;
 
 /**
  * 用户信息表
@@ -11,192 +14,204 @@ import org.cdqt.night.core.entity.BaseEntity;
  */
 public class UserInfo extends BaseEntity {
 	private static final long serialVersionUID = 1L;
-    /**
-     * 主键
-     * 
-     * @author LiuGangQiang Create in 2020/03/07
-     */
-    private String id;
 
-    /**
-     * 姓名
-     * 
-     * @author LiuGangQiang Create in 2020/03/07
-     */
-    private String name;
+	/**
+	 * 用户登录分组
+	 *
+	 * @author LiuGangQiang Create in 2020/10/25
+	 */
+	public abstract interface Login {
+	};
 
-    /**
-     * 手机
-     * 
-     * @author LiuGangQiang Create in 2020/03/07
-     */
-    private String phone;
+	/**
+	 * 主键
+	 * 
+	 * @author LiuGangQiang Create in 2020/03/07
+	 */
+	private String id;
 
-    /**
-     * 身份证
-     * 
-     * @author LiuGangQiang Create in 2020/03/07
-     */
-    private String idCard;
+	/**
+	 * 姓名
+	 * 
+	 * @author LiuGangQiang Create in 2020/03/07
+	 */
+	private String name;
 
-    /**
-     * 生日
-     * 
-     * @author LiuGangQiang Create in 2020/03/07
-     */
-    private Date birthday;
+	/**
+	 * 手机
+	 * 
+	 * @author LiuGangQiang Create in 2020/03/07
+	 */
+	@NotBlank(message = "{user.info.phone.not.blank}", groups = { Login.class })
+	private String phone;
 
-    /**
-     * 地址
-     * 
-     * @author LiuGangQiang Create in 2020/03/07
-     */
-    private String address;
+	/**
+	 * 身份证
+	 * 
+	 * @author LiuGangQiang Create in 2020/03/07
+	 */
+	private String idCard;
 
-    /**
-     * 密码
-     * 
-     * @author LiuGangQiang Create in 2020/03/07
-     */
-    private String password;
+	/**
+	 * 生日
+	 * 
+	 * @author LiuGangQiang Create in 2020/03/07
+	 */
+	private Date birthday;
 
-    /**
-     * 修改时间
-     * 
-     * @author LiuGangQiang Create in 2020/03/07
-     */
-    private Date updateTime;
+	/**
+	 * 地址
+	 * 
+	 * @author LiuGangQiang Create in 2020/03/07
+	 */
+	private String address;
 
-    /**
-     * 创建时间
-     * 
-     * @author LiuGangQiang Create in 2020/03/07
-     */
-    private Date createTime;
+	/**
+	 * 密码
+	 * 
+	 * @author LiuGangQiang Create in 2020/03/07
+	 */
+	@NotBlank(message = "{user.info.password.not.blank}", groups = { Login.class })
+	@Length(message = "{user.info.password.length}", min = 6, max = 32, groups = { Login.class })
+	private String password;
 
-    /**
-     * @return the id
-     */
-    public String getId() {
-        return id;
-    }
+	/**
+	 * 修改时间
+	 * 
+	 * @author LiuGangQiang Create in 2020/03/07
+	 */
+	private Date updateTime;
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
+	/**
+	 * 创建时间
+	 * 
+	 * @author LiuGangQiang Create in 2020/03/07
+	 */
+	private Date createTime;
 
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
 
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    /**
-     * @return the phone
-     */
-    public String getPhone() {
-        return phone;
-    }
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
 
-    /**
-     * @param phone the phone to set
-     */
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    /**
-     * @return the idCard
-     */
-    public String getIdCard() {
-        return idCard;
-    }
+	/**
+	 * @return the phone
+	 */
+	public String getPhone() {
+		return phone;
+	}
 
-    /**
-     * @param idCard the idCard to set
-     */
-    public void setIdCard(String idCard) {
-        this.idCard = idCard;
-    }
+	/**
+	 * @param phone the phone to set
+	 */
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
-    /**
-     * @return the birthday
-     */
-    public Date getBirthday() {
-        return birthday;
-    }
+	/**
+	 * @return the idCard
+	 */
+	public String getIdCard() {
+		return idCard;
+	}
 
-    /**
-     * @param birthday the birthday to set
-     */
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
+	/**
+	 * @param idCard the idCard to set
+	 */
+	public void setIdCard(String idCard) {
+		this.idCard = idCard;
+	}
 
-    /**
-     * @return the address
-     */
-    public String getAddress() {
-        return address;
-    }
+	/**
+	 * @return the birthday
+	 */
+	public Date getBirthday() {
+		return birthday;
+	}
 
-    /**
-     * @param address the address to set
-     */
-    public void setAddress(String address) {
-        this.address = address;
-    }
+	/**
+	 * @param birthday the birthday to set
+	 */
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
 
-    /**
-     * @return the password
-     */
-    public String getPassword() {
-        return password;
-    }
+	/**
+	 * @return the address
+	 */
+	public String getAddress() {
+		return address;
+	}
 
-    /**
-     * @param password the password to set
-     */
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	/**
+	 * @param address the address to set
+	 */
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    /**
-     * @return the updateTime
-     */
-    public Date getUpdateTime() {
-        return updateTime;
-    }
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
 
-    /**
-     * @param updateTime the updateTime to set
-     */
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    /**
-     * @return the createTime
-     */
-    public Date getCreateTime() {
-        return createTime;
-    }
+	/**
+	 * @return the updateTime
+	 */
+	public Date getUpdateTime() {
+		return updateTime;
+	}
 
-    /**
-     * @param createTime the createTime to set
-     */
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	/**
+	 * @param updateTime the updateTime to set
+	 */
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	/**
+	 * @return the createTime
+	 */
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	/**
+	 * @param createTime the createTime to set
+	 */
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 }

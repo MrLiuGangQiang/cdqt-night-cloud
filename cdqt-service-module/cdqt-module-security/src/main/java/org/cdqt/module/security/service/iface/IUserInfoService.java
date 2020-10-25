@@ -1,18 +1,15 @@
-package org.cdqt.module.security.mapper;
+package org.cdqt.module.security.service.iface;
 
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.cdqt.module.security.entity.UserInfo;
-import org.cdqt.night.core.mapper.IBaseMapper;
 
 /**
- * UserInfoMapper
+ * IUserInfoService
  *
- * @author LiuGangQiang Create in 2020/04/05
+ * @author LiuGangQiang Create in 2020/10/25
  */
-@Mapper
-public interface UserInfoMapper extends IBaseMapper<UserInfo, String> {
+public interface IUserInfoService {
 
 	/**
 	 * 用户登录
@@ -22,4 +19,5 @@ public interface UserInfoMapper extends IBaseMapper<UserInfo, String> {
 	 * @return {@link Map}
 	 */
 	Map<String, Object> login(UserInfo userInfo);
+
 }

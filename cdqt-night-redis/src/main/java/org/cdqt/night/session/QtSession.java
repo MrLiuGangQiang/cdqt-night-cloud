@@ -7,7 +7,7 @@ import java.io.Serializable;
  * 
  * @author LiuGangQiang Create in 2020/03/01
  */
-public class Session<T> implements Serializable {
+public class QtSession<T> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -29,7 +29,7 @@ public class Session<T> implements Serializable {
 	 *
 	 * @author LiuGangQiang Create in 2020/03/01
 	 */
-	public Session() {
+	public QtSession() {
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class Session<T> implements Serializable {
 	 * @param identify 唯一区别串
 	 * @param cache    缓存数据
 	 */
-	public Session(String identify, T cache) {
+	public QtSession(String identify, T cache) {
 		this.identify = identify;
 		this.cache = cache;
 	}

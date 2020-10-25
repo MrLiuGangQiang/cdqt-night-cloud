@@ -33,7 +33,7 @@
   </insert>
 
   <!-- 查询重复 -->
-  <select id="queryUnique" parameterType="org.cdqt.module.security.entity.Menu" resultMap="BaseResultMap">
+  <select id="queryUnique" parameterType="org.cdqt.module.security.entity.Menu" resultMap="baseMenuMap">
     SELECT
     m.id,
     m.`code`
@@ -44,7 +44,7 @@
   </select>
 
   <!-- 查询详情 -->
-  <select id="queryOne" parameterType="org.cdqt.module.security.entity.Menu" resultMap="BaseResultMap">
+  <select id="queryOne" parameterType="org.cdqt.module.security.entity.Menu" resultMap="baseMenuMap">
     SELECT
     m.id,
     m.pid,
@@ -64,7 +64,7 @@
   </select>
 
   <!-- 查询列表 -->
-  <select id="queryList" parameterType="org.cdqt.module.security.entity.Menu" resultMap="BaseResultMap">
+  <select id="queryList" parameterType="org.cdqt.module.security.entity.Menu" resultMap="baseMenuMap">
     SELECT
     m.id,
     m.pid,
