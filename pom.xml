@@ -82,6 +82,8 @@
     <module>cdqt-night-admin</module>
     <!-- 模块项目 -->
     <module>cdqt-service-module</module>
+    <!-- 示例项目 -->
+    <module>cdqt-night-study</module>
   </modules>
 
   <!-- 构建配置 -->
