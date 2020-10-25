@@ -17,8 +17,6 @@
   </build>
   <!-- 子项目配置 -->
   <modules>
-    <!-- API文档模块 -->
-    <module>cdqt-module-docs</module>
     <!-- 生产者模块 用作演示 -->
     <module>cdqt-module-provider</module>
     <!-- 消费者模块 用作演示 -->

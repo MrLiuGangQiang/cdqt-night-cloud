@@ -2,7 +2,9 @@ package org.cdqt.module.security.exception;
 
 import java.util.Locale;
 
+import org.cdqt.night.core.exception.QtRuntimeException;
 import org.cdqt.night.core.result.ApiStatus;
+import org.cdqt.night.core.result.Prompt;
 import org.cdqt.night.core.result.ResultApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,9 +60,9 @@ public class GlobalExceptionHandler implements ErrorController {
 	@ResponseBody
 	public ResultApi<?> httpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
 		if (logger.isWarnEnabled()) {
-			logger.warn("method not allowed message --> {}", e.getMessage());
+			logger.warn("method not allowed message --> {}", e.toString());
 		}
-		return new ResultApi<>(ApiStatus.METHOD_NOT_ALLOWED).setMsg(e.getMessage());
+		return new ResultApi<>(ApiStatus.METHOD_NOT_ALLOWED).setMsg(e.toString());
 	}
 
 	/**
@@ -71,7 +73,7 @@ public class GlobalExceptionHandler implements ErrorController {
 	 * @return {@link ResultApi}
 	 */
 	@ExceptionHandler(BindException.class)
-	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ResponseBody
 	public ResultApi<?> bindErrorHandler(BindException e) {
 		BindingResult result = e.getBindingResult();
@@ -89,7 +91,7 @@ public class GlobalExceptionHandler implements ErrorController {
 	 * @return {@link ResultApi}
 	 */
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ResponseBody
 	public ResultApi<?> bindErrorHandler(MethodArgumentNotValidException e) {
 		BindingResult result = e.getBindingResult();
@@ -97,6 +99,30 @@ public class GlobalExceptionHandler implements ErrorController {
 			logger.error("validator message [json] --> {}", result.getFieldError().getDefaultMessage());
 		}
 		return new ResultApi<>(ApiStatus.BAD_REQUEST).setMsg(result.getFieldError().getDefaultMessage());
+	}
+
+	/**
+	 * 自定义异常处理
+	 *
+	 * @author LiuGangQiang Create in 2020/03/02
+	 * @param e 异常
+	 * @return {@link Object} 对象
+	 */
+	@ExceptionHandler(QtRuntimeException.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseBody
+	public Object defaultErrorHandler(QtRuntimeException e, HandlerMethod method) {
+		Locale locale = LocaleContextHolder.getLocale();
+		/* 获取消息 */
+		String message = Prompt.bundle(locale, e.getMessage(), e.getArgs());
+		if (logger.isErrorEnabled()) {
+			logger.error("system appear error msg --> {}", message);
+		}
+		/* 如果是下载文件则返回 {@link ResponseEntity} */
+		if (method.getMethod().getReturnType() == ResponseEntity.class) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResultApi<>(ApiStatus.ERROR).setMsg(message);
 	}
 
 	/**
@@ -110,14 +136,15 @@ public class GlobalExceptionHandler implements ErrorController {
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ResponseBody
 	public Object defaultErrorHandler(Exception e, HandlerMethod method) {
+		e.printStackTrace();
 		if (logger.isErrorEnabled()) {
-			logger.error("system appear error msg --> {}", e.getMessage());
+			logger.error("system appear error msg --> {}", e.toString());
 		}
 		/* 如果是下载文件则返回 {@link ResponseEntity} */
 		if (method.getMethod().getReturnType() == ResponseEntity.class) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		return new ResultApi<>(ApiStatus.ERROR).setMsg(e.getMessage());
+		return new ResultApi<>(ApiStatus.ERROR).setMsg(e.toString());
 	}
 
 	/**

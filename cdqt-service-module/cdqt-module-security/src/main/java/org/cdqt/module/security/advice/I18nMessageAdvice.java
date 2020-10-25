@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+/**
+ * 国际化配置
+ *
+ * @author LiuGangQiang Create in 2020/10/25
+ */
 @ControllerAdvice(annotations = RestController.class)
 public class I18nMessageAdvice implements ResponseBodyAdvice<Object> {
 

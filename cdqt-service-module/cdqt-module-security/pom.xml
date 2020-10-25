@@ -28,6 +28,12 @@
       <artifactId>cdqt-night-tools</artifactId>
       <version>1.1.1.20200401.RELEASE</version>
     </dependency>
+    <!-- Redis项目 -->
+    <dependency>
+      <groupId>com.cdqt</groupId>
+      <artifactId>cdqt-night-redis</artifactId>
+      <version>1.1.1.20200401.RELEASE</version>
+    </dependency>
     <!-- Eureka Client -->
     <dependency>
       <groupId>org.springframework.cloud</groupId>

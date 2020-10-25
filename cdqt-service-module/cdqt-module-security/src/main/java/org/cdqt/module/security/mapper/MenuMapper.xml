@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.cdqt.module.security.mapper.MenuMapper">
-  <resultMap id="BaseResultMap" autoMapping="false" type="java.util.LinkedHashMap">
+
+  <resultMap id="baseMenuMap" autoMapping="false" type="map">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="pid" jdbcType="VARCHAR" property="pid" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="code" jdbcType="VARCHAR" property="code" />
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
-    <result column="enabled" jdbcType="BIT" property="enabled" />
+    <result column="enabled" jdbcType="TINYINT" property="enabled" />
     <result column="icon" jdbcType="VARCHAR" property="icon" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
+
   <!-- 新增 -->
   <insert id="insert" parameterType="org.cdqt.module.security.entity.Menu">
     insert into base_menu (id, pid, name,code, type, sort, enabled,icon, remark, update_time,create_time)
@@ -29,6 +31,7 @@
     #{updateTime,jdbcType=TIMESTAMP},
     #{createTime,jdbcType=TIMESTAMP})
   </insert>
+
   <!-- 查询重复 -->
   <select id="queryUnique" parameterType="org.cdqt.module.security.entity.Menu" resultMap="BaseResultMap">
     SELECT
@@ -39,6 +42,7 @@
     WHERE
     m.`code` = #{code}
   </select>
+
   <!-- 查询详情 -->
   <select id="queryOne" parameterType="org.cdqt.module.security.entity.Menu" resultMap="BaseResultMap">
     SELECT
@@ -58,6 +62,7 @@
     WHERE
     m.id=#{id}
   </select>
+
   <!-- 查询列表 -->
   <select id="queryList" parameterType="org.cdqt.module.security.entity.Menu" resultMap="BaseResultMap">
     SELECT
@@ -91,6 +96,7 @@
       </if>
     </where>
   </select>
+  
   <!-- 修改 -->
   <update id="update" parameterType="org.cdqt.module.security.entity.Menu">
     UPDATE base_menu
@@ -125,6 +131,7 @@
     </set>
     WHERE id=#{id}
   </update>
+  
   <!-- 删除 -->
   <delete id="delete" parameterType="org.cdqt.module.security.entity.Menu">
     DELETE FROM base_menu

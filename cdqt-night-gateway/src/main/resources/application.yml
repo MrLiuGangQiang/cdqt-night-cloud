@@ -15,7 +15,7 @@ spring:
             -  name: Hystrix
                args:
                   name: fallbackcmd
-                  fallbackUri: forward:/fallback/cdqt-module-mongo
+                  fallbackUri: forward:/fallback?lb=文件服务
 cdqt-module-mongo: #单个服务负载均衡设置
    ribbon:
       NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule

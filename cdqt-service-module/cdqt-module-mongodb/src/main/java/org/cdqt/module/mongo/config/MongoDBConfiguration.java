@@ -3,7 +3,7 @@ package org.cdqt.module.mongo.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.convert.MongoConverter;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
@@ -32,11 +32,11 @@ public class MongoDBConfiguration {
 	 * 配置 {@link MongoTemplate}
 	 *
 	 * @author LiuGangQiang Create in 2020/02/03
-	 * @param dbFactory MongoDbFactory
+	 * @param dbFactory MongoDatabaseFactory
 	 * @return {@link MongoTemplate}
 	 */
 	@Bean
-	public MongoTemplate mongoTemplate(MongoDbFactory dbFactory) {
+	public MongoTemplate mongoTemplate(MongoDatabaseFactory dbFactory) {
 		return new MongoTemplate(dbFactory);
 	}
 
@@ -44,12 +44,12 @@ public class MongoDBConfiguration {
 	 * 配置 {@link GridFsTemplate}
 	 *
 	 * @author LiuGangQiang Create in 2020/02/01
-	 * @param dbFactory MongoDbFactory
+	 * @param dbFactory MongoDatabaseFactory
 	 * @param converter MongoConverter
 	 * @return {@link GridFsTemplate}
 	 */
 	@Bean
-	public GridFsTemplate gridFsTemplate(MongoDbFactory dbFactory, MongoConverter converter) {
+	public GridFsTemplate gridFsTemplate(MongoDatabaseFactory dbFactory, MongoConverter converter) {
 		return new GridFsTemplate(dbFactory, converter, bucketName);
 	}
 
@@ -61,8 +61,8 @@ public class MongoDBConfiguration {
 	 * @return {@link GridFSBucket}
 	 */
 	@Bean
-	public GridFSBucket gridFSBuckets(MongoDbFactory dbFactory) {
-		MongoDatabase db = dbFactory.getDb();
+	public GridFSBucket gridFSBuckets(MongoDatabaseFactory dbFactory) {
+		MongoDatabase db = dbFactory.getMongoDatabase();
 		return GridFSBuckets.create(db, bucketName);
 	}
 }

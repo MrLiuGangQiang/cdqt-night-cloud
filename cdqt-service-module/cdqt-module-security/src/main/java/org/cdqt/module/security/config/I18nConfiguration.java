@@ -1,6 +1,3 @@
-/**
- * Copyright © 2020 Night Technology Co.Ltd All Rights Reserved.
- */
 package org.cdqt.module.security.config;
 
 import java.util.Locale;

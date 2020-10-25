@@ -54,7 +54,6 @@ public class MenuController {
 	@PostMapping("/menu")
 	@Authentication(value = "role:security:menu:insert", level = Level.ROLE)
 	public ResultApi<?> insert(@Validated({ Insert.class }) @RequestBody Menu menu) {
-		System.out.println(0 / 0);
 		/* 先校验菜单信息是否存在 */
 		Map<String, Object> menuMap = menuService.queryUnique(menu);
 		if (MapUtils.isNotEmpty(menuMap)) {
