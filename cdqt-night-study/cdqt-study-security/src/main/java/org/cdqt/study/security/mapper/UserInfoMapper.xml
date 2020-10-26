@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cdqt.study.security.mapper.UserInfoMapper">
+
+  <!-- 返回格式定义 -->
+  <resultMap id="userInfoMap" autoMapping="false" type="map">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="id_card" jdbcType="VARCHAR" property="idCard" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  
+  <!-- 用户登录 -->
+  <select id="login" parameterType="org.cdqt.study.security.entity.UserInfo" resultMap="userInfoMap">
+    SELECT id, `name`, phone, birthday, address FROM base_user_info ui WHERE ui.phone = #{phone} AND ui.`password`= #{password}
+  </select>
+  
+</mapper>

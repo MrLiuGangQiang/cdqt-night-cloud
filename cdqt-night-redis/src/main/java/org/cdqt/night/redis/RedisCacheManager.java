@@ -206,6 +206,7 @@ public class RedisCacheManager extends AbstractTransactionSupportingCacheManager
 	 * @param data      用户信息
 	 */
 	public <T> void putSession(String cacheName, String token, T data) {
+		/* 解码 */
 		String[] tokens = QtToken.getInstance().decodeToekn(token).split(":");
 		String platform = tokens[0];
 		String uuid = tokens[1];
@@ -221,8 +222,33 @@ public class RedisCacheManager extends AbstractTransactionSupportingCacheManager
 	 * @param flag      唯一标识 这里是指用于生成token的唯一标识
 	 * @param terminal  平台
 	 */
-	public void removeSession(String cacheName, String flag, QtDeviceEnum terminal) {
+	public void removeSessionByFlag(String cacheName, String flag, QtDeviceEnum terminal) {
 		this.getCache(cacheName).evict(terminal.getFlag() + ":" + flag);
+	}
+
+	/**
+	 * 移除登录信息
+	 *
+	 * @author LiuGangQiang Create in 2020/10/26
+	 * @param cacheName 缓存名
+	 * @param token     token
+	 */
+	public void removeSessionByToken(String cacheName, String token) {
+		/* 解码 */
+		String[] tokens = QtToken.getInstance().decodeToekn(token).split(":");
+		String platform = tokens[0];
+		String uuid = tokens[1];
+		String flag = tokens[2];
+		String key = platform + ":" + flag;
+		Cache cache = this.getCache(cacheName);
+		if (cache != null) {
+			QtSession<?> session = cache.get(key, QtSession.class);
+			if (session != null) {
+				if (uuid.equals(session.getIdentify())) {
+					this.getCache(cacheName).evict(key);
+				}
+			}
+		}
 	}
 
 	/**
@@ -231,9 +257,11 @@ public class RedisCacheManager extends AbstractTransactionSupportingCacheManager
 	 * @author LiuGangQiang Create in 2020/10/25
 	 * @param cacheName 缓存名
 	 * @param token     token
-	 * @return {@link QtSession}
+	 * @param type      类型
+	 * @return {@link T}
 	 */
-	public QtSession<?> getSession(String cacheName, String token) {
+	@SuppressWarnings("unchecked")
+	public <T> T getSessionData(String cacheName, String token, Class<T> type) {
 		String[] tokens = QtToken.getInstance().decodeToekn(token).split(":");
 		String platform = tokens[0];
 		String uuid = tokens[1];
@@ -250,7 +278,11 @@ public class RedisCacheManager extends AbstractTransactionSupportingCacheManager
 					this.getCache(cacheName).evict(key);
 					return null;
 				}
-				return session;
+				Object value = session.getCache();
+				if (value != null && type != null && !type.isInstance(value)) {
+					throw new IllegalStateException("Cached value is not of required type [" + type.getName() + "]: " + value.getClass().getName());
+				}
+				return (T) value;
 			}
 		}
 		return null;
