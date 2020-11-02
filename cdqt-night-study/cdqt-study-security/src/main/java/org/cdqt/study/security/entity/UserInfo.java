@@ -8,11 +8,16 @@ import org.cdqt.night.core.entity.BaseEntity;
 import org.hibernate.validator.constraints.Length;
 
 /**
- * 用户信息表
+ * UserInfo 
  *
- * @author LiuGangQiang Create in 2020/03/07
+ * @author LiuGangQiang Create in 2020/10/27
  */
 public class UserInfo extends BaseEntity {
+	/**
+	 * serialVersionUID 
+	 *
+	 * @author LiuGangQiang Create in 2020/10/27
+	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
