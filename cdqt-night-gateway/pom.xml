@@ -22,12 +22,7 @@
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-      <!-- 剔除tomcat -->
       <exclusions>
-        <exclusion>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-starter-tomcat</artifactId>
-        </exclusion>
         <!-- 高版本不使用ribbon -->
         <exclusion>
           <groupId>org.springframework.cloud</groupId>

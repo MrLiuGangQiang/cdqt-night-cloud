@@ -3,6 +3,10 @@ server:
 spring:
    application:
       name: cdqt-study-security #应用名称
+   cloud:
+      loadbalancer:
+         ribbon:
+            enabled: false #禁用ribbon         
    servlet:
       multipart:
          enabled: true #是否开启批量上传
