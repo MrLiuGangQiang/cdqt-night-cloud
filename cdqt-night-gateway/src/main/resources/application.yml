@@ -4,6 +4,9 @@ spring:
    application:
       name: cdqt-night-gateway #应用名设置
    cloud:
+      loadbalancer:
+         ribbon:
+            enabled: false #禁用ribbon        
       gateway:
          routes: #路由设置
          -  id: cdqt-module-mongo #文件
