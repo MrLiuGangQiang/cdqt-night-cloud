@@ -11,6 +11,10 @@ spring:
       user:
          name: admin
          password: 123456
+   cloud:
+      loadbalancer:
+         ribbon:
+            enabled: false #禁用ribbon         
 management: #监控节点配置
    endpoints:
       web:
